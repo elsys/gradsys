@@ -72,14 +72,20 @@ $(function() {
 		<% end %>
 		<%= hidden_field_tag :diplomants_number, br %>
 	</div>
-	
+
 	<div class="field">
     <%= label_tag :commissioners %><br>
+		<% @commissioners= @diploma_work.teachers %>
 		<% br_c=0 %>
-    <% (1..5).each do |c| %>
+    <% @commissioners.each do |c| %>
 			<% br_c+=1 %>
-			<p><%= select("commissioners", "#{br_c}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'None'}) %><p>
+			<p><%= select("commissioner", "#{br_c}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'None', :selected => c.id}) %></p>
 		<% end %>		
+		<% (br_c..4).each do |br| %>
+			<p><%= select("commissioner", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'None'}) %></p>
+		<% end %>
+	</div>
+
 
   <div class="field">
     <%= f.label :covenanted %><br>

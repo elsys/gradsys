@@ -21,7 +21,11 @@
 </p>
 <p>
   <strong>Diplomants:</strong>
-  <%= @diploma_work.students %>
+  <%= @diploma_work.diplomants_names %>
+</p>
+<p>
+  <strong>Commission:</strong>
+  <%= @diploma_work.teachers %>
 </p>
 <p>
   <strong>Covenanted:</strong>

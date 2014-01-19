@@ -46,19 +46,34 @@ class DiplomaWorksController < ApplicationController
   def update
 		
 		@diplomants_number = params[:diplomants_number].to_i
-		@new_diplomants_ids = Array.new
+		@diploma_work.students.clear
 		for d in 1..@diplomants_number
-		if !params[:diplomants][:"p_dipl_#{d}"].nil?
-			@diplomant_id = params[:diplomants][:"p_dipl_#{d}"].to_i
-			if @diplomant_id>0
-					 
-					@new_diplomants_ids << @diplomant_id	
+			if !params[:diplomants][:"p_dipl_#{d}"].nil?
+				@diplomant_id = params[:diplomants][:"p_dipl_#{d}"].to_i
+				if @diplomant_id > 0	 
+					@diplomant = Student.find(@diplomant_id)
+					if !@diploma_work.students.exists?(@diplomant)
+						@diploma_work.students << @diplomant
+					end	
+				end
 			end
 		end
+	
+		@diploma_work.teachers.clear
+		for c in 1..5	
+			if !params[:commissioner][:"#{c}"].nil?
+				@commissioner_id = params[:commissioner][:"#{c}"].to_i
+				if @commissioner_id > 0
+					@commissioner = Teacher.find(@commissioner_id)
+					if !@diploma_work.teachers.exists?(@commissioner)
+						@diploma_work.teachers << @commissioner
+					end
+				end
+			end
 		end
-		
-		@diploma_work.set_diplomants(@new_diplomants_ids)
 
+		#@commissioner = Teacher.find(79)
+		#@diploma_work.teachers.delete(@commissioner)
 
     respond_to do |format|
       if @diploma_work.update(diploma_work_params)

@@ -22,20 +22,12 @@ class DiplomaWork < ActiveRecord::Base
 			end
 			@diplomants
 	end
-	def set_diplomants(new_diplomants_ids)
-		@new_diplomants_ids = new_diplomants_ids
-		remove_old_diplomants
-		@new_diplomants_ids.each do |d|
-			@diplomant =  Student.find_by_id(d.to_i)
-			@diplomant.update_attribute(:diploma_work_id, self.id) 
-		end
-	end
-	def remove_old_diplomants
-		@old_diplomants = self.students
-		@old_diplomants.each do |d|
-			d.update_attribute(:diploma_work_id, nil)
-		end
-	end
-	
 
+	def commissioners_names
+		@commissioners = Array.new
+			self.teachers.each do |c|
+				@commissioners << c.name
+			end
+			@commissioners
+	end	
 end
