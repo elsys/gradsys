@@ -1,0 +1,59 @@
+<h1>Editing student</h1>
+
+<%= form_for(@student) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+		<div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+	<div class="field">
+    <%= f.label :user_name %><br>
+    <%= f.text_field :user_name %>
+  </div>
+	<% if !@current_user.admin? %>
+		<div class="field">
+		  <%= f.label :old_password %>
+		  <%= f.password_field :old_password %>
+		</div>
+	<% end %>
+  <div class="field">
+    <%= f.label :password, "New password" %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, 'Confirm' %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+	<div class="field">
+    <%= f.label :number %><br>
+    <%= f.text_area :number %>
+	<div class="field">
+    <%= f.label :grade %><br>
+    <%= f.select(:grade, ["","12a","12b","12v","12g"]) %>
+	</div>
+	<div class="field">
+    <%= f.label :diploma_work_id %><br>
+    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'None(Chose)'}) %>
+	</div>
+	<div class="field">
+    <%= f.label :access %><br>
+    <%= f.select(:access, ["user","admin"]) %>
+	</div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Show', @student %> |
+<%= link_to 'Back', students_path %>

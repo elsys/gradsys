@@ -1,0 +1,13 @@
+class CreateDiplomaWorks < ActiveRecord::Migration
+  def change
+    create_table :diploma_works do |t|
+			t.string :title
+      t.text :description
+      t.integer :diploma_supervisor_id
+			t.integer :reviewer_id
+      t.boolean :covenanted, :default => false
+      t.boolean :approved, :default => false
+      t.timestamps
+    end
+  end
+end

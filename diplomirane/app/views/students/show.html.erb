@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Name:</strong>
+  <%= @student.name %>
+</p>
+<p>
+  <strong>Number:</strong>
+  <%= @student.number %>
+</p>
+<p>
+  <strong>Grade:</strong>
+  <%= @student.grade %>
+</p>
+<p>
+  <strong>Diploma Work:</strong>
+  <%= @student.diploma_work.title %>
+</p>
+<% if @current_user.admin? %>
+	<p>
+		<strong>Username:</strong>
+		<%= @student.user_name %>
+	</p>
+	<p>
+		<strong>Type:</strong>
+		<%= @student.predecessor.heir_type %>
+	</p>
+	<p>
+		<strong>Access:</strong>
+		<%= @student.access %>
+	</p>
+	<p>
+		<strong>Hashed password:</strong>
+		<%= @student.hashed_password %>
+	</p>
+	<p>
+		<strong>Salt:</strong>
+		<%= @student.salt %>
+	</p>
+<% end %>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Diplomirane</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<% if session[:user_id].nil? %>
+		<%= stylesheet_link_tag "/assets/login.css" %>
+	<% end %>	
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="header">
+	<% if session[:user_id] %>
+		<h1><a id="logo" href="http://localhost:3000">Elsys</a></h1>
+		<div class="menu-top-level-menu-container">
+			<ul id="menu-top-level-menu" class="menu">
+				<li><a href="http://localhost:3000/students/">Ученици</a></li>
+				<li><a href="http://localhost:3000/teachers/">Учители</a></li>
+				<li><a href="http://localhost:3000/diploma_works/">Дипломни работи</a></li>
+				<li><a href="#"></a></li>
+				<li><a href="#"></a></li>
+			</ul>
+		</div>
+		<div id="user">
+			<ul>
+				<% if @current_user.predecessor.heir_type == "Teacher" %>
+					<li><%= link_to @current_user.user_name, teacher_path(@current_user) %></li>
+				<% elsif  @current_user.predecessor.heir_type == "Student" %>
+					<li><%= link_to @current_user.user_name, student_path(@current_user) %></li>
+				<% end %>
+			  <li><%= button_to 'Logout', logout_path, :method => :delete %></li>
+			</ul>
+		</div>
+	<% else %>	
+		<h1><a id="logo" href="http://localhost:3000">Elsys</a></h1>
+		<div class="menu-top-level-menu-container">
+			<ul id="menu-top-level-menu" class="menu">
+				<li><h1>Онлайн система за дипломиране в ТУЕС</h1></li>
+			</ul>
+		</div>
+	<% end %>
+	<div style="clear: both; padding-top: 5px;"></div>
+</div>
+
+<div id="inscreen">
+  <%= yield %>  
+ <div style="clear: both; padding-top: 20px;"></div>
+</div>
+
+
+<div id="footer">
+	<a class="tu" title="Технически Университет - София" href="http://www.tu-sofia.bg/">Технически Университет - София</a>
+	<div id="copyright">
+		Copyright © 
+		<strong><a class="elsys" title="Технологично училище Електронни системи" href="http://www.elsys-bg.org/">Технологично училище Електронни системи</a></strong> 
+		към Технически Университет - София 2014. Всички права са запазени. </a>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+class Reviewer < ActiveRecord::Base
+	child_of :teacher	
+
+  validates_presence_of :review
+end

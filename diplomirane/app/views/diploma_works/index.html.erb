@@ -1,0 +1,46 @@
+<h1>Listing diploma_works</h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+			<th>Student</th>
+      <th>Diploma supervisor</th>
+      <th>Reviewer</th>
+      <th>Covenanted</th>
+      <th>Approved</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @diploma_works.each do |diploma_work| %>
+      <tr>
+        <td><%= diploma_work.title %></td>
+        <td><%= diploma_work.description %></td>
+				<td><%= diploma_work.diplomants_names%></td>
+        <td><% if t = Teacher.find_by_id(diploma_work.diploma_supervisor_id) %>
+							<%= t.name  %>
+						<% end %>
+				</td>
+        <td><% if t = Teacher.find_by_id(diploma_work.reviewer_id) %>
+							<%= t.name  %>
+						<% end %>
+				</td>
+        <td><%= diploma_work.covenanted %></td>
+        <td><%= diploma_work.approved %></td>
+        <td><%= link_to 'Show', diploma_work %></td>
+        <td><%= link_to 'Edit', edit_diploma_work_path(diploma_work) %></td>
+        <td><%= link_to 'Destroy', diploma_work, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Diploma work', new_diploma_work_path %>

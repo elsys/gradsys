@@ -1,0 +1,72 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ *= stub login
+ */
+
+body {
+	margin: 0px;
+	color: #333;
+	font-family: 'Helvetica Neue', Arial, sans-serif;
+	background: url('/assets/rsz_rotate1.jpg') center 55px no-repeat;
+	}
+
+#header {
+	background: #fff;
+	width: 960px;
+	margin: 0 auto 0 auto;
+	height: 55px;
+	display: block;
+}
+
+/* header */
+#header {background: #fff; width: 960px; margin: 0 auto 0 auto; height: 55px; display: block;}
+#header h1 {margin: 0px; padding: 0px; float: left; position: relative;}
+#header #logo {display: block; width: 55px; height: 30px !important; background: url(http://www.elsys-bg.org/wp-content/themes/elsys/images/logo.png) top left no-repeat; text-indent: -9999px; padding: 0px; margin: 13px 15px 12px 15px;}
+#header #logo:hover {background: url(/assets/logoh.png) top left no-repeat;}
+#xmas-hat {background: url(images/christmas-hat-small.png) top left no-repeat; position: absolute; width: 18px; height: 21px; display: block; top: 7px; left: 8px; display: none !important;}
+#header ul {list-style: none; float: left; margin: 0px; padding: 0px; display: inline-block; height: 55px; margin-left: 1}
+#header ul li {display: inline;margin: 0px; padding: 0px;}
+#header ul li a {display: inline-block; padding: 10px; font-size: 12px; font-weight: bold; text-transform: uppercase; color: #666; text-decoration: none; background: #fff; margin-top: 10px; letter-spacing: 1px; line-height: 12px;}
+#header ul li h1 {display: inline-block; padding: 10px; font-size: 15px; font-weight: bold; text-transform: uppercase; color: #666; text-decoration: none; background: #fff; margin-top: 10px; letter-spacing: 1px; line-height: 12px;}
+#header ul li form {display: inline-block; font-size: 12px; font-weight: bold; text-transform: uppercase; color: #666; text-decoration: none; background: #fff; margin-top: 10px; letter-spacing: 1px; line-height: 12px;}
+#header #user {float:right}
+#header ul li a:hover {color: #fff; background: #3d94e0;}
+#header ul li h2:hover {color: #3d94e0;}
+
+
+#inscreen {
+	width: 960px;
+	margin: 80px auto 0 auto;
+	padding: 30px;
+	height: auto;
+	min-height: 600px;
+}
+
+#inscreen fieldset {
+	width: 400px;
+	margin: 0 auto 0 auto;
+}
+
+input#name {
+	margin-left: 22px;
+}
+
+
+/* footer */
+#footer {width: 930px; margin: 0 auto 0 auto; font-size: 12px; color: #777; border-top: 1px solid #ccc; padding: 15px;}
+#footer #copyright {width: 770px; margin: 0 auto 0 auto;}
+#footer a {color: #777; font-weight: bold; text-decoration: none; background: #fff;}
+#footer a.tu {display: block; text-indent: -9999px; width: 25px; height: 26px; background: url(/assets/tu.png) no-repeat top left; float: right; margin-right: 75px; cursor: pointer; margin-top: -6px;}
+#footer a.tu:hover {background: url(/assets/tu-h.png) no-repeat top left;}
+#footer a.tu:hover {color: #333;}
+#footer a.elsys:hover {color: #333;}

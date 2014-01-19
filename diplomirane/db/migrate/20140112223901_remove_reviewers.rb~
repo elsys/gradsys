@@ -1,0 +1,4 @@
+class RemoveReviewers < ActiveRecord::Migration
+  def change
+  end
+end
