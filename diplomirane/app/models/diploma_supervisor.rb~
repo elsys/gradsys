@@ -1,4 +1,0 @@
-class DiplomaSupervisor < Teacher
-	
-
-end
