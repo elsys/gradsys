@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.name %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%= @user.heir_type %>
+</p>
+<p>
+  <strong>Hashed password:</strong>
+  <%= @user.hashed_password %>
+</p>
+
+<p>
+  <strong>Salt:</strong>
+  <%= @user.salt %>
+</p>
+<% if @user.heir_type == "Teacher" %>
+	<%= link_to 'Edit', edit_teacher_path(@user) %> |
+<% elsif @user.heir_type == "Student" %>
+	<%= link_to 'Edit', edit_student_path(@user) %> |
+<% end %>
+<%= link_to 'Back', users_path %>

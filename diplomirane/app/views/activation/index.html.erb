@@ -1,0 +1,24 @@
+<h1>Activation</h1>
+  <% if flash[:alert] %>
+    <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+<% if @activatin_code = params[:code] %>
+	<% if @u = User.find_by_activation_code(@activatin_code) %>
+		<% if !@u.active %>
+			<%= form_tag(save_password_path) do %>
+				<%= hidden_field_tag :user, "#{@activatin_code}" %>
+				<div>
+					<%= label_tag :password, "New password" %>
+					<%= password_field_tag :password %>
+				</div>
+				<div>
+					<%= label_tag :password2, "Repead password" %>
+					<%= password_field_tag :password2 %>
+				</div>
+				<div>
+					<%= submit_tag "Update" %>
+				</div>	
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>

@@ -1,0 +1,4 @@
+class RemoveTypeFromTeachers < ActiveRecord::Migration
+  def change
+  end
+end

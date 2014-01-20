@@ -1,0 +1,37 @@
+<h1>Listing teachers</h1>
+
+<table>
+  <thead>
+    <tr>
+			<th>Name</th>
+			<th>Business</th>	
+			<% if @current_user.admin? %>		
+				<th>Username</th>
+				<th>ID</th>
+			<% end %>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teachers.each do |teacher| %>
+      <tr>
+				<td><%= teacher.name %></td>
+				<td><%= teacher.business %></td>		
+				<% if @current_user.admin? %>		
+					<td><%= teacher.id %></td>
+					<td><%= teacher.user_name %></td>
+				<% end %>
+        <td><%= link_to 'Show', teacher %></td>
+        <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
+        <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Teacher', new_teacher_path %>

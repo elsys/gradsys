@@ -1,0 +1,2 @@
+module DiplomaWorksHelper
+end

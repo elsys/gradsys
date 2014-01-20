@@ -1,0 +1,4 @@
+class RemoveTypeFromUsers < ActiveRecord::Migration
+  def change
+  end
+end

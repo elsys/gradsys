@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  diploma_supervisor_id: 1
+  reviewer_id: 1
+  covenanted: false
+  approved: 
+
+two:
+  title: MyString
+  description: MyText
+  diploma_supervisor_id: 1
+  reviewer_id: 1
+  covenanted: false
+  approved: 
