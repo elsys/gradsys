@@ -123,7 +123,7 @@ class StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
 			if @current_user.admin?
-      	params.require(:student).permit(:user_name, :name, :password, :password_confirmation, :grade, :number, :diploma_work_id, :access)
+      	params.require(:student).permit(:user_name, :name, :password, :password_confirmation, :grade, :number, :diploma_work_id, :access, :active)
 			else 
 				params.require(:student).permit(:password, :password_confirmation)
 			end

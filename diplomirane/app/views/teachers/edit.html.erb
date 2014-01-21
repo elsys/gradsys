@@ -55,6 +55,10 @@
     <%= f.label :access %><br>
     <%= f.select(:access, ["user","admin"]) %>
 	</div>
+  <div class="field">
+    <%= f.label :active %><br>
+    <%= f.select(:active, ["true","false"]) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
