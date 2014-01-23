@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140119125328) do
   create_table "students", force: true do |t|
     t.string  "grade"
     t.integer "number"
+	t.integer "student_id"
     t.integer "diploma_work_id"
   end
 
@@ -54,5 +55,12 @@ ActiveRecord::Schema.define(version: 20140119125328) do
     t.boolean "active",          default: false
     t.string  "activation_code"
   end
+  
+  create_table "assembling", fource: true do |t|
+	t.integer "student_id"
+	t.integer "first"
+	t.integer "second"
+	t.integer "third" 
+	t.boolean "ready",           default: false
 
 end
