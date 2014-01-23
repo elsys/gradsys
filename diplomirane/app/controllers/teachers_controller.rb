@@ -36,14 +36,14 @@ class TeachersController < ApplicationController
 				@teacher_params = { "user_name" => "#{@email}", "name" => "#{@name}", "email" => "#{@email}", "business" => "#{@business}" , "password" => "1234"}   
 		  	@teacher = Teacher.new(@teacher_params)	
 				@teacher.save
-				Teacher.update_all("id = '#{@predecessor_id}'", "id = '#{@teacher_id}'")
-				User.where("heir_type = 'Teacher'").update_all("heir_id = '#{@predecessor_id}'", "heir_id = '#{@teacher_id}'")
+			  Teacher.update_all("id = '#{@teacher.predecessor.id}'", "id = '#{@teacher.id}'")
+        User.where("heir_type = "Teacher").update_all("heir_id = '#{@teacher.predecessor.id}'", "heir_id = '#{@teacher.id}'")
 				#UserMailer.welcome_email(@teacher,"#{@teacher.activation_code}").deliver
 			end	
 		else
 			@teacher = Teacher.new(teacher_params)
-      Student.update_all("id = '#{@predecessor_id}'", "id = '#{@student_id}'")
-      User.where("heir_type = 'Student'").update_all("heir_id = '#{@predecessor_id}'", "heir_id = '#{@student_id}'")
+      Teacher.update_all("id = '#{@teacher.predecessor.id}'", "id = '#{teacher.id}'")
+      User.where("heir_type = "Teacher").update_all("heir_id = '#{@teacher.predecessor.id}'", "heir_id = '#{@teacher.id}'")
 			#UserMailer.welcome_email(@teacher,"#{@teacher.activation_code}").deliver
 		end
 
