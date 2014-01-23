@@ -9,14 +9,14 @@
       Now you have an account in our site, <br/>
       your username is: <%= @user.user_name %><br/>
 			your activation link is: <br/>
-      <%= link_to @activation_url,@activation_url %> <br/>
+      <%= @activation_url %> <br/>
 			After you click the activation link, you <br/>
       can set your password.
     </p>
     <p>
      To activete your acount in the site, <br/>
      just follow this link: <br/>
-     <%= link_to @activation_url,@activation_url %>.
+     <%= @activation_url %>.
     </p>
     <p>Have a great day!</p>
   </body>

@@ -1,0 +1,4 @@
+<h1>Admin#index</h1>
+<p>Find me in app/views/admin/index.html.erb</p>
+<% @url  = "http://localhost:3000/students" %>
+<%= link_to @url, @url %>
