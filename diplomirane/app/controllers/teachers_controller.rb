@@ -37,13 +37,13 @@ class TeachersController < ApplicationController
 		  	@teacher = Teacher.new(@teacher_params)	
 				@teacher.save
 			  Teacher.update_all("id = '#{@teacher.predecessor.id}'", "id = '#{@teacher.id}'")
-        User.where("heir_type = "Teacher").update_all("heir_id = '#{@teacher.predecessor.id}'", "heir_id = '#{@teacher.id}'")
+        User.where("heir_type = 'Teacher'").update_all("heir_id = '#{@teacher.predecessor.id}'", "heir_id = '#{@teacher.id}'")
 				#UserMailer.welcome_email(@teacher,"#{@teacher.activation_code}").deliver
 			end	
 		else
 			@teacher = Teacher.new(teacher_params)
       Teacher.update_all("id = '#{@teacher.predecessor.id}'", "id = '#{teacher.id}'")
-      User.where("heir_type = "Teacher").update_all("heir_id = '#{@teacher.predecessor.id}'", "heir_id = '#{@teacher.id}'")
+      User.where("heir_type = 'Teacher'").update_all("heir_id = '#{@teacher.predecessor.id}'", "heir_id = '#{@teacher.id}'")
 			#UserMailer.welcome_email(@teacher,"#{@teacher.activation_code}").deliver
 		end
 
