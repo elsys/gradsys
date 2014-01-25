@@ -42,8 +42,16 @@
     <%= f.select(:grade, ["","12a","12b","12v","12g"]) %>
 	</div>
 	<div class="field">
-    <%= f.label :diploma_work_id %><br>
-    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'None(Chose)'}) %>
+    <%= f.label :first %><br>
+    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'First Choice'}) %>
+	</div>
+	<div class="field">
+    <%= f.label :second %><br>
+    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'Second Choice'}) %>
+	</div>
+	<div class="field">
+    <%= f.label :third %><br>
+    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'Third choice'}) %>
 	</div>
 	<div class="field">
     <%= f.label :access %><br>
@@ -53,11 +61,13 @@
     <%= f.label :active %><br>
     <%= f.select(:active, ["true","false"]) %>
   </div>
+</select>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
 
 <%= link_to 'Show', @student %> |
 <%= link_to 'Back', students_path %>

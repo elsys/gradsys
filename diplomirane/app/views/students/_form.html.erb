@@ -41,12 +41,14 @@
     <%= f.label :diploma_work_id %><br>
     <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'None(Chose)'}) %>
 	</div>
+	
 	<div class="field">
     <%= f.label :access %><br>
     <%= f.select(:access, ["user","admin"]) %>
 	</div>
-
+	<%= f.collection_select :provider_id, Provider.order(:name),:id,:name, include_blank: true %>
   <div class="actions">
     <%= f.submit %>
   </div>
+  
 <% end %>

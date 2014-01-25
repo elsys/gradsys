@@ -1,5 +1,7 @@
 Oop::Application.routes.draw do
 
+  get "assemble/index"
+  get "home/index"
   get 'activation' => 'activation#index'
 	get 'admin' => 'admin#index'
 
