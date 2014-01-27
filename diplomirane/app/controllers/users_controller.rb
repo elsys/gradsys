@@ -87,9 +87,6 @@ class UsersController < ApplicationController
 	 select("diploma_works", "diploma_work_id", diploma_works.all.collect {|p| [ diploma_works.title, diploma_works.diploma_works.id ] }, { include_blank: true })
 	 end
 	 
-	 def choice_assemble 
-	 select("diploma_works", "diploma_work_id", diploma_works.all.collect {|p| [ diploma_works.title, diploma_works.diploma_works.id ] }, { include_blank: true })
-	 
-	end
+	
 	 
 end

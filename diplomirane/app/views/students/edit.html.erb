@@ -26,6 +26,11 @@
 		  <%= f.password_field :old_password %>
 		</div>
 	<% end %>
+	<div class="field">
+   <div class="field">
+    <%= f.label :grades %><br>
+    <%= f.select(:grades, ["2","2,5","3","3,5","4","4,5","5","5,5","6"]) %>
+	</div>
   <div class="field">
     <%= f.label :password, "New password" %>
     <%= f.password_field :password %>
@@ -41,18 +46,19 @@
     <%= f.label :grade %><br>
     <%= f.select(:grade, ["","12a","12b","12v","12g"]) %>
 	</div>
+  </div>
 	<div class="field">
-    <%= f.label :first %><br>
-    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'First Choice'}) %>
-	</div>
-	<div class="field">
-    <%= f.label :second %><br>
-    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'Second Choice'}) %>
-	</div>
-	<div class="field">
-    <%= f.label :third %><br>
-    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'Third choice'}) %>
-	</div>
+    <%= f.label :diploma_work_id,"first" %><br>
+    <%= f.select(:first, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'None(Chose)'}) %>
+        </div>
+		<div class="field">
+    <%= f.label :diploma_work_id, "second" %><br>
+    <%= f.select(:second, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'None(Chose)'}) %>
+        </div>
+		<div class="field">
+    <%= f.label :diploma_work_id, "third" %><br>
+    <%= f.select(:third, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'None(Chose)'}) %>
+        </div>
 	<div class="field">
     <%= f.label :access %><br>
     <%= f.select(:access, ["user","admin"]) %>

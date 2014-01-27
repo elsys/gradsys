@@ -98,6 +98,7 @@ class DiplomaWorksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_diploma_work
       @diploma_work = DiplomaWork.find(params[:id])
+		
     end
 
 		def access

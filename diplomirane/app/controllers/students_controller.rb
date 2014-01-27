@@ -34,7 +34,7 @@ class StudentsController < ApplicationController
 				@number = row[1]
 				@name = row[2]
 				@email = row[4]
-				@student_params = { "user_name" => "#{@email}", "name" => "#{@name}", "email" => "#{@email}", "number" => "#{@number}", "grade" => "#{@grade}", "password" => "1234"}   
+				@student_params = { "user_name" => "#{@email}", "name" => "#{@name}", "email" => "#{@email}", "number" => "#{@number}", "grade" => "#{@grade}", "password" => "1234","first" => "#{@first}", "second" => "#{@second}", "third" => "#{@third}", "grades" => "#{@grades}"}   
 		  	@student = Student.new(@student_params)
 				@student.save
 				Student.update_all("id = '#{@student.predecessor.id}'", "id = '#{@student.id}'")
@@ -123,7 +123,7 @@ class StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
 			if @current_user.admin?
-      	params.require(:student).permit(:user_name, :name, :password, :password_confirmation, :grade, :number, :diploma_work_id, :access, :active)
+      	params.require(:student).permit(:user_name, :name, :password, :password_confirmation, :grade, :number, :grades, :first, :second, :third, :access, :active)
 			else 
 				params.require(:student).permit(:password, :password_confirmation)
 			end
