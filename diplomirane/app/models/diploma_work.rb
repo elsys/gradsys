@@ -1,5 +1,5 @@
 class DiplomaWork < ActiveRecord::Base
-	has_and_belongs_to_many :teachers, association_foreign_key: "commissioner_id", join_table: "commissioners_diploma_works"
+	has_and_belongs_to_many :commissioners, class_name: "Teacher", association_foreign_key: "commissioner_id", join_table: "commissioners_diploma_works"
 	has_many :students
 
 	validates :title, :presence => true, :uniqueness => true
@@ -25,7 +25,7 @@ class DiplomaWork < ActiveRecord::Base
 
 	def commissioners_names
 		@commissioners = Array.new
-			self.teachers.each do |c|
+			self.commissioners.each do |c|
 				@commissioners << c.name
 			end
 			@commissioners

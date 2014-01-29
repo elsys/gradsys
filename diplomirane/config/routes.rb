@@ -1,6 +1,6 @@
 Oop::Application.routes.draw do
 
-  get "assemble/index"
+  get "assemble" => 'assemble#index'
   get "home/index"
   get 'activation' => 'activation#index'
 	get 'admin' => 'admin#index'
@@ -23,6 +23,8 @@ Oop::Application.routes.draw do
   resources :students
 
   resources :users
+
+  resources :assemble
 
 
 	get 'students/parse_emails'

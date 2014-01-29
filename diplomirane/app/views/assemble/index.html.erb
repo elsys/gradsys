@@ -3,12 +3,7 @@
     <tr>
 			<th>Name</th>
 			<th>Number</th>
-      <th>Grade</th>
-			<% if @current_user.admin? %>
-				<th>Username</th>
-				<th>ID</th>
-				
-			<% end %>		
+      <th>Grade</th>	
       <th>Grades</th>
       <th>First</th>
       <th>Second</th>
@@ -23,10 +18,6 @@
 				<td><%= student.number %></td>
 				
 				<td><%= student.grade %></td>
-				<% if @current_user.admin? %>
-					<td><%= student.user_name %></td>
-					<td><%= student.id %></td>
-				<% end %>
 			
 				<td><%= student.grades %></td>
 				<td><% if d = DiplomaWork.find_by_id(student.first) %>

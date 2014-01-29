@@ -10,6 +10,39 @@
       </ul>
     </div>
   <% end %>
+
+  <script type="text/javascript" src= "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+$(function() {
+        var scntDiv = $('#p_scents');
+        var i = $('#p_scents p').size() + 1;
+        var br = i;
+        var div, field ;
+        
+        $('#addScnt').live('click', function() {
+                $('<p><label for="p_scnts"><%=j select("diplomants", "p_dipl_", Student.all.collect {|p| [ p.name, p.id ]},{include_blank: 'None'}) %></label> <a href="#" id="remScnt">Remove</a></p>').appendTo(scntDiv);
+                div = $("#p_scents");
+                field = div.find("select[name^='diplomants[p_dipl_]']");
+                field.attr('name', 'diplomants[p_dipl_'+ i +']');
+                i++;
+                br++;
+                $("#diplomants_number").val(i-1);
+
+                return false;
+        });
+        
+        $('#remScnt').live('click', function() { 
+                if( br > 2 ) {
+                        $(this).parents('p').remove();      
+                        --br;                             
+                }
+                return false;
+        });
+});
+</script>
+
+
+  
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>
@@ -42,7 +75,7 @@
 
 	<div class="field">
     <%= label_tag :commissioners %><br>
-		<% @commissioners= @diploma_work.teachers %>
+		<% @commissioners= @diploma_work.commissioners %>
 		<% br_c=0 %>
     <% @commissioners.each do |c| %>
 			<% br_c+=1 %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127145135) do
+ActiveRecord::Schema.define(version: 20140129150850) do
 
   create_table "commissioners_diploma_works", force: true do |t|
     t.integer "diploma_work_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140127145135) do
     t.integer "first"
     t.integer "second"
     t.integer "third"
-    t.integer "grades"
+    t.float   "grades"
   end
 
   create_table "teachers", force: true do |t|
