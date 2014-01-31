@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129150850) do
+ActiveRecord::Schema.define(version: 20140131143700) do
+
+  create_table "assembles", force: true do |t|
+    t.string "round"
+  end
 
   create_table "commissioners_diploma_works", force: true do |t|
     t.integer "diploma_work_id"
