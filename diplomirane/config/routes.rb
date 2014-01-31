@@ -11,7 +11,10 @@ Oop::Application.routes.draw do
 
   controller :assemble do
     post 'get_student' => :get_student
-    post 'remove_student' => :remove_student 
+    post 'remove_student' => :remove_student
+    post 'next_round' => :next_round
+    post 'new_round' => :new_round 
+    post 'remove_round' => :remove_round 
   end
 
   controller :sessions do

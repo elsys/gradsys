@@ -1,86 +1,92 @@
-<% if @current_user.predecessor.heir_type == "Teacher" %>
-<% @current_user.diploma_works.each do |diploma_work| %>
-  <h2>Diploma work: <%= diploma_work.title %></h2>
-  <table>  
-    <thead>
-      <tr>
-  			<th>Name</th>
-  			<th>Number</th>
-        <th>Grade</th>	
-        <th>Grades</th>
-        <th>First</th>
-        <th>Second</th>
-  	    <th>Third</th>
-        <th>Options</th>
-      </tr>
-    </thead>
+<%# if @current_user.admin? %>
+    <h2>Класиране: <%= @assemble.round %></h2>
+    <p><%= button_to "Следващо класиране", {action: "next_round"}, data: { confirm: 'Are you sure?' } %></p>
+    <p><%= button_to "Ново класиране", {action: "new_round"}, data: { confirm: 'Are you sure?' } %></p>
+    <p><%= button_to "Премахване на класиране", {action: "remove_round"}, data: { confirm: 'Are you sure?' } %></p>
+<%# end %>
+
+<% if @assemble.round != "none" %>
+  <% if @current_user.predecessor.heir_type == "Teacher" %>
+    <% @current_user.diploma_works.each do |diploma_work| %>
+      <h2>Diploma work: <%= diploma_work.title %></h2>
+      <table>  
+        <thead>
+          <tr>
+      			<th>Name</th>
+      			<th>Number</th>
+            <th>Grade</th>	
+            <th>Grades</th>
+            <th>First</th>
+            <th>Second</th>
+      	    <th>Third</th>
+            <th>Options</th>
+          </tr>
+        </thead>
 
 
-    <tbody>
-      <% @diplomants = @students.where("students.first = '#{diploma_work.id}' AND students.diploma_work_id IS NULL") %>
-      <% @diplomants = @diplomants.sort_by {|s| s.grades}.reverse %>
-      <% @diplomants.each do |student| %>
-        <tr>
-          <td><%= student.name %></td>
-          <td><%= student.number %></td>
-          
-          <td><%= student.grade %></td>
-        
-          <td><%= student.grades %></td>
-          <td><% if d = DiplomaWork.find_by_id(student.first) %>
-                <%= d.title  %>
-              <% end %>
-          </td>
-          <td><% if d = DiplomaWork.find_by_id(student.second) %>
-                <%= d.title  %>
-              <% end %>
-          </td>
-          <td><% if d = DiplomaWork.find_by_id(student.third) %>
-                <%= d.title  %>
-              <% end %>
-          </td>
-          <td><%= button_to "Get student", {action: "get_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-      <%= link_to "Don't want them", assemble_path %>
+        <tbody>
+          <% @diplomants = @students.where("students.#{@assemble.round} = '#{diploma_work.id}' AND students.diploma_work_id IS NULL") %>
+          <% @diplomants = @diplomants.sort_by {|s| s.grades}.reverse %>
+          <% @diplomants.each do |student| %>
+            <tr>
+              <td><%= student.name %></td>
+              <td><%= student.number %></td>
+              
+              <td><%= student.grade %></td>
+            
+              <td><%= student.grades %></td>
+              <td><% if d = DiplomaWork.find_by_id(student.first) %>
+                    <%= d.title  %>
+                  <% end %>
+              </td>
+              <td><% if d = DiplomaWork.find_by_id(student.second) %>
+                    <%= d.title  %>
+                  <% end %>
+              </td>
+              <td><% if d = DiplomaWork.find_by_id(student.third) %>
+                    <%= d.title  %>
+                  <% end %>
+              </td>
+              <td><%= button_to "Get student", {action: "get_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+          <%= link_to "Don't want them", assemble_path %>
 
-      <% @diplomants = @students.where("students.diploma_work_id =  '#{diploma_work.id}'") %>
-      <% @diplomants.each do |student| %>
-        <tr>
-          <td><%= student.name %></td>
-          <td><%= student.number %></td>
-          
-          <td><%= student.grade %></td>
-        
-          <td><%= student.grades %></td>
-          <td><% if d = DiplomaWork.find_by_id(student.first) %>
-                <%= d.title  %>
-              <% end %>
-          </td>
-          <td><% if d = DiplomaWork.find_by_id(student.second) %>
-                <%= d.title  %>
-              <% end %>
-          </td>
-          <td><% if d = DiplomaWork.find_by_id(student.third) %>
-                <%= d.title  %>
-              <% end %>
-          </td>
-          <td><% if student.first == diploma_work.id %>
-                <%= button_to "Remove", {action: "remove_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %>
-              <% else %>
-                Have it
-              <% end %>
-
-          </td>
-        </tr>
-      <% end %>
-
-    </tbody>
-  </table>
-  <br />
+          <% @diplomants = @students.where("students.diploma_work_id =  '#{diploma_work.id}'") %>
+          <% @diplomants.each do |student| %>
+            <tr>
+              <td><%= student.name %></td>
+              <td><%= student.number %></td>
+              
+              <td><%= student.grade %></td>
+            
+              <td><%= student.grades %></td>
+              <td><% if d = DiplomaWork.find_by_id(student.first) %>
+                    <%= d.title  %>
+                  <% end %>
+              </td>
+              <td><% if d = DiplomaWork.find_by_id(student.second) %>
+                    <%= d.title  %>
+                  <% end %>
+              </td>
+              <td><% if d = DiplomaWork.find_by_id(student.third) %>
+                    <%= d.title  %>
+                  <% end %>
+              </td>
+              <td><% if student.first == diploma_work.id %>
+                    <%= button_to "Remove", {action: "remove_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %>
+                  <% else %>
+                    Have it
+                  <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br />
+    <% end %>
+  <% end %>
 <% end %>
-<% end %>
-
 <script>
 var table = $('table');
 
