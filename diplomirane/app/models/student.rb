@@ -4,7 +4,7 @@ class Student < ActiveRecord::Base
 	belongs_to :diploma_work
   	
   validates_presence_of :number
-	validates_inclusion_of :grade, :in => ["12а","12б","12в","12г"] 
+	validates_inclusion_of :grade, :in => ["12a","12b","12v","12g"] 
 	validates :diploma_work_id,	:numericality => true, :unless => lambda { self.diploma_work_id.nil? }
 
 	validates :password, :confirmation => true
