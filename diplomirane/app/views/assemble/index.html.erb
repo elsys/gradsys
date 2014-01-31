@@ -17,7 +17,7 @@
 
 
     <tbody>
-      <% @diplomants = @students.where("students.first = '#{diploma_work.id}'") %>
+      <% @diplomants = @students.where("students.first = '#{diploma_work.id}' AND students.diploma_work_id IS NULL") %>
       <% @diplomants = @diplomants.sort_by {|s| s.grades}.reverse %>
       <% @diplomants.each do |student| %>
         <tr>
@@ -39,7 +39,7 @@
                 <%= d.title  %>
               <% end %>
           </td>
-          <td><%= button_to "Get student", {action: "get_student", id: student.id, diploma_work_id: diploma_work.id} %></td>
+          <td><%= button_to "Get student", {action: "get_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
       <%= link_to "Don't want them", assemble_path %>
@@ -66,7 +66,7 @@
               <% end %>
           </td>
           <td><% if student.first == diploma_work.id %>
-                <%= button_to "Remove", {action: "remove_student", id: student.id, diploma_work_id: diploma_work.id} %>
+                <%= button_to "Remove", {action: "remove_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %>
               <% else %>
                 Have it
               <% end %>

@@ -5,7 +5,8 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 	<% if session[:user_id].nil? %>
 		<%= stylesheet_link_tag "/assets/login.css" %>
-	<% end %>	
+	<% end %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>	
   <%= csrf_meta_tags %>
 </head>
 <body>
