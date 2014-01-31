@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131143700) do
+ActiveRecord::Schema.define(version: 20140131150215) do
 
   create_table "assembles", force: true do |t|
     t.string "round"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140131143700) do
     t.boolean  "approved",              default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "checkout"
   end
 
   create_table "students", force: true do |t|
