@@ -9,6 +9,11 @@ Oop::Application.routes.draw do
     post 'save_password' => :save_password
   end  
 
+  controller :assemble do
+    post 'get_student' => :get_student
+    post 'remove_student' => :remove_student 
+  end
+
   controller :sessions do
     get  'login' => :new
     post 'login' => :create

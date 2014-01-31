@@ -1,6 +1,7 @@
 class DiplomaWork < ActiveRecord::Base
 	has_and_belongs_to_many :commissioners, class_name: "Teacher", association_foreign_key: "commissioner_id", join_table: "commissioners_diploma_works"
 	has_many :students
+	belongs_to :diploma_supervisor, class_name: "Teacher", foreign_key: "diploma_supervisor_id"
 
 	validates :title, :presence => true, :uniqueness => true
 	validates :description, :presence => true

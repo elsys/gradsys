@@ -1,7 +1,8 @@
 require 'digest/sha2'
 class Teacher < ActiveRecord::Base
 	child_of :user
-	has_and_belongs_to_many :diploma_works, foreign_key: "commissioner_id", join_table: "commissioners_diploma_works"
+  has_many :diploma_works, foreign_key: "diploma_supervisor_id"
+	has_and_belongs_to_many :commissioners, class_name: "DiplomaWork", foreign_key: "commissioner_id", join_table: "commissioners_diploma_works"
 
 	validates :password, :confirmation => true
   attr_accessor :password_confirmation

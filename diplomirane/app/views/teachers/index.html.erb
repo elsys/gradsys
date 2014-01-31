@@ -21,8 +21,8 @@
 				<td><%= teacher.name %></td>
 				<td><%= teacher.business %></td>		
 				<% if @current_user.admin? %>		
-					<td><%= teacher.id %></td>
 					<td><%= teacher.user_name %></td>
+          <td><%= teacher.id %></td>
 				<% end %>
         <td><%= link_to 'Show', teacher %></td>
         <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>

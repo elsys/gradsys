@@ -45,7 +45,7 @@ class StudentsController < ApplicationController
 			@student = Student.new(student_params)
       Student.update_all("id = '#{@student.predecessor.id}'", "id = '#{@student.id}'")
       User.where("heir_type = 'Student'").update_all("heir_id = '#{@student.predecessor.id}'", "heir_id = '#{@student.id}'")
-			UserMailer.welcome_email(@student,"#{@student.activation_code}").deliver
+			#UserMailer.welcome_email(@student,"#{@student.activation_code}").deliver
 		end
 
 

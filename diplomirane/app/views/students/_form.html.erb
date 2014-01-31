@@ -46,7 +46,7 @@
     <%= f.label :access %><br>
     <%= f.select(:access, ["user","admin"]) %>
 	</div>
-	<%= f.collection_select :provider_id, Provider.order(:name),:id,:name, include_blank: true %>
+	
   <div class="actions">
     <%= f.submit %>
   </div>
