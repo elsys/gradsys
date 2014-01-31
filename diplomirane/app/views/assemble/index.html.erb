@@ -12,14 +12,14 @@
       <table>  
         <thead>
           <tr>
-      			<th>Name</th>
-      			<th>Number</th>
-            <th>Grade</th>	
-            <th>Grades</th>
-            <th>First</th>
-            <th>Second</th>
-      	    <th>Third</th>
-            <th>Options</th>
+      			<th>Име</th>
+      			<th>Номер</th>
+            <th>Клас</th>	
+            <th>Успех</th>
+            <th>Първо желание</th>
+            <th>Второ желание</th>
+      	    <th>Трето желание</th>
+            <th>Опции</th>
           </tr>
         </thead>
 
@@ -47,10 +47,10 @@
                     <%= d.title  %>
                   <% end %>
               </td>
-              <td><%= button_to "Get student", {action: "get_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= button_to "Вземи ученик", {action: "get_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
-          <%= link_to "Don't want them", assemble_path %>
+          <%= link_to "Изчакай следващо класиране", assemble_path %>
 
           <% @diplomants = @students.where("students.diploma_work_id =  '#{diploma_work.id}'") %>
           <% @diplomants.each do |student| %>

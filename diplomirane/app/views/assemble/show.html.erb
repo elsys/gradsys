@@ -1,40 +1,40 @@
 <p id="notice"><%= notice %></p>
 <p>
-  <strong>Title:</strong>
+  <strong>Задание:</strong>
   <%= @diploma_work.title %>
 </p>
 <p>
-  <strong>Description:</strong>
+  <strong>Описание:</strong>
   <%= @diploma_work.description %>
 </p>
 <p>
-  <strong>Diploma supervisor:</strong>
+  <strong>Дипломен Ръководител:</strong>
   <% if t = Teacher.find_by_id(@diploma_work.diploma_supervisor_id) %>
 		<%= t.name  %>
 	<% end %>
 </p>
 <p>
-  <strong>Reviewer:</strong>
+  <strong>Рецензент:</strong>
   <% if t = Teacher.find_by_id(@diploma_work.reviewer_id) %>
 		<%= t.name  %>
 	<% end %>
 </p>
 <p>
-  <strong>Diplomants:</strong>
+  <strong>Дипломанти:</strong>
   <%= @diploma_work.diplomants_names %>
 </p>
 <p>
-  <strong>Commission:</strong>
+  <strong>Комисия:</strong>
   <%= @diploma_work.commissioners_names %>
 </p>
 <p>
-  <strong>Covenanted:</strong>
+  <strong>Уговорена:</strong>
   <%= @diploma_work.covenanted %>
 </p>
 <p>
-  <strong>Approved:</strong>
+  <strong>Удобрена:</strong>
   <%= @diploma_work.approved %>
 </p>
 
-<%= link_to 'Edit', edit_diploma_work_path(@diploma_work) %> |
-<%= link_to 'Back', diploma_works_path %>
+<%= link_to 'Промени', edit_diploma_work_path(@diploma_work) %> |
+<%= link_to 'Назад', diploma_works_path %>

@@ -11,15 +11,15 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :title %>
+    <%= f.label :title, "Задание" %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label :description, "Описание" %><br>
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :diploma_supervisor_id %><br>
+    <%= f.label :diploma_supervisor_id,"Дипломен ръководител" %><br>
     <%= f.select(:diploma_supervisor_id, Teacher.where(:diploma_supervisor => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'None(Chose)'}) %>
   </div>
   <div class="field">
@@ -29,19 +29,19 @@
 
 	<div id="p_scents">
 		<%= label_tag :diplomants %>
-		<a href="#" id="addScnt">Add Diplomant</a>
+		<a href="#" id="addScnt">Добавяне на дипломант</a>
 		<% br=0 %>
 		<% @diplomanti= @diploma_work.students %>
 		<% @diplomanti.each do |d| %>
 			<% br+=1 %>
-			<p><label for="p_scnts"><%= select("diplomants", "p_dipl_#{br}", Student.all.collect {|p| [ p.name, p.id ]},{include_blank: 'None', :selected => d.id}) %></label>
+			<p><label for="p_scnts"><%= select("Дипломант", "p_dipl_#{br}", Student.all.collect {|p| [ p.name, p.id ]},{include_blank: 'None', :selected => d.id}) %></label>
 			<a href="#" id="remScnt">Remove</a></p>	
 		<% end %>
 		<%= hidden_field_tag :diplomants_number, br %>
 	</div>
 
 	<div class="field">
-    <%= label_tag :commissioners %><br>
+    <%= label_tag :commissioners,"Комисия" %><br>
 		<% @commissioners= @diploma_work.teachers %>
 		<% br_c=0 %>
     <% @commissioners.each do |c| %>
@@ -55,11 +55,11 @@
 
 
   <div class="field">
-    <%= f.label :covenanted %><br>
+    <%= f.label :covenanted, "Уговорена" %><br>
     <%= f.check_box :covenanted %>
   </div>
   <div class="field">
-    <%= f.label :approved %><br>
+    <%= f.label :approved,"Удобрена" %><br>
     <%= f.check_box :approved %>
   </div>
   <div class="actions">
@@ -67,6 +67,4 @@
   </div>
 <% end %>
 
-
-<%= link_to 'Add new student', diploma_works_path, remote: true %>
 

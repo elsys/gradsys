@@ -3,11 +3,11 @@
 <table>
   <thead>
     <tr>
-			<th>Name</th>
-			<th>Number</th>
-      <th>Grade</th>
+			<th>Име</th>
+			<th>Номер</th>
+      <th>Клас</th>
 			<% if @current_user.admin? %>
-				<th>Username</th>
+				<th>Акаунт</th>
 				<th>ID</th>
 			<% end %>		
       <th></th>
@@ -75,4 +75,4 @@ $('#facility_header, #city_header')
 <br>
 
 
-<%= link_to 'New Student', new_student_path %>
+<%= link_to 'Нов ученик', new_student_path %>

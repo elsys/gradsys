@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 </script>
 <p>
-  <strong>Name:</strong>
+  <strong>Име:</strong>
   <%= @student.name %>
 </p>
 <p>
-  <strong>Number:</strong>
+  <strong>Номер:</strong>
   <%= @student.number %>
 </p>
 <p>
-  <strong>Grade:</strong>
+  <strong>Клас:</strong>
   <%= @student.grade %>
 </p>
 <p>
-  <strong>Diploma Work:</strong>
+  <strong>Дипломна работа:</strong>
   <% if s = @student.diploma_work %>
 		<%= s.title %>
 	<% end %>	
@@ -22,25 +22,25 @@
 	
 </p>
 <p>
-  <strong>Grades:</strong>
+  <strong>Оценки:</strong>
 	<%= @student.grades %>
 	
 </p>
 <% if @current_user.admin? %>
 	<p>
-		<strong>Username:</strong>
+		<strong>Акаунт:</strong>
 		<%= @student.user_name %>
 	</p>
 	<p>
-		<strong>Type:</strong>
+		<strong>Тип:</strong>
 		<%= @student.predecessor.heir_type %>
 	</p>
 	<p>
-		<strong>Access:</strong>
+		<strong>Ниво на достъп:</strong>
 		<%= @student.access %>
 	</p>
 	<p>
-		<strong>Active:</strong>
+		<strong>Статус:</strong>
 		<%= @student.active %>
 	</p>
 	<p>
@@ -54,5 +54,5 @@
 	
 <% end %>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<%= link_to 'Промени', edit_student_path(@student) %> |
+<%= link_to 'Назад', students_path %>
