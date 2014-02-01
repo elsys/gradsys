@@ -26,9 +26,9 @@
 					<td><%= student.user_name %></td>
 					<td><%= student.id %></td>
 				<% end %>
-        <td><%= link_to 'Show', student %></td>
-        <td><%= link_to 'Edit', edit_student_path(student) %></td>
-        <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Покажи', student %></td>
+        <td><%= link_to 'Промени', edit_student_path(student) %></td>
+        <td><%= link_to 'Унищожи', student, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></td>
       </tr>
     <% end %>
   </tbody>

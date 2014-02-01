@@ -1,13 +1,13 @@
 <h1>Разпределение на комисии</h1>
- <script type="text/javascript">
-$(function() {
-  $(".datepicker").datepicker({
-    format:'dd/mm/yyyy',
-    autoclose: true
-  });
-});
-</script>
 
+<script type="text/javascript">
+  $(function() {
+    $(".datepicker").datepicker({
+      format:'dd/mm/yyyy',
+      autoclose: true
+    });
+  });
+</script>
 
 <%= form_tag(set_dates_path) do %>
   <div class="mydate">
@@ -23,86 +23,88 @@ $(function() {
 <% end %>
 <br />
 <% if !@committees.nil? %>
-    <% @committees.each do |committee| %> 
-      <% br_c=0 %>
-      <hr style="background-color: #777; height: 3px; border:none;">
-      <table>
-        <h2>
-          <%= link_to committee.date, committee %> 
-          <%= link_to 'Промяна на комисия', edit_committee_path(committee) %>
-        </h2>
-                                  
-        <thead>        
+  <% @committees.each do |committee| %> 
+    <% br_c=0 %>
+    <hr style="background-color: #777; height: 3px; border:none;">
+    <table>
+      <h2>
+        <%= link_to committee.date, committee %> 
+        <%= link_to 'Промяна на комисия', edit_committee_path(committee) %>
+      </h2>                                  
+      <thead>        
+        <tr>
+          <th>Свободен</th>
+          <th>Име</th>
+          <th>Опции</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @commissioners = Teacher.where("teachers.commissioner_dates LIKE '%#{committee.date}%'").all %>
+        <% @commissioners.each do |commissioner| %>
+          <% if !committee.commissioners.exists?(commissioner.id) %>
+            <% br_c+=1 %>
             <tr>
-              <th>Свободен</th>
-              <th>Име</th>
-              <th>Опции</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @commissioners = Teacher.where("teachers.commissioner_dates LIKE '%#{committee.date}%'").all %>
-          <% @commissioners.each do |commissioner| %>
-            <% if !committee.commissioners.exists?(commissioner.id) %>
-              <% br_c+=1 %>
-              <tr>
-                <td>Да</td>
-                <td><%= commissioner.name %></td>    
-                <td>
-                    <%= button_to "Добави към комисия", {action: "add_commissioner", commissioner_id: commissioner.id, committee_id: committee.id}, data: { confirm: 'Сигурни ли сте?' } %> 
-                </td>   
-              </tr> 
-            <% end %>
+              <td>Да</td>
+              <td><%= commissioner.name %></td>    
+              <td>
+                <%= button_to "Добави към комисия", {action: "add_commissioner", commissioner_id: commissioner.id, committee_id: committee.id} %> 
+              </td>   
+            </tr> 
           <% end %>
-
-            <% br=0 %>
-            <% committee.commissioners.each do |commissioner| %> 
-              <% br+=1 %>
-              <tr>
-                <td>
-                  <% if commissioner.commissioner_dates.include?(committee.date)%>
-                    Да
-                  <% else %>
-                    Не
-                  <% end %>
-                </td>
-                <td><%=commissioner.name%></td>
-                <td>
-                    <%= button_to "Премахни от комисия", {action: "remove_commissioner", commissioner_id: commissioner.id, committee_id: committee.id}, data: { confirm: 'Сигурни ли сте?' } %>        
-                </td>   
-              </tr>
-            <% end %>
-            <%= form_for(committee) do |f| %>
+        <% end %>
+        <tr>
+          <td><hr></td>
+          <td><hr></td>
+          <td><hr></td>
+        </tr>
+        <% br=0 %>
+        <% committee.commissioners.each do |commissioner| %> 
+          <% br+=1 %>
+          <tr>
+            <td>
+              <% if commissioner.commissioner_dates.include?(committee.date)%>
+                Да
+              <% else %>
+                  Не
+              <% end %>
+            </td>
+            <td><%=commissioner.name%></td>
+            <td>
+              <%= button_to "Премахни от комисия", {action: "remove_commissioner", commissioner_id: commissioner.id, committee_id: committee.id} %>        
+            </td>   
+          </tr>
+        <% end %>
+        <%= form_for(committee) do |f| %>
+          <tr>
+            <td></td>
+            <td></td>
+            <td rowspan="6"><%= f.submit "Добави", :onclick => "return confirm('Сигурни ли сте?')" %></td>
+          </tr>  
+          <%= f.hidden_field :id %>
+          <% br_c =0 %>
+          <% committee.commissioners.each do |commissioner| %> 
+            <% br_c+=1 %>
             <tr>
               <td></td>
+              <td>
+                <input id="commissioner_<%=br_c%>" name="commissioner[<%=br_c%>]" type="hidden" value="<%=commissioner.id%>" readonly>
+              </td> 
+            </tr>
+          <% end %>
+          <% (br_c..4).each do |br| %>
+            <tr>
               <td></td>
-              <td rowspan="6"><%= f.submit "Добави", :onclick => "return confirm('Сигурни ли сте?')" %></td>
-            </tr>  
-              <%= f.hidden_field :id %>
-              <% br_c =0 %>
-              <% committee.commissioners.each do |commissioner| %> 
-              <% br_c+=1 %>
-              <tr>
-                <td></td>
-                <td>
-                  <input id="commissioner_<%=br_c%>" name="commissioner[<%=br_c%>]" type="hidden" value="<%=commissioner.id%>" readonly>
-                </td> 
-              </tr>
-            <% end %>
-              <% (br_c..4).each do |br| %>
-                <tr>
-                  <td></td>
-                  <td>
-                    <%= select("commissioner", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)'}) %>
-                  </td>
-                </tr>
-              <% end %>
-            <% end %>
+              <td>
+                <%= select("commissioner", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)'}) %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
         </tbody>
-      </table>
-      <br />
-    <% end %>   
+    </table>
+    <br />
+  <% end %>   
 <% end %>
    
-
 <%= link_to 'Нова комисяи за нов ден', new_committee_path %> 
 <%= link_to 'Всички комисии', committees_all_path %>

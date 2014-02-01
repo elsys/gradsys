@@ -2,9 +2,9 @@
 <br />
 <%# if @current_user.admin? %>
     <h2>Класиране: <%= @assemble.round %></h2>
-    <p><%= button_to "Следващо класиране", {action: "next_round"}, data: { confirm: 'Are you sure?' } %></p>
-    <p><%= button_to "Ново класиране", {action: "new_round"}, data: { confirm: 'Are you sure?' } %></p>
-    <p><%= button_to "Премахване на класиране", {action: "remove_round"}, data: { confirm: 'Are you sure?' } %></p>
+    <p><%= button_to "Следващо класиране", {action: "next_round"}, data: { confirm: 'Сигурни ли стe?' } %></p>
+    <p><%= button_to "Ново класиране", {action: "new_round"}, data: { confirm: 'Сигурни ли стe?' } %></p>
+    <p><%= button_to "Премахване на класиране", {action: "remove_round"}, data: { confirm: 'Сигурни ли стe?' } %></p>
 <%# end %>
 
 <% if @assemble.round != "none" %>
