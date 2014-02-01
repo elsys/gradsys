@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 </script>
 <p>
-  <strong>Име:</strong>
+  <strong>РРјРµ:</strong>
   <%= @student.name %>
 </p>
 <p>
-  <strong>Номер:</strong>
+  <strong>РќРѕРјРµСЂ:</strong>
   <%= @student.number %>
 </p>
 <p>
-  <strong>Клас:</strong>
+  <strong>РљР»Р°СЃ:</strong>
   <%= @student.grade %>
 </p>
 <p>
-  <strong>Дипломна работа:</strong>
+  <strong>Р”РёРїР»РѕРјРЅР° СЂР°Р±РѕС‚Р°:</strong>
   <% if s = @student.diploma_work %>
 		<%= s.title %>
 	<% end %>	
@@ -22,29 +22,29 @@
 	
 </p>
 <p>
-  <strong>Оценки:</strong>
+  <strong>РЈСЃРїРµС…:</strong>
 	<%= @student.grades %>
 	
 </p>
 <% if @current_user.admin? %>
 	<p>
-		<strong>Акаунт:</strong>
+		<strong>РђРєР°СѓРЅС‚:</strong>
 		<%= @student.user_name %>
 	</p>
 	<p>
-		<strong>Тип:</strong>
+		<strong>РўРёРї:</strong>
 		<%= @student.predecessor.heir_type %>
 	</p>
 	<p>
-		<strong>Ниво на достъп:</strong>
+		<strong>РќРёРІРѕ РЅР° РґРѕСЃС‚СЉРї:</strong>
 		<%= @student.access %>
 	</p>
 	<p>
-		<strong>Статус:</strong>
+		<strong>РђРєС‚РёРІРµРЅ:</strong>
 		<%= @student.active %>
 	</p>
 	<p>
-		<strong>Hashed password:</strong>
+		<strong>РљСЂРёРїС‚РёСЂР°РЅР° РїР°СЂРѕР»Р°:</strong>
 		<%= @student.hashed_password %>
 	</p>
 	<p>
@@ -54,5 +54,5 @@
 	
 <% end %>
 
-<%= link_to 'Промени', edit_student_path(@student) %> |
-<%= link_to 'Назад', students_path %>
+<%= link_to 'РџСЂРѕРјРµРЅРё', edit_student_path(@student) %> |
+<%= link_to 'РќР°Р·Р°Рґ', students_path %>

@@ -1,6 +1,7 @@
 Oop::Application.routes.draw do
 
-  get "committee" => 'committee#index'
+  get "committees" => 'committees#index'
+  get "committees/all"
   get "assemble" => 'assemble#index'
   get "home/index"
   get 'activation' => 'activation#index'
@@ -10,8 +11,10 @@ Oop::Application.routes.draw do
     post 'save_password' => :save_password
   end  
 
-  controller :committee do
+  controller :committees do
     post 'set_dates' => :set_dates
+    post 'add_commissioner' => :add_commissioner
+    post 'remove_commissioner' => :remove_commissioner
   end 
 
   controller :assemble do
@@ -28,7 +31,6 @@ Oop::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
-
   resources :diploma_works
 
   resources :teachers
@@ -39,6 +41,7 @@ Oop::Application.routes.draw do
 
   resources :assemble
 
+  resources :committees
 
 	get 'students/parse_emails'
 	get 'user_mailer' => 'user_mailer#index'

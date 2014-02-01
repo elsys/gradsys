@@ -21,8 +21,13 @@
 				<li><a href="/students/">Ученици</a></li>
 				<li><a href="/teachers/">Учители</a></li>
 				<li><a href="/diploma_works/">Дипломни работи</a></li>
-				<li><a href="/assemble/">Разпределение</a></li>
-				<li><a href="/committee/">Комисия</a></li>
+				<% if @current_user.predecessor.heir_type == "Teacher" or
+						@current_user.admin? %>
+							<li><a href="/assemble/">Разпределение</a></li>
+				<% end %>
+				<% if @current_user.admin? %>
+					<li><a href="/committees/">Комисия</a></li>
+				<% end %>	
 			</ul>
 		</div>
 		<div id="user">
@@ -32,7 +37,7 @@
 				<% elsif  @current_user.predecessor.heir_type == "Student" %>
 					<li><%= link_to @current_user.user_name, student_path(@current_user) %></li>
 				<% end %>
-			  <li><%= button_to 'Logout', logout_path, :method => :delete %></li>
+			  <li><%= button_to 'Изход', logout_path, :method => :delete %></li>
 			</ul>
 		</div>
 	<% else %>	

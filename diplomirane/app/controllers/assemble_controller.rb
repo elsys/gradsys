@@ -1,4 +1,6 @@
 class AssembleController < ApplicationController
+  before_filter :access
+
   def index
   	@assemble = Assemble.find(1)
     @students = Student.all
@@ -47,4 +49,12 @@ class AssembleController < ApplicationController
   	@assemble.save
   	redirect_to assemble_url
   end
+
+  private
+
+    def access
+      unless @current_user.admin? or @current_user.predecessor.heir_type == "Teacher"
+        redirect_to admin_url
+      end
+    end
 end

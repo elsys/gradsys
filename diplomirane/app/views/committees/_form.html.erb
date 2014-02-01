@@ -1,0 +1,47 @@
+<%= form_for(@committee) do |f| %>
+  <% if @committee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@committee.errors.count, "error") %> prohibited this committee from being saved:</h2>
+
+      <ul>
+      <% @committee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<script type="text/javascript">
+  $(function() {
+    $(".datepicker").datepicker({
+      format:'dd/mm/yyyy',
+      autoclose: true   
+    });
+  });
+</script>
+
+  <div class="mydate">
+      Ден:<br/>
+      <input id="committee_date" name="committee[date]" type="text" class="datepicker" data-format="dd-MM-yyyy" value="<%=  @committee.date %>"  readonly placeholder="Select .." />
+    </div>
+
+
+  <%= f.hidden_field :id %>
+  <div id="p_scents">
+    <h3>Членовe на комисията</h3>
+    <a href="#" id="addScnt">Добавяне на член към комисията</a>
+    <% br_c=0 %>
+    <% @commissioners = @committee.commissioners %>
+    <% @commissioners.each do |c| %>
+      <% br_c+=1 %>
+      <p><%= select("commissioner", "#{br_c}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)', :selected => c.id}) %></p>
+    <% end %>
+    <% (br_c..4).each do |br| %>
+      <p><%= select("commissioner", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)'}) %></p>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Запази промените" %>
+  </div>
+<% end %>

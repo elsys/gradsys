@@ -1,14 +1,14 @@
-<h1>Listing diploma_works</h1>
+<h1>Разглеждане на дипломни работи</h1>
 
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Diploma supervisor</th>
-      <th>Covenanted</th>
-      <th>Approved</th>
+      <th>Заглавие</th>
+      <th>Описание</th>
+      <th>Дипломен ръководител</th>
+      <th>Уговорена</th>
+      <th>Удобрена</th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @diploma_works.each do |diploma_work| %>
+    <% @diploma_works.sort_by {|d| d.covenanted ? 1 : 0}.each do |diploma_work| %>
       <tr>
         <td><%= diploma_work.title %></td>
         <td><%= diploma_work.description %></td>
@@ -26,9 +26,9 @@
 				</td>
         <td><%= diploma_work.covenanted %></td>
         <td><%= diploma_work.approved %></td>
-        <td><%= link_to 'Show', diploma_work %></td>
-        <td><%= link_to 'Edit', edit_diploma_work_path(diploma_work) %></td>
-        <td><%= link_to 'Destroy', diploma_work, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Покажи', diploma_work %></td>
+        <td><%= link_to 'Промени', edit_diploma_work_path(diploma_work) %></td>
+        <td><%= link_to 'Унищожи', diploma_work, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +36,4 @@
 
 <br>
 
-<%= link_to 'New Diploma work', new_diploma_work_path %>
+<%= link_to 'Нова Дипломна работа', new_diploma_work_path %>

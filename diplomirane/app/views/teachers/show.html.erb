@@ -1,49 +1,49 @@
 <p id="notice"><%= notice %></p>
 <p>
-  <strong>Name:</strong>
+  <strong>Име:</strong>
   <%= @teacher.name %>
 </p>
 <p>
-  <strong>Type:</strong>
+  <strong>Тип:</strong>
   <%= @teacher.predecessor.heir_type %>
 </p>
 <p>
-  <strong>Diploma Supervisor:</strong>
+  <strong>Дипломен ръководител:</strong>
   <%= @teacher.diploma_supervisor %>
 </p>
 <p>
-  <strong>Reviewer:</strong>
+  <strong>Рецензент:</strong>
   <%= @teacher.reviewer %>
 </p>
 <p>
-  <strong>Commissioner:</strong>
+  <strong>Член на комисия:</strong>
   <%= @teacher.commissioner %>
 </p>
 <% if @teacher.commissioner %>
 	<p>
-  	<strong>Commissioner Dates:</strong>
+  	<strong>Дни в които може да бъде член на комисия:</strong>
   	<%= @teacher.commissioner_dates %>
 	</p>
 <% end %>
 <p>
-  <strong>Business:</strong>
+  <strong>Работа:</strong>
   <%= @teacher.business %>
 </p>
 <% if @current_user.admin? %>
 	<p>
-		<strong>Username:</strong>
+		<strong>Акаунт:</strong>
 		<%= @teacher.user_name %>
 	</p>
 	<p>
-		<strong>Access:</strong>
+		<strong>Ниво на достъп:</strong>
 		<%= @teacher.access%>
 	</p>
 	<p>
-		<strong>Active:</strong>
+		<strong>Активен:</strong>
 		<%= @teacher.active %>
 	</p>
 	<p>
-		<strong>Hashed password:</strong>
+		<strong>Криптирана парола:</strong>
 		<%= @teacher.hashed_password %>
 	</p>
 	<p>
@@ -51,5 +51,5 @@
 		<%= @teacher.salt %>
 	</p>
 <% end %>
-<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
-<%= link_to 'Back', teachers_path %>
+<%= link_to 'Промяна', edit_teacher_path(@teacher) %> |
+<%= link_to 'Назад', teachers_path %>

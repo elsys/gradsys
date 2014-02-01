@@ -1,0 +1,28 @@
+<h1>Всички комисии</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ден</th>
+      <th>Членове</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @committees.each do |committee| %>
+      <tr>
+        <td><hr><%= committee.date %></td>
+        <td><hr><%= committee.commissioners_names %></td>
+        <td><hr><%= link_to 'Покажи', committee %></td>
+        <td><hr><%= link_to 'Промени', edit_committee_path(committee) %></td>
+        <td><hr>
+        	<%= link_to 'Унищожи', committee, method: :delete, data: { confirm: 'Сигурни ли сте?' } %>
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>

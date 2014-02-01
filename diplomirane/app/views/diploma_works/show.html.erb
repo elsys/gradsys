@@ -1,40 +1,40 @@
 <p id="notice"><%= notice %></p>
 <p>
-  <strong>Задание:</strong>
+  <strong>Р—Р°РіР»Р°РІРёРµ:</strong>
   <%= @diploma_work.title %>
 </p>
 <p>
-  <strong>Описание:</strong>
+  <strong>РћРїРёСЃР°РЅРёРµ:</strong>
   <%= @diploma_work.description %>
 </p>
 <p>
-  <strong>Дипломен ръководител:</strong>
+  <strong>Р”РёРїР»РѕРјРµРЅ СЂСЉРєРѕРІРѕРґРёС‚РµР»:</strong>
   <% if t = Teacher.find_by_id(@diploma_work.diploma_supervisor_id) %>
 		<%= t.name  %>
 	<% end %>
 </p>
 <p>
-  <strong>Рецензент:</strong>
+  <strong>Р РµС†РµРЅР·РµРЅС‚:</strong>
   <% if t = Teacher.find_by_id(@diploma_work.reviewer_id) %>
 		<%= t.name  %>
 	<% end %>
 </p>
 <p>
-  <strong>Дипломанти:</strong>
+  <strong>Р”РёРїР»РѕРјР°РЅС‚Рё:</strong>
   <%= @diploma_work.diplomants_names %>
 </p>
 <p>
-  <strong>Комисия:</strong>
+  <strong>Р§Р»РµРЅРѕРІРµ РЅР° РєРѕРјРёСЃРёСЏС‚Р°:</strong>
   <%= @diploma_work.commissioners_names %>
 </p>
 <p>
-  <strong>Уговорена:</strong>
+  <strong>РЈРіРѕРІРѕСЂРµРЅР°:</strong>
   <%= @diploma_work.covenanted %>
 </p>
 <p>
-  <strong>Удобрена:</strong>
+  <strong>РЈРґРѕР±СЂРµРЅР°:</strong>
   <%= @diploma_work.approved %>
 </p>
 
-<%= link_to 'Промяна', edit_diploma_work_path(@diploma_work) %> |
-<%= link_to 'Назад', diploma_works_path %>
+<%= link_to 'РџСЂРѕРјРµРЅРё', edit_diploma_work_path(@diploma_work) %> |
+<%= link_to 'РќР°Р·Р°Рґ', diploma_works_path %>

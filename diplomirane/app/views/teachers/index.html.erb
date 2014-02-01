@@ -1,12 +1,12 @@
-<h1>Listing teachers</h1>
+<h1>Разглеждане на учители</h1>
 
 <table>
   <thead>
     <tr>
-			<th>Name</th>
-			<th>Business</th>	
+			<th>Име</th>
+			<th>Работа</th>	
 			<% if @current_user.admin? %>		
-				<th>Username</th>
+				<th>Акаунт</th>
 				<th>ID</th>
 			<% end %>
       <th></th>
@@ -24,9 +24,9 @@
 					<td><%= teacher.user_name %></td>
           <td><%= teacher.id %></td>
 				<% end %>
-        <td><%= link_to 'Show', teacher %></td>
-        <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-        <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Покажи', teacher %></td>
+        <td><%= link_to 'Промени', edit_teacher_path(teacher) %></td>
+        <td><%= link_to 'Унищожи', teacher, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Teacher', new_teacher_path %>
+<%= link_to 'Нов учител', new_teacher_path %>

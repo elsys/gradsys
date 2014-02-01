@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131232440) do
+ActiveRecord::Schema.define(version: 20140201103750) do
 
   create_table "assembles", force: true do |t|
     t.string "round"
+    t.string "committee_start_date"
+    t.string "committee_end_date"
+  end
+
+  create_table "commissioners_committees", force: true do |t|
+    t.integer "committee_id"
+    t.integer "commissioner_id"
   end
 
   create_table "commissioners_diploma_works", force: true do |t|
@@ -23,8 +30,7 @@ ActiveRecord::Schema.define(version: 20140131232440) do
   end
 
   create_table "committees", force: true do |t|
-    t.string "start_date"
-    t.string "end_date"
+    t.string "date"
   end
 
   create_table "diploma_works", force: true do |t|

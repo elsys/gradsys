@@ -5,20 +5,20 @@
 
   <%= form_tag do %>
     <fieldset>
-      <legend>Please Log In</legend>
+      <legend>Моля влезте в системата</legend>
 
       <div>
-        <label for="user_name">Username:</label>
+        <label for="user_name">Акаунт:</label>
         <%= text_field_tag :user_name, params[:user_name] %>
       </div>
 
       <div>
-        <label for="password">Password:</label>
+        <label for="password">Парола:</label>
         <%= password_field_tag :password, params[:password] %>
       </div>
   
       <div>
-        <%= submit_tag "Login" %>
+        <%= submit_tag "Вход" %>
       </div>
     </fieldset>
   <% end %>

@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Username:</strong>
+  <strong>Акаунт:</strong>
   <%= @user.name %>
 </p>
 <p>
-  <strong>Type:</strong>
+  <strong>Тип:</strong>
   <%= @user.heir_type %>
 </p>
 <p>
-  <strong>Hashed password:</strong>
+  <strong>Криптирана парола:</strong>
   <%= @user.hashed_password %>
 </p>
 
@@ -18,8 +18,8 @@
   <%= @user.salt %>
 </p>
 <% if @user.heir_type == "Teacher" %>
-	<%= link_to 'Edit', edit_teacher_path(@user) %> |
+	<%= link_to 'Промяна', edit_teacher_path(@user) %> |
 <% elsif @user.heir_type == "Student" %>
-	<%= link_to 'Edit', edit_student_path(@user) %> |
+	<%= link_to 'Промяна', edit_student_path(@user) %> |
 <% end %>
-<%= link_to 'Back', users_path %>
+<%= link_to 'Назад', users_path %>

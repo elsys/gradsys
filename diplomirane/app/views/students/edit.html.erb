@@ -13,67 +13,67 @@
     </div>
   <% end %>
 		<div class="field">
-    <%= f.label :name,"Èìå" %><br>
+    <%= f.label :name,"Ð˜Ð¼Ðµ" %><br>
     <%= f.text_field :name %>
   </div>
 	<div class="field">
-    <%= f.label :user_name,"Àêàóíò" %><br>
+    <%= f.label :user_name,"ÐÐºÐ°ÑƒÐ½Ñ‚" %><br>
     <%= f.text_field :user_name %>
   </div>
 	<% if !@current_user.admin? %>
 		<div class="field">
-		  <%= f.label :old_password %>
+		  <%= f.label :old_password, "Ð¡Ñ‚Ð°Ñ€Ð° Ð¿Ð°Ñ€Ð¾Ð»Ð°" %>
 		  <%= f.password_field :old_password %>
 		</div>
 	<% end %>
    <div class="field">
-    <%= f.label :grades, "Îöåíêè" %><br>
+    <%= f.label :grades, "Ð£ÑÐ¿ÐµÑ…" %><br>
     <%= f.select(:grades, ["2","2.52","3","3.5","4","4.5","5","5.5","6"]) %>
 	</div>
   <div class="field">
-    <%= f.label :password, "Íîâà ïàðîëà" %>
+    <%= f.label :password, "ÐŸÐ°Ñ€Ð¾Ð»Ð°" %>
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :password_confirmation, 'Ïîòâúðäè' %>
+    <%= f.label :password_confirmation, "ÐŸÐ¾Ñ‚Ð²ÑŠÑ€Ð¶Ð´ÐµÐ½Ð¸Ðµ" %>
     <%= f.password_field :password_confirmation %>
   </div>
 	<div class="field">
-    <%= f.label :number, "Íîìåð" %><br>
-    <%= f.text_area :number %>
+    <%= f.label :number, "ÐÐ¾Ð¼ÐµÑ€" %><br>
+    <%= f.text_field :number %>
 	<div class="field">
-    <%= f.label :grade %><br>
-    <%= f.select(:grade, ["","12à","12á","12â","12ã"]) %>
+    <%= f.label :grade, "ÐšÐ»Ð°Ñ" %><br>
+    <%= f.select(:grade, ["","12a","12b","12v","12g"]) %>
 	</div>
-  <%= f.label :diploma_work_id, "Äèïëîìíà ðàáîòà" %><br>
-    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'Íÿìà (Èçáåðè)'}) %>
+  <%= f.label :diploma_work_id, "Ð”Ð¸Ð¿Ð»Ð¾Ð¼Ð½Ð° Ñ€Ð°Ð±Ð¾Ñ‚Ð°" %><br>
+    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: "ÐÑÐ¼Ð° (Ð˜Ð·Ð±ÐµÑ€Ð¸)"}) %>
 	<div class="field">
-    <%= f.label :first,"Ïúðâî æåëàíèå" %><br>
-    <%= f.select(:first, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'Íÿìà (Èçáåðè)'}) %>
+    <%= f.label :first,"ÐŸÑŠÑ€Ð²Ð¾ Ð¶ÐµÐ»Ð°Ð½Ð¸Ðµ" %><br>
+    <%= f.select(:first, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: "ÐÑÐ¼Ð° (Ð˜Ð·Ð±ÐµÑ€Ð¸)"}) %>
   </div>
 		<div class="field">
-    <%= f.label :second, "Âòîðî æåëàíèå" %><br>
-    <%= f.select(:second, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'Íÿìà (Èçáåðè)'}) %>
+    <%= f.label :second, "Ð’Ñ‚Ð¾Ñ€Ð¾ Ð¶ÐµÐ»Ð°Ð½Ð¸Ðµ" %><br>
+    <%= f.select(:second, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: "ÐÑÐ¼Ð° (Ð˜Ð·Ð±ÐµÑ€Ð¸)"}) %>
         </div>
 		<div class="field">
-    <%= f.label :third, "Òðåòî æåëàíèå" %><br>
-    <%= f.select(:third, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'Íÿìà (Èçáåðè)'}) %>
+    <%= f.label :third, "Ð¢Ñ€ÐµÑ‚Ð¾ Ð¶ÐµÐ»Ð°Ð½Ð¸Ðµ" %><br>
+    <%= f.select(:third, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: "ÐÑÐ¼Ð° (Ð˜Ð·Ð±ÐµÑ€Ð¸)"}) %>
         </div>
 	<div class="field">
-    <%= f.label :access, "Íèâî íà äîñòúï" %><br>
+    <%= f.label :access, "ÐÐ¸Ð²Ð¾ Ð½Ð° Ð´Ð¾ÑÑ‚ÑŠÐ¿" %><br>
     <%= f.select(:access, ["user","admin"]) %>
 	</div>
   <div class="field">
-    <%= f.label :active, "Ñòàòóñ" %><br>
-    <%= f.select(:active, [["Àêòèâåí","true"],["Íåàêòèâåí" ,"false"]]) %>
+    <%= f.label :active, "ÐÐºÑ‚Ð¸Ð²ÐµÐ½" %><br>
+    <%= f.select(:active, [["Ð”Ð°","true"],["ÐÐµ" ,"false"]]) %>
   </div>
 </select>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Ð—Ð°Ð¿Ð°Ð·Ð¸ Ð¿Ñ€Ð¾Ð¼ÐµÐ½Ð¸Ñ‚Ðµ" %>
   </div>
 <% end %>
 
 
-<%= link_to 'Show', @student %> |
-<%= link_to 'Back', students_path %>
+<%= link_to 'ÐŸÐ¾ÐºÐ°Ð¶Ð¸', @student %> |
+<%= link_to 'ÐÐ°Ð·Ð°Ð´', students_path %>

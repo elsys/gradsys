@@ -11,43 +11,43 @@
     </div>
   <% end %>
 	<div class="field">
-    <%= f.label :file %><br>
+    <%= f.label :file, "CSV File" %><br>
     <%= f.file_field :file %>
   </div>
 	<div class="field">
-    <%= f.label :user_name %><br>
+    <%= f.label :user_name, "Акаунт" %><br>
     <%= f.text_field :user_name %>
   </div>
 	<div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, "Име" %><br>
     <%= f.text_field :name %>
   </div>
 	<div class="field">
-    <%= f.label :diploma_supervisor %><br>
+    <%= f.label :diploma_supervisor, "Дипломен ръководител" %><br>
     <%= f.check_box :diploma_supervisor %>
   </div>
 	<div class="field">
-    <%= f.label :reviewer %><br>
+    <%= f.label :reviewer, "Рецензент" %><br>
     <%= f.check_box :reviewer %>
   </div>	
 	<div class="field">
-    <%= f.label :commissioner %><br>
+    <%= f.label :commissioner, "Член на комисия" %><br>
     <%= f.check_box :commissioner %>
   </div>
   <div class="field">
-    <%= f.label :password, "New password" %>
+    <%= f.label :password, "Парола" %>
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :password_confirmation, 'Confirm' %>
+    <%= f.label :password_confirmation, 'Потвърждение' %>
     <%= f.password_field :password_confirmation %>
   </div>
 	<div class="field">
-    <%= f.label :business %><br>
+    <%= f.label :business, "Работа" %><br>
     <%= f.text_area :business %>
 	</div>
 		<div class="field">
-    <%= f.label :access %><br>
+    <%= f.label :access, "Ниво на достъп" %><br>
     <%= f.select(:access, ["user","admin"]) %>
 	</div>
   <div class="actions">

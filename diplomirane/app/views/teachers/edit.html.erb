@@ -1,4 +1,4 @@
-<h1>Editing teacher</h1>
+<h1>Промяна на учител</h1>
 
 <script type="text/javascript">
 $(function() {
@@ -25,61 +25,61 @@ $(function() {
   <% end %>
 
 	<div class="field">
-    <%= f.label :user_name %><br>
+    <%= f.label :user_name, "Акаунт" %><br>
     <%= f.text_field :user_name %>
   </div>
 	<div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, "Име" %><br>
     <%= f.text_field :name %>
   </div>
 	<div class="field">
-    <%= f.label :diploma_supervisor %><br>
+    <%= f.label :diploma_supervisor, "Дипломен ръководител" %><br>
     <%= f.check_box :diploma_supervisor %>
   </div>
 	<div class="field">
-    <%= f.label :reviewer %><br>
+    <%= f.label :reviewer, "Рецензент" %><br>
     <%= f.check_box :reviewer %>
   </div>	
 	<div class="field">
-    <%= f.label :commissioner %><br>
+    <%= f.label :commissioner, "Член на комисия" %><br>
     <%= f.check_box :commissioner %>
   </div>
   <% if @teacher.commissioner %>
     <div class="mydate">
-      Commissioner dates :<br/>
+      Дни в които мога да бъда член на комисия:<br/>
       <input id="teacher_commissioner_dates" name="teacher[commissioner_dates]" type="text" class="datepicker" data-format="dd-MM-yyyy" value="<%= @teacher.commissioner_dates %>"  readonly placeholder="Select .." />
     </div>
   <% end %>
 	<% if !@current_user.admin? %>
 		<div class="field">
-		  <%= f.label :old_password %>
+		  <%= f.label :old_password, "Стара парола" %>
 		  <%= f.password_field :old_password %>
 		</div>
 	<% end %>
   <div class="field">
-    <%= f.label :password, "New password" %>
+    <%= f.label :password, "Нова Парола" %>
     <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :password_confirmation, 'Confirm' %>
+    <%= f.label :password_confirmation, 'Потвърждение' %>
     <%= f.password_field :password_confirmation %>
   </div>
 	<div class="field">
-    <%= f.label :business %><br>
+    <%= f.label :business, "Работа" %><br>
     <%= f.text_area :business %>
 	</div>
 		<div class="field">
-    <%= f.label :access %><br>
+    <%= f.label :access, "Ниво на достъп" %><br>
     <%= f.select(:access, ["user","admin"]) %>
 	</div>
   <div class="field">
-    <%= f.label :active %><br>
+    <%= f.label :active, "Активен" %><br>
     <%= f.select(:active, ["true","false"]) %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Запази промените" %>
   </div>
 <% end %>
 
-<%= link_to 'Show', @teacher %> |
-<%= link_to 'Back', teachers_path %>
+<%= link_to 'Покажи', @teacher %> |
+<%= link_to 'Назад', teachers_path %>

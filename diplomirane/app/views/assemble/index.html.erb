@@ -1,3 +1,5 @@
+<h1>Разпределение</h1>
+<br />
 <%# if @current_user.admin? %>
     <h2>Класиране: <%= @assemble.round %></h2>
     <p><%= button_to "Следващо класиране", {action: "next_round"}, data: { confirm: 'Are you sure?' } %></p>
@@ -8,7 +10,8 @@
 <% if @assemble.round != "none" %>
   <% if @current_user.predecessor.heir_type == "Teacher" %>
     <% @current_user.diploma_works.each do |diploma_work| %>
-      <h2>Diploma work: <%= diploma_work.title %></h2>
+      <hr>
+      <h2>Дипломна работа: <%= diploma_work.title %></h2>
       <table>  
         <thead>
           <tr>
