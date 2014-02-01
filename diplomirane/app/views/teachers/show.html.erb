@@ -19,6 +19,12 @@
   <strong>Commissioner:</strong>
   <%= @teacher.commissioner %>
 </p>
+<% if @teacher.commissioner %>
+	<p>
+  	<strong>Commissioner Dates:</strong>
+  	<%= @teacher.commissioner_dates %>
+	</p>
+<% end %>
 <p>
   <strong>Business:</strong>
   <%= @teacher.business %>

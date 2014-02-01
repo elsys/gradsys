@@ -1,5 +1,6 @@
 Oop::Application.routes.draw do
 
+  get "committee" => 'committee#index'
   get "assemble" => 'assemble#index'
   get "home/index"
   get 'activation' => 'activation#index'
@@ -8,6 +9,10 @@ Oop::Application.routes.draw do
   controller :activation do
     post 'save_password' => :save_password
   end  
+
+  controller :committee do
+    post 'set_dates' => :set_dates
+  end 
 
   controller :assemble do
     post 'get_student' => :get_student

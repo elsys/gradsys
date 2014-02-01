@@ -108,9 +108,9 @@ class TeachersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
 			if @current_user.admin?
-      	params.require(:teacher).permit(:user_name, :name, :password, :password_confirmation, :diploma_supervisor, :reviewer, :commissioner, :business, :access, :active)
+      	params.require(:teacher).permit(:user_name, :name, :password, :password_confirmation, :diploma_supervisor, :reviewer, :commissioner, :commissioner_dates, :business, :access, :active)
 			else 
-				params.require(:teacher).permit(:password, :password_confirmation, :diploma_supervisor, :reviewer, :commissioner, :business)
+				params.require(:teacher).permit(:password, :password_confirmation, :diploma_supervisor, :reviewer, :commissioner, :commissioner_dates, :business)
 			end
       
     end

@@ -1,0 +1,47 @@
+ <script type="text/javascript">
+$(function() {
+  $(".datepicker").datepicker({
+    format:'dd/mm/yyyy',
+    autoclose: true
+  });
+});
+</script>
+<%= form_tag(set_dates_path) do %>
+	<div class="mydate">
+	  Start Date :<br/>
+	  <input  id="committee_start_date" name="committee[start_date]" value="<%= @committee.start_date %>"  readonly type="text" class="datepicker" data-format="dd-MM-yyyy"  placeholder="Select .." />
+	  <br/>
+	  End Date:<br/>
+	  <input id="committee_end_date" name="committee[end_date]" value="<%= @committee.end_date %>"  readonly type="text" class="datepicker" data-format="dd-MM-yyyy"  placeholder="Select .." />
+	</div>
+	<div>
+		<%= submit_tag "Update" %>
+	</div>	
+<% end %>
+<br />
+<% if !@all_dates.nil? %>
+	<% @all_dates.each do |date| %> 
+		<h3><%= date %></h3>
+		<table>  
+        <thead>
+          <tr>
+      			<th>Име</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @commissioners = Teacher.where("teachers.commissioner_dates LIKE '%#{date}%'").all %>
+          <% @commissioners.each do |commissioner| %>
+            <tr>
+              <td><%= commissioner.name %></td>
+            </tr> 
+          <% end %>
+         </tbody>
+     </table>
+     <br />
+	<% end %>
+<% end %>
+
+
+
+
+

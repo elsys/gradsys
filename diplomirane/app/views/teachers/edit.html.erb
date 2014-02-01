@@ -1,5 +1,16 @@
 <h1>Editing teacher</h1>
 
+<script type="text/javascript">
+$(function() {
+  $(".datepicker").datepicker({
+    format:'dd/mm/yyyy',
+    autoclose: false,
+    multidate: true,
+    multidateSeparator: ","
+  });
+});
+</script>
+
 <%= form_for(@teacher) do |f| %>
   <% if @teacher.errors.any? %>
     <div id="error_explanation">
@@ -33,6 +44,12 @@
     <%= f.label :commissioner %><br>
     <%= f.check_box :commissioner %>
   </div>
+  <% if @teacher.commissioner %>
+    <div class="mydate">
+      Commissioner dates :<br/>
+      <input id="teacher_commissioner_dates" name="teacher[commissioner_dates]" type="text" class="datepicker" data-format="dd-MM-yyyy" value="<%= @teacher.commissioner_dates %>"  readonly placeholder="Select .." />
+    </div>
+  <% end %>
 	<% if !@current_user.admin? %>
 		<div class="field">
 		  <%= f.label :old_password %>

@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  *= stub login
+ *= require bootstrap-datepicker
  */
 
 body {

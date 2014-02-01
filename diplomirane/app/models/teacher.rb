@@ -26,6 +26,12 @@ class Teacher < ActiveRecord::Base
     end
   end
 
+  def commissioner_free_dates
+    if self.commissioner_dates
+      @d = self.commissioner_dates.split(",")
+    end
+  end  
+
   
   private
 

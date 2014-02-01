@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131150215) do
+ActiveRecord::Schema.define(version: 20140131232440) do
 
   create_table "assembles", force: true do |t|
     t.string "round"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20140131150215) do
   create_table "commissioners_diploma_works", force: true do |t|
     t.integer "diploma_work_id"
     t.integer "commissioner_id"
+  end
+
+  create_table "committees", force: true do |t|
+    t.string "start_date"
+    t.string "end_date"
   end
 
   create_table "diploma_works", force: true do |t|
@@ -49,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140131150215) do
     t.boolean "diploma_supervisor", default: false
     t.boolean "reviewer",           default: false
     t.boolean "commissioner",       default: false
+    t.string  "commissioner_dates"
   end
 
   create_table "users", force: true do |t|
