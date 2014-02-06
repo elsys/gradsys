@@ -5,8 +5,6 @@ class Teacher < ActiveRecord::Base
   has_many :diploma_works, foreign_key: "diploma_supervisor_id"
   has_and_belongs_to_many :committees, foreign_key: "commissioner_id", join_table: "commissioners_committees"
 
-  before_create :generate_activation_code
-
 	validates :password, :confirmation => true
   attr_accessor :password_confirmation
   attr_accessor :current_password
@@ -53,9 +51,5 @@ class Teacher < ActiveRecord::Base
 
     def generate_salt
       self.salt = self.object_id.to_s + rand.to_s
-    end
-
-    def generate_activation_code
-      self.activation_code = self.object_id.to_s + SecureRandom.urlsafe_base64 
     end  
 end
