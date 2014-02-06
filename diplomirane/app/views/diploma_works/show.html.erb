@@ -24,8 +24,16 @@
   <%= @diploma_work.diplomants_names %>
 </p>
 <p>
+  <strong>Kомисия:</strong>
+  <% if @diploma_work.committee %>
+    <%= link_to @diploma_work.committee.date, committee_path(@diploma_work.committee) %>
+  <% end %> 
+</p>
+<p>
   <strong>Членове на комисията:</strong>
-  <%= @diploma_work.commissioners_names %>
+  <% if @diploma_work.committee %>
+   <%= @diploma_work.committee.commissioners_names %>
+  <% end %> 
 </p>
 <p>
   <strong>Уговорена:</strong>

@@ -64,27 +64,43 @@ class CommitteesController < ApplicationController
     @committee = Committee.find(params[:committee][:id])
     @committee.commissioners.clear
     for c in 1..5
-      if !params[:commissioner][:"#{c}"].nil?
-        @commissioner_id = params[:commissioner][:"#{c}"].to_i
-        if @commissioner_id > 0   
-          @commissioner = Teacher.find(@commissioner_id)
-          if !@committee.commissioners.exists?(@commissioner)
-            @committee.commissioners << @commissioner
+      if !params[:commissioner].nil? 
+        if !params[:commissioner][:"#{c}"].nil?
+          @commissioner_id = params[:commissioner][:"#{c}"].to_i
+          if @commissioner_id > 0   
+            @commissioner = Teacher.find(@commissioner_id)
+            if !@committee.commissioners.exists?(@commissioner)
+              @committee.commissioners << @commissioner
+            end 
           end 
-        end
+        end   
+      elsif !params[:commissioner_].nil?
+        if !params[:commissioner_][:"#{c}"].nil?
+          @commissioner_id = params[:commissioner_][:"#{c}"].to_i
+          if @commissioner_id > 0   
+            @commissioner = Teacher.find(@commissioner_id)
+            if !@committee.commissioners.exists?(@commissioner)
+              @committee.commissioners << @commissioner
+            end 
+          end
+        end       
       end
     end
-    @committee.update(committee_params)
-    redirect_to committees_url
+    
     #respond_to do |format|
-     # if @committee.update(committee_params)
-      #  format.html { redirect_to @committee, notice: 'Committee was successfully updated.' }
-       # format.json { head :no_content }
-      #else
-      #  format.html { render action: 'edit' }
-      #  format.json { render json: @committee.errors, status: :unprocessable_entity }
-     # end
+    #  format.js{ render :action => "tbody" }
+    #  format.html
     #end
+    respond_to do |format|
+      if @committee.update(committee_params)
+        format.html { redirect_to @committee, notice: 'Committee was successfully updated.' }
+        format.json { head :no_content }
+        format.js{ render :action => "tbody" }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @committee.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # DELETE /committees/1
@@ -107,21 +123,32 @@ class CommitteesController < ApplicationController
     @assemble.committee_start_date = params[:committee][:start_date]
     @assemble.committee_end_date = params[:committee][:end_date]
     @assemble.save
-    redirect_to committees_url
+    index()
+    respond_to do |format|
+      format.js
+    end
   end 
 
   def add_commissioner
     @committee = Committee.find(params[:committee_id])
     @commissioner = Teacher.find(params[:commissioner_id])
-    @committee.commissioners << @commissioner
-    redirect_to committees_path
+    if !@committee.commissioners.exists?(@commissioner)
+      @committee.commissioners << @commissioner
+    end 
+    respond_to do |format|
+      format.js{ render :action => "tbody" }
+    end
   end
 
   def remove_commissioner
     @committee = Committee.find(params[:committee_id])
     @commissioner = Teacher.find(params[:commissioner_id])
-    @committee.commissioners.delete(@commissioner.id)
-    redirect_to committees_path
+    if @committee.commissioners.exists?(@commissioner)
+      @committee.commissioners.delete(@commissioner.id)
+    end 
+    respond_to do |format|
+      format.js{ render :action => "tbody" }
+    end
   end
 
 

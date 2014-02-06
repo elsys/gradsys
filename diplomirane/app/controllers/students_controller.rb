@@ -34,65 +34,44 @@ class StudentsController < ApplicationController
 				@number = row[1]
 				@name = row[2]
 				@email = row[4]
-				@student_params = { "user_name" => "#{@email}", "name" => "#{@name}", "email" => "#{@email}", "number" => "#{@number}", "grade" => "#{@grade}", "password" => "1234","first" => "#{@first}", "second" => "#{@second}", "third" => "#{@third}", "grades" => "#{@grades}"}   
+				@student_params = { "user_name" => "#{@email}", "name" => "#{@name}", "email" => "#{@email}", "number" => "#{@number}", "grade" => "#{@grade}"}   
 		  	@student = Student.new(@student_params)
 				@student.save
 				Student.update_all("id = '#{@student.predecessor.id}'", "id = '#{@student.id}'")
 				User.where("heir_type = 'Student'").update_all("heir_id = '#{@student.predecessor.id}'", "heir_id = '#{@student.id}'")
 				#UserMailer.welcome_email(@student,"#{@student.activation_code}").deliver
 			end	
+      redirect_to students_url
 		else
 			@student = Student.new(student_params)
-      Student.update_all("id = '#{@student.predecessor.id}'", "id = '#{@student.id}'")
-      User.where("heir_type = 'Student'").update_all("heir_id = '#{@student.predecessor.id}'", "heir_id = '#{@student.id}'")
-			#UserMailer.welcome_email(@student,"#{@student.activation_code}").deliver
-		end
-
-
-    respond_to do |format|
-      if @student.save		 
-        format.html { redirect_to students_url, notice: 'Student was successfully created.' }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+      @student.current_user =  @current_user
+      respond_to do |format|
+        if @student.save
+          Student.update_all("id = '#{@student.predecessor.id}'", "id = '#{@student.id}'")
+          User.where("heir_type = 'Student'").update_all("heir_id = '#{@student.predecessor.id}'", "heir_id = '#{@student.id}'")		 
+          #UserMailer.welcome_email(@student,"#{@student.activation_code}").deliver
+          format.html { redirect_to students_url, notice: 'Student was successfully created.' }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @student.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    end  
   end
 
   # PATCH/PUT /students/1
   # PATCH/PUT /students/1.json
   def update
+    @student.current_user =  @current_user
     respond_to do |format|
-
-  		if !@current_user.admin?
-  			if	User.authenticate(@student.user_name, params[:student][:old_password])
-  					#@student.update_attribute(:password, "#{params[:student][:password]}")
-            if @student.update(student_params)
-              format.html { redirect_to @student, notice: 'Student was successfully updated.' }
-              format.json { head :no_content }
-            else
-              format.html { render action: 'edit' }
-              format.json { render json: @student.errors, status: :unprocessable_entity }
-            end
-  			else
-  					params[:student][:password] = ""
-            @student.errors.add(:old_password, "not correct")
-            format.html { render action: 'edit' }
-            format.json { render json: @student.errors, status: :unprocessable_entity }
-  			end
+      if @student.update(student_params)
+        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+        format.json { head :no_content }
       else
-        if @student.update(student_params)
-          format.html { redirect_to @student, notice: 'Student was successfully updated.' }
-          format.json { head :no_content }
-        else
-          format.html { render action: 'edit' }
-          format.json { render json: @student.errors, status: :unprocessable_entity }
-        end  
-  		end
-
+        format.html { render action: 'edit' }
+        format.json { render json: @student.errors, status: :unprocessable_entity }
+      end
     end
-
-
   end
 
   # DELETE /students/1
@@ -125,7 +104,7 @@ class StudentsController < ApplicationController
 			if @current_user.admin?
       	params.require(:student).permit(:user_name, :name, :password, :password_confirmation, :grade, :number, :grades, :diploma_work_id, :first, :second, :third, :access, :active)
 			else 
-				params.require(:student).permit(:password, :password_confirmation)
+				params.require(:student).permit(:password, :password_confirmation, :current_password, :first, :second, :third)
 			end
     end
 end

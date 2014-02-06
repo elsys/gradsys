@@ -23,15 +23,20 @@ $(function() {
       </ul>
     </div>
   <% end %>
-
-	<div class="field">
-    <%= f.label :user_name, "Акаунт" %><br>
-    <%= f.text_field :user_name %>
-  </div>
-	<div class="field">
-    <%= f.label :name, "Име" %><br>
-    <%= f.text_field :name %>
-  </div>
+  <% if @current_user.admin? %>
+  	<div class="field">
+      <%= f.label :user_name, "Акаунт" %><br>
+      <%= f.text_field :user_name %>
+    </div>
+  	<div class="field">
+      <%= f.label :name, "Име" %><br>
+      <%= f.text_field :name %>
+    </div>
+  <% else %>
+    <div class="field">
+      <%= f.label :name, "Име: #{@teacher.name}" %><br>
+    </div>  
+  <% end %>
 	<div class="field">
     <%= f.label :diploma_supervisor, "Дипломен ръководител" %><br>
     <%= f.check_box :diploma_supervisor %>
@@ -50,12 +55,6 @@ $(function() {
       <input id="teacher_commissioner_dates" name="teacher[commissioner_dates]" type="text" class="datepicker" data-format="dd-MM-yyyy" value="<%= @teacher.commissioner_dates %>"  readonly placeholder="Select .." />
     </div>
   <% end %>
-	<% if !@current_user.admin? %>
-		<div class="field">
-		  <%= f.label :old_password, "Стара парола" %>
-		  <%= f.password_field :old_password %>
-		</div>
-	<% end %>
   <div class="field">
     <%= f.label :password, "Нова Парола" %>
     <%= f.password_field :password %>
@@ -68,14 +67,21 @@ $(function() {
     <%= f.label :business, "Работа" %><br>
     <%= f.text_area :business %>
 	</div>
+  <% if @current_user.admin? %>
 		<div class="field">
-    <%= f.label :access, "Ниво на достъп" %><br>
-    <%= f.select(:access, ["user","admin"]) %>
-	</div>
-  <div class="field">
-    <%= f.label :active, "Активен" %><br>
-    <%= f.select(:active, ["true","false"]) %>
-  </div>
+      <%= f.label :access, "Ниво на достъп" %><br>
+     <%= f.select(:access, ["user","admin"]) %>
+	 </div>
+   <div class="field">
+      <%= f.label :active, "Активен" %><br>
+      <%= f.select(:active, ["true","false"]) %>
+   </div>
+  <% else %>
+    <div class="field">
+      <%= f.label :current_password, "Сегашна парола" %>
+      <%= f.password_field :current_password %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit "Запази промените" %>
   </div>

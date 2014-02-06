@@ -24,17 +24,22 @@ $(function() {
                 div = $("#p_scents");
                 field = div.find("select[name^='diplomants[p_dipl_]']");
                 field.attr('name', 'diplomants[p_dipl_'+ i +']');
+                field.attr('id', 'diplomants_p_dipl_'+ i);
+                $("#diplomants_number").val(i);
+                $("#diploma_work_diplomants_number").val(br);
                 i++;
                 br++;
                 $("#diplomants_number").val(i-1);
+                $("#diploma_work_diplomants_number").val(br-2);
 
                 return false;
         });
         
         $('#remScnt').live('click', function() { 
-                if( br > 2 ) {
+                if( br > 3 ) {
                         $(this).parents('p').remove();      
-                        --br;                             
+                        --br; 
+                        $("#diploma_work_diplomants_number").val(br-2);                            
                 }
                 return false;
         });
@@ -49,51 +54,47 @@ $(function() {
     <%= f.text_area :description %>
   </div>
   <div class="field">
+  <% if @current_user.admin? %>
     <%= f.label :diploma_supervisor_id,"Дипломен ръководител" %><br>
     <%= f.select(:diploma_supervisor_id, Teacher.where(:diploma_supervisor => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
+  <% else %>
+    <%= f.hidden_field :diploma_supervisor_id, readonly: true, value: @current_user.id %>
+  <% end %>
   </div>
-  <div class="field">
-    <%= f.label :reviewer_id,"Рецензент" %><br>
-    <%= f.select(:reviewer_id, Teacher.where(:reviewer => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
-  </div>
-
 	<div id="p_scents">
-		<%= label_tag :diplomants,"Дипломанти" %>
-		<a href="#" id="addScnt">Добавяне на дипломант</a>
+		<%= label_tag :diplomants, "Дипломанти" %>
+    <%= f.text_field :diplomants_number, readonly: true %>
+		<p><a href="#" id="addScnt">Добавяне на дипломант</a></p>
 		<% br=0 %>
 		<% @diplomanti= @diploma_work.students %>
 		<% @diplomanti.each do |d| %>
 			<% br+=1 %>
 			<p><label for="p_scnts"><%= select("diplomants", "p_dipl_#{br}", Student.all.collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)', :selected => d.id}) %></label>
-			<a href="#" id="remScnt">Remove</a></p>	
+			<a href="#" id="remScnt">Премахни</a></p>	
 		<% end %>
 		<%= hidden_field_tag :diplomants_number, br %>
 	</div>
-
-	<div class="field">
-    <%= label_tag :commissioners %><br>
-		<% @commissioners= @diploma_work.commissioners %>
-		<% br_c=0 %>
-    <% @commissioners.each do |c| %>
-			<% br_c+=1 %>
-			<p><%= select("commissioner", "#{br_c}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)', :selected => c.id}) %></p>
-		<% end %>		
-		<% (br_c..4).each do |br| %>
-			<p><%= select("commissioner", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)'}) %></p>
-		<% end %>
-	</div>
-
-
+	
   <div class="field">
     <%= f.label :covenanted,"Уговорена" %><br>
     <%= f.check_box :covenanted %>
   </div>
-  <div class="field">
-    <%= f.label :approved,"Удобрена" %><br>
-    <%= f.check_box :approved %>
-  </div>
+  <% if @current_user.admin? %>
+    <div class="field">
+      <%= f.label :reviewer_id,"Рецензент" %><br>
+      <%= f.select(:reviewer_id, Teacher.where(:reviewer => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
+    </div>
+    <div class="field">
+     <%= f.label :committee_id,"Комисия" %><br>
+     <%= f.select(:committee_id, Committee.all.collect {|p| [ p.date, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
+    </div>
+    <div class="field">
+      <%= f.label :approved,"Удобрена" %><br>
+      <%= f.check_box :approved %>
+    </div>
+  <% end %>  
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Запази" %>
   </div>
 <% end %>
 

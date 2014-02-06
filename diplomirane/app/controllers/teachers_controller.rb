@@ -33,42 +33,35 @@ class TeachersController < ApplicationController
 				@name = row[0]
 				@email = row[1]
 				@business = row[2]
-				@teacher_params = { "user_name" => "#{@email}", "name" => "#{@name}", "email" => "#{@email}", "business" => "#{@business}" , "password" => "1234"}   
+				@teacher_params = { "user_name" => "#{@email}", "name" => "#{@name}", "email" => "#{@email}", "business" => "#{@business}"}   
 		  	@teacher = Teacher.new(@teacher_params)	
 				@teacher.save
 			  Teacher.update_all("id = '#{@teacher.predecessor.id}'", "id = '#{@teacher.id}'")
         User.where("heir_type = 'Teacher'").update_all("heir_id = '#{@teacher.predecessor.id}'", "heir_id = '#{@teacher.id}'")
 				#UserMailer.welcome_email(@teacher,"#{@teacher.activation_code}").deliver
 			end	
+      redirect_to teachers_url
 		else
 			@teacher = Teacher.new(teacher_params)
-      Teacher.update_all("id = '#{@teacher.predecessor.id}'", "id = '#{@teacher.id}'")
-      User.where("heir_type = 'Teacher'").update_all("heir_id = '#{@teacher.predecessor.id}'", "heir_id = '#{@teacher.id}'")
-			#UserMailer.welcome_email(@teacher,"#{@teacher.activation_code}").deliver
-		end
-
-    respond_to do |format|
-      if @teacher.save
-        #format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
-        #format.json { render action: 'show', status: :created, location: @teacher }
-				format.html { redirect_to teachers_url, notice: 'Teacher was successfully created.' }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+      @teacher.current_user =  @current_user
+      respond_to do |format|
+        if @teacher.save
+          Teacher.update_all("id = '#{@teacher.predecessor.id}'", "id = '#{@teacher.id}'")
+          User.where("heir_type = 'Teacher'").update_all("heir_id = '#{@teacher.predecessor.id}'", "heir_id = '#{@teacher.id}'")
+          #UserMailer.welcome_email(@teacher,"#{@teacher.activation_code}").deliver
+          format.html { redirect_to teachers_url, notice: 'Teacher was successfully created.' }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    end  
   end
 
   # PATCH/PUT /teachers/1
   # PATCH/PUT /teachers/1.json
   def update
-		if !@current_user.admin?
-			if	User.authenticate(@teacher.user_name, params[:teacher][:old_password])
-					@teacher.update_attribute(:password, "#{params[:teacher][:password]}")
-				else
-					params[:teacher][:password] = ""
-				end
-		end
+    @teacher.current_user =  @current_user
     respond_to do |format|
       if @teacher.update(teacher_params)
         format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
@@ -110,8 +103,7 @@ class TeachersController < ApplicationController
 			if @current_user.admin?
       	params.require(:teacher).permit(:user_name, :name, :password, :password_confirmation, :diploma_supervisor, :reviewer, :commissioner, :commissioner_dates, :business, :access, :active)
 			else 
-				params.require(:teacher).permit(:password, :password_confirmation, :diploma_supervisor, :reviewer, :commissioner, :commissioner_dates, :business)
-			end
-      
+				params.require(:teacher).permit(:password, :password_confirmation, :current_password, :diploma_supervisor, :reviewer, :commissioner, :commissioner_dates, :business)
+			end   
     end
 end

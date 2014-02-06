@@ -1,0 +1,66 @@
+<tbody id="tbody_<%=@committee.id%>"> 
+  <% @commissioners = Teacher.where("teachers.commissioner_dates LIKE '%#{@committee.date}%'").all %>
+  <% @br_c = 0 %>
+  <% @commissioners.each do |c| %>
+    <% if !@committee.commissioners.exists?(c.id) %>
+      <% @br_c+=1 %>
+      <tr>
+        <td>Да</td>
+        <td><%= c.name %></td>    
+        <td>
+          <%= button_to "Добави към комисия", add_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %> 
+        </td>   
+      </tr> 
+    <% end %>
+  <% end %>
+  <tr>
+    <td><hr></td>
+    <td><hr></td>
+    <td><hr></td>
+  </tr>
+  <% br=0 %>
+  <% @committee.commissioners.each do |c| %> 
+    <% br+=1 %>
+    <tr>
+      <td>
+        <% if c.commissioner_dates.include?(@committee.date)%>
+          Да
+        <% else %>
+            Не
+        <% end %>
+      </td>
+      <td><%=c.name%></td>
+      <td>
+        <%= button_to "Премахни от комисия", remove_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %>       
+      </td>   
+    </tr>
+  <% end %>
+  <%= form_for(@committee, remote: true ) do |f| %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td rowspan="6"><%= f.submit "Добави", :onclick => "return confirm('Сигурни ли сте?')" %></td>
+    </tr>  
+    <%= f.hidden_field :id %>
+    <% @br_c =0 %>
+    <% @committee.commissioners.each do |c| %> 
+      <% @br_c+=1 %>
+      <tr>
+        <td></td>
+        <td>
+          <input id="commissioner_<%=@br_c%>" name="commissioner_[<%=@br_c%>]" type="hidden" value="<%=c.id%>" readonly>
+        </td> 
+      </tr>
+    <% end %>
+    <% (@br_c..4).each do |br| %>
+      <% @br =  br %>
+      <tr>
+        <td></td>
+        <td>
+          <%= select("commissioner_", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)'}) %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</tbody>
+     

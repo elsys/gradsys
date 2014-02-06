@@ -7,17 +7,23 @@ class AssembleController < ApplicationController
   end 
 
   def get_student	
-  	s = Student.find(params[:id])
-  	s.diploma_work_id = params[:diploma_work_id]
-  	s.save
-  	redirect_to assemble_url
+  	@s = Student.find(params[:id])
+    @d = DiplomaWork.find(params[:diploma_work_id])
+  	@s.diploma_work_id = @d.id
+  	@s.save
+    respond_to do |format|
+      format.js
+    end
   end	
 
   def remove_student
-  	s = Student.find(params[:id])
-  	s.diploma_work_id = nil
-  	s.save
-  	redirect_to assemble_url
+  	@s = Student.find(params[:id])
+    @d = DiplomaWork.find(params[:diploma_work_id])
+  	@s.diploma_work_id = nil
+  	@s.save
+    respond_to do |format|
+      format.js
+    end
   end	
 
   def next_round

@@ -9,6 +9,8 @@ Oop::Application.routes.draw do
 
   controller :activation do
     post 'save_password' => :save_password
+    get 'lost_password' => :lost_password
+    post 'change_lost_password' => :change_lost_password    
   end  
 
   controller :committees do
@@ -23,6 +25,10 @@ Oop::Application.routes.draw do
     post 'next_round' => :next_round
     post 'new_round' => :new_round 
     post 'remove_round' => :remove_round 
+  end
+
+  controller :diploma_works do
+    post 'approve_diploma_work' => :approve_diploma_work
   end
 
   controller :sessions do

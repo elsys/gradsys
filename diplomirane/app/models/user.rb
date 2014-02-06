@@ -1,13 +1,17 @@
+require 'digest/sha2'
+require 'securerandom'
 class User < ActiveRecord::Base
 	acts_as_predecessor :exposes => :admin?
-	validates :user_name, :presence => true, :uniqueness => true
 
+  before_create :generate_activation_code
+
+	validates :user_name, :presence => true, :uniqueness => true
   validates :password, :confirmation => true
 
   attr_accessor :password_confirmation
   attr_reader   :password
 
-  validate  :password_must_be_present
+  #validate  :password_must_be_present
   
 
 	def User.authenticate(user_name, password)
@@ -18,7 +22,7 @@ class User < ActiveRecord::Base
     end
   end
 
-	def User.encrypt_password(password, salt)
+	def User.encrypt_password(password, salt)   
     Digest::SHA2.hexdigest(password + "interesno" + salt)
   end
 
@@ -40,7 +44,10 @@ class User < ActiveRecord::Base
     end
   end
 
-  
+  def change_activation_code
+    generate_activation_code
+  end
+ 
   private
 
     def password_must_be_present
@@ -49,5 +56,9 @@ class User < ActiveRecord::Base
   
     def generate_salt
       self.salt = self.object_id.to_s + rand.to_s
+    end
+
+    def generate_activation_code
+      self.activation_code = self.object_id.to_s + SecureRandom.urlsafe_base64 
     end
 end

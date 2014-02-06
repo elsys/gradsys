@@ -1,0 +1,4 @@
+var parent = $('#student_<%= @s.id %>').parent().parent().parent();
+$('#student_<%= @s.id %>').parent().parent().remove();
+parent.prepend('<%= button_to "Премахни ученик", remove_student_path({id: @s.id, diploma_work_id: @d.id}), data: { confirm: "Сигурни ли сте?" }, remote: true, id: "student_#{@s.id}" %>');
+

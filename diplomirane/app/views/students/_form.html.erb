@@ -22,14 +22,6 @@
     <%= f.label :user_name, "Акаунт" %><br>
     <%= f.text_field :user_name %>
   </div>
-  <div class="field">
-    <%= f.label :password, "Парола" %>
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation, 'Потвърждение' %>
-    <%= f.password_field :password_confirmation %>
-  </div>
 	<div class="field">
     <%= f.label :number,"Номер" %><br>
     <%= f.text_field :number %>
@@ -48,7 +40,7 @@
 	</div>
 	
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Създай ученик" %>
   </div>
   
 <% end %>

@@ -1,5 +1,5 @@
 class DiplomaWork < ActiveRecord::Base
-	has_and_belongs_to_many :commissioners, class_name: "Teacher", association_foreign_key: "commissioner_id", join_table: "commissioners_diploma_works"
+	belongs_to :committee
 	has_many :students
 	belongs_to :diploma_supervisor, class_name: "Teacher", foreign_key: "diploma_supervisor_id"
 
@@ -7,6 +7,7 @@ class DiplomaWork < ActiveRecord::Base
 	validates :description, :presence => true
 	validates :diploma_supervisor_id,	:numericality => true
 	validates :reviewer_id,	:numericality => true, :unless => lambda { self.reviewer_id.nil? }
+	validates :diplomants_number,	:numericality => true, :unless => lambda { self.covenanted == true }
 	validate :diploma_supervisor_must_be_different_from_reviewer_id
 	validates_inclusion_of :covenanted, :in => [true,false]
 	validates_inclusion_of :approved, :in => [true,false]

@@ -41,8 +41,7 @@ class DiplomaWorksController < ApplicationController
 
   # PATCH/PUT /diploma_works/1
   # PATCH/PUT /diploma_works/1.json
-  def update
-		
+  def update	
 		@diplomants_number = params[:diplomants_number].to_i
 		@diploma_work.students.clear
 		for d in 1..@diplomants_number
@@ -57,22 +56,6 @@ class DiplomaWorksController < ApplicationController
 			end
 		end
 	
-		@diploma_work.teachers.clear
-		for c in 1..5	
-			if !params[:commissioner][:"#{c}"].nil?
-				@commissioner_id = params[:commissioner][:"#{c}"].to_i
-				if @commissioner_id > 0
-					@commissioner = Teacher.find(@commissioner_id)
-					if !@diploma_work.teachers.exists?(@commissioner)
-						@diploma_work.teachers << @commissioner
-					end
-				end
-			end
-		end
-
-		#@commissioner = Teacher.find(79)
-		#@diploma_work.teachers.delete(@commissioner)
-
     respond_to do |format|
       if @diploma_work.update(diploma_work_params)
         format.html { redirect_to @diploma_work, notice: 'Diploma work was successfully updated.' }
@@ -92,6 +75,13 @@ class DiplomaWorksController < ApplicationController
       format.html { redirect_to diploma_works_url }
       format.json { head :no_content }
     end
+  end
+
+  def approve_diploma_work
+    @d = DiplomaWork.find(params[:id])
+    @d.approved = "true"
+    @d.save
+    redirect_to diploma_works_url
   end
 
   private
@@ -122,6 +112,10 @@ class DiplomaWorksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def diploma_work_params
-      params.require(:diploma_work).permit(:title, :description, :diploma_supervisor_id, :reviewer_id, :covenanted, :approved)
+      if @current_user.admin?
+        params.require(:diploma_work).permit(:title, :description, :diploma_supervisor_id, :reviewer_id, :committee_id, :diplomants_number, :covenanted, :approved)
+      else
+         params.require(:diploma_work).permit(:title, :description, :diploma_supervisor_id, :diplomants_number, :covenanted)
+      end
     end
 end

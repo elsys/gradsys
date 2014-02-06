@@ -32,7 +32,7 @@ body {
 /* header */
 #header {background: #fff; width: 960px; margin: 0 auto 0 auto; height: 55px; display: block;}
 #header h1 {margin: 0px; padding: 0px; float: left; position: relative;}
-#header #logo {display: block; width: 55px; height: 30px !important; background: url(http://www.elsys-bg.org/wp-content/themes/elsys/images/logo.png) top left no-repeat; text-indent: -9999px; padding: 0px; margin: 13px 15px 12px 15px;}
+#header #logo {display: block; width: 55px; height: 30px !important; background: url(/assets/logo.png) top left no-repeat; text-indent: -9999px; padding: 0px; margin: 13px 15px 12px 15px;}
 #header #logo:hover {background: url(/assets/logoh.png) top left no-repeat;}
 #xmas-hat {background: url(images/christmas-hat-small.png) top left no-repeat; position: absolute; width: 18px; height: 21px; display: block; top: 7px; left: 8px; display: none !important;}
 #header ul {list-style: none; float: left; margin: 0px; padding: 0px; display: inline-block; height: 55px; margin-left: 1}

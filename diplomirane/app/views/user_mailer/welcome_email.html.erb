@@ -4,20 +4,21 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to TUES Diplomas, </h1>
+    <h1>Добре дошли в Онлайн системата за дипломиране в ТУЕС, </h1>
     <p>
-      Now you have an account in our site, <br/>
-      your username is: <%= @user.user_name %><br/>
-			your activation link is: <br/>
+      Сега Вие имате създаден акаунт в нашата система, <br/>
+      името на Вашия акаунт е: <%= @user.user_name %><br/>
+			Линкът за Вашата активация е: <br/>
       <%= link_to @activation_url,@activation_url %> <br/>
-			After you click the activation link, you <br/>
-      can set your password.
+			След като отворите линка за активацията, <br/>
+      можете да въведете Вашата парола, след което <br/>
+      ще можете да влезнете в профила си.
     </p>
     <p>
-     To activete your acount in the site, <br/>
-     just follow this link: <br/>
-     <%= link_to @activation_url,@activation_url %>.
+     За да активирате акаунта в системата, <br/>
+     просто използвайте този линк: <br/>
+     <%= link_to @activation_url,@activation_url %>
     </p>
-    <p>Have a great day!</p>
+    <p>Желаем Ви приятен ден!</p>
   </body>
 </html>

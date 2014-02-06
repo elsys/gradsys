@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140201103750) do
+ActiveRecord::Schema.define(version: 20140206144341) do
 
   create_table "assembles", force: true do |t|
     t.string "round"
@@ -21,11 +21,6 @@ ActiveRecord::Schema.define(version: 20140201103750) do
 
   create_table "commissioners_committees", force: true do |t|
     t.integer "committee_id"
-    t.integer "commissioner_id"
-  end
-
-  create_table "commissioners_diploma_works", force: true do |t|
-    t.integer "diploma_work_id"
     t.integer "commissioner_id"
   end
 
@@ -43,6 +38,8 @@ ActiveRecord::Schema.define(version: 20140201103750) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "checkout"
+    t.integer  "committee_id"
+    t.integer  "diplomants_number"
   end
 
   create_table "students", force: true do |t|
@@ -74,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140201103750) do
     t.string  "access",          default: "user"
     t.boolean "active",          default: false
     t.string  "activation_code"
+    t.boolean "lost_password",   default: false
   end
 
 end

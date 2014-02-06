@@ -1,0 +1,4 @@
+var parent = $('#tbody_<%=@committee.id%>').parent()
+$('#tbody_<%=@committee.id%>').remove();
+parent.prepend("<%=j render 'tbody' %>");
+

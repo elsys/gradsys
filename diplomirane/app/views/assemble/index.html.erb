@@ -50,7 +50,7 @@
                     <%= d.title  %>
                   <% end %>
               </td>
-              <td><%= button_to "Вземи ученик", {action: "get_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= button_to 'Вземи ученик', get_student_path({id: student.id, diploma_work_id: diploma_work.id}), data: { confirm: 'Сигурни ли сте?' }, remote: true, id: "student_#{student.id}" %></td>
             </tr>
           <% end %>
           <%= link_to "Изчакай следващо класиране", assemble_path %>
@@ -77,7 +77,7 @@
                   <% end %>
               </td>
               <td><% if student.first == diploma_work.id %>
-                    <%= button_to "Remove", {action: "remove_student", id: student.id, diploma_work_id: diploma_work.id}, data: { confirm: 'Are you sure?' } %>
+                    <%= button_to 'Премахни ученик', remove_student_path({id: student.id, diploma_work_id: diploma_work.id}), data: { confirm: 'Сигурни ли сте?' }, remote: true, id: "student_#{student.id}" %>
                   <% else %>
                     Have it
                   <% end %>

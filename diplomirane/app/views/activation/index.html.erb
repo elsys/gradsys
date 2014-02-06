@@ -1,10 +1,15 @@
-<h1>Activation</h1>
-  <% if flash[:alert] %>
-    <p id="notice"><%= flash[:alert] %></p>
-  <% end %>
+
+<% if flash[:alert] %>
+  <p id="notice"><%= flash[:alert] %></p>
+<% end %>
 <% if @activatin_code = params[:code] %>
 	<% if @u = User.find_by_activation_code(@activatin_code) %>
-		<% if !@u.active %>
+		<% if !@u.active or @u.lost_password%>
+		  <% if !@u.active %>
+		  	<h1>Активиране</h1>
+		  <% elsif @u.lost_password %>
+		  	<h1>Нова парола</h1>
+		  <% end %>
 			<%= form_tag(save_password_path) do %>
 				<%= hidden_field_tag :user, "#{@activatin_code}" %>
 				<div>
