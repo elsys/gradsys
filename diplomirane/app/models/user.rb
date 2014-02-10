@@ -1,18 +1,18 @@
+# encoding: UTF-8
 require 'digest/sha2'
 require 'securerandom'
 class User < ActiveRecord::Base
 	acts_as_predecessor :exposes => :admin?
 
   before_create :generate_activation_code
-
-	validates :user_name, :presence => true, :uniqueness => true
+  
+  validates :user_name, :uniqueness => true
   validates :password, :confirmation => true
-
   attr_accessor :password_confirmation
   attr_reader   :password
 
   #validate  :password_must_be_present
-  
+
 
 	def User.authenticate(user_name, password)
     if user = find_by_user_name(user_name)
@@ -27,11 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-	 if self.access == "admin"
-		  true
-	 else
-		  false
-	 end
+	 self.access == "admin"
   end
  
   # 'password' is a virtual attribute

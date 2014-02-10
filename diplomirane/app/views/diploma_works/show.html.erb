@@ -21,7 +21,7 @@
 </p>
 <p>
   <strong>Дипломанти:</strong>
-  <%= @diploma_work.diplomants_names %>
+  <%= @diploma_work.students.map(&:name) %>
 </p>
 <p>
   <strong>Kомисия:</strong>
@@ -32,7 +32,7 @@
 <p>
   <strong>Членове на комисията:</strong>
   <% if @diploma_work.committee %>
-   <%= @diploma_work.committee.commissioners_names %>
+   <%= @diploma_work.committee.commissioners.map(&:name) %>
   <% end %> 
 </p>
 <p>

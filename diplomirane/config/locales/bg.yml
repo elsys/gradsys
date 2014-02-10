@@ -1,23 +1,29 @@
 bg:
+  activerecord:
+    models:
+      diploma_work: DiplomaWork
+    attributes:
+      diploma_work:
+        title: "Заглавие"
   errors:
     # The default format to use in full error messages.
-    format: "%{attribute} %{message}"
+    format: "%{attribute}: %{message}"
 
     # The values :model, :attribute and :value are always available for interpolation
     # The value :count is available when applicable. Can be used for pluralization.
     messages:
-      inclusion: "is not included in the list"
+      inclusion: "is фсф included in the list"
       exclusion: "is reserved"
       invalid: "is invalid"
       confirmation: "doesn't match %{attribute}"
       accepted: "must be accepted"
-      empty: "can't be empty"
-      blank: "can't be blank"
+      empty: "не може да бъде празнo"
+      blank: "не може да бъде празно"
       present: "must be blank"
       too_long: "is too long (maximum is %{count} characters)"
       too_short: "is too short (minimum is %{count} characters)"
       wrong_length: "is the wrong length (should be %{count} characters)"
-      not_a_number: "is not a number"
+      not_a_number: "не е число"
       not_an_integer: "must be an integer"
       greater_than: "must be greater than %{count}"
       greater_than_or_equal_to: "must be greater than or equal to %{count}"
@@ -27,3 +33,4 @@ bg:
       other_than: "must be other than %{count}"
       odd: "must be odd"
       even: "must be even"
+      diploma_supervisor_must_be_different_from_reviewer_id: "Рецензента трабва да бъде различен от Дипломния ръководител"
