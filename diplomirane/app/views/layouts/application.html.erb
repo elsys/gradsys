@@ -6,7 +6,7 @@
 	<% if session[:user_id].nil? %>
 		<%= stylesheet_link_tag "/assets/login.css" %>
 	<% end %>
-	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application" => true %>
   <%= csrf_meta_tags %>
 			<link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> 
 			<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
