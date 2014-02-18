@@ -64,27 +64,17 @@ class CommitteesController < ApplicationController
     @committee = Committee.find(params[:committee][:id])
     @committee.commissioners.clear
     for c in 1..5
-      if !params[:commissioner].nil? 
-        if !params[:commissioner][:"#{c}"].nil?
-          @commissioner_id = params[:commissioner][:"#{c}"].to_i
+      if !params[:comm].nil? 
+        if !params[:comm][:"#{c}"].nil?
+          @commissioner_id = params[:comm][:"#{c}"].to_i
           if @commissioner_id > 0   
             @commissioner = Teacher.find(@commissioner_id)
             if !@committee.commissioners.exists?(@commissioner)
               @committee.commissioners << @commissioner
             end 
           end 
-        end   
-      elsif !params[:commissioner_].nil?
-        if !params[:commissioner_][:"#{c}"].nil?
-          @commissioner_id = params[:commissioner_][:"#{c}"].to_i
-          if @commissioner_id > 0   
-            @commissioner = Teacher.find(@commissioner_id)
-            if !@committee.commissioners.exists?(@commissioner)
-              @committee.commissioners << @commissioner
-            end 
-          end
-        end       
-      end
+        end 
+      end    
     end
     
     #respond_to do |format|
@@ -125,7 +115,8 @@ class CommitteesController < ApplicationController
     @assemble.save
     index()
     respond_to do |format|
-      format.js
+      format.js 
+      format.html {redirect_to committees_url}
     end
   end 
 
@@ -151,6 +142,27 @@ class CommitteesController < ApplicationController
     end
   end
 
+  def add_diploma_work
+    @committee = Committee.find(params[:committee])
+    @diploma_work = DiplomaWork.find(params[:diploma_work])
+    if !@committee.diploma_works.exists?(@diploma_work)
+      @committee.diploma_works << @diploma_work
+    end  
+    respond_to do |format|
+        format.html {redirect_to edit_committee_path(@committee) }
+    end
+  end  
+
+  def remove_diploma_work
+    @committee = Committee.find(params[:committee_id])
+    @diploma_work = DiplomaWork.find(params[:diploma_work_id])
+    if @committee.diploma_works.exists?(@diploma_work)
+      @committee.diploma_works.delete(@diploma_work.id)
+    end 
+    respond_to do |format|
+        format.js
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,0 +1,18 @@
+<h3>Дипломни работи</h3>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @committee.diploma_works.each do |d| %>
+      <tr id="<%= d.id %>">
+        <td><%= link_to d.title, d %></td>
+        <td><%= button_to 'Премахни', remove_diploma_work_path({committee_id: @committee.id, diploma_work_id: d.id}), remote: true %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <p><a class='inline' href="#inline_content">Добавяне на дипломна работа</a></p>

@@ -9,7 +9,7 @@
   });
 </script>
 
-<%= form_tag(set_dates_path, remote: true ) do %>
+<%= form_tag(set_dates_path, remote: false) do %>
   <div class="mydate">
     Начална дата :<br/>
     <input  id="committee_start_date" name="committee[start_date]" value="<%= @assemble.committee_start_date %>"  readonly type="text" class="datepicker" data-format="dd-MM-yyyy"  placeholder="Изберете .." />

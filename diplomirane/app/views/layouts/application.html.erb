@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>Diplomirane</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
 	<% if session[:user_id].nil? %>
 		<%= stylesheet_link_tag "/assets/login.css" %>
 	<% end %>
-	<%= javascript_include_tag "application" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
   <%= csrf_meta_tags %>
-			<link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> 
-			<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+			
 </head>
 <body>
 
@@ -26,7 +26,7 @@
 							<li><a href="/assemble/">Разпределение</a></li>
 				<% end %>
 				<% if @current_user.admin? %>
-					<li><a href="/committees/">Комисия</a></li>
+					<li><a href="/committees/"data-no-turbolink >Комисия</a></li>
 				<% end %>	
 			</ul>
 		</div>

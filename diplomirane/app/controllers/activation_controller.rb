@@ -5,7 +5,7 @@ class ActivationController < ApplicationController
   end
 
   def save_password
-  	@activation_code = params[:user], 
+  	@activation_code = params[:user]
   	@password = params[:password]
   	@password_comfirmation = params[:"password2"]
 

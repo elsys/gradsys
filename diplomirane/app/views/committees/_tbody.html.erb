@@ -35,32 +35,6 @@
       </td>   
     </tr>
   <% end %>
-  <%= form_for(@committee, remote: true ) do |f| %>
-    <tr>
-      <td></td>
-      <td></td>
-      <td rowspan="6"><%= f.submit "Добави", :onclick => "return confirm('Сигурни ли сте?')" %></td>
-    </tr>  
-    <%= f.hidden_field :id %>
-    <% @br_c =0 %>
-    <% @committee.commissioners.each do |c| %> 
-      <% @br_c+=1 %>
-      <tr>
-        <td></td>
-        <td>
-          <input id="commissioner_<%=@br_c%>" name="commissioner_[<%=@br_c%>]" type="hidden" value="<%=c.id%>" readonly>
-        </td> 
-      </tr>
-    <% end %>
-    <% (@br_c..4).each do |br| %>
-      <% @br =  br %>
-      <tr>
-        <td></td>
-        <td>
-          <%= select("commissioner_", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)'}) %>
-        </td>
-      </tr>
-    <% end %>
-  <% end %>
+
 </tbody>
      

@@ -17,6 +17,8 @@ Oop::Application.routes.draw do
     post 'set_dates' => :set_dates
     post 'add_commissioner' => :add_commissioner
     post 'remove_commissioner' => :remove_commissioner
+    post 'add_diploma_work' => :add_diploma_work
+    post 'remove_diploma_work' => :remove_diploma_work
   end 
 
   controller :assemble do

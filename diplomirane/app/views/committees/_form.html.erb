@@ -20,73 +20,37 @@
   });
 </script>
 
-<!--<script type="text/javascript" src= "https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
-<script>
-$(function() {
-        var scntDiv = $('#p_scents');
-        var i = $('#p_scents p').size() + 1;
-        var br = i;
-        var div, field ;
-        
-        $('#addScnt').live('click', function() {
-                $('<p><label for="p_scnts"><%=j select("diploma_work", "", DiplomaWork.where(:approved => true).collect {|p| [ p.title, p.id ]},{include_blank: 'Няма (Избери)'}) %></label> <a href="#" id="remScnt">Премахни</a></p>').appendTo(scntDiv);
-                div = $("#p_scents");
-                field = div.find("select[name^='diploma_work[]']");
-                field.attr('name', 'diploma_work['+ i +']');
-                field.attr('id', 'diploma_work_'+ i);
-                i++;
-                br++;
-                $("#diploma_works_number").val(i-1);
-                return false;
-        });
-        
-        $('#remScnt').live('click', function() { 
-                if( br > 2 ) {
-                        $(this).parents('p').remove();      
-                        --br;                         
-                }
-                return false;
-        });
-});
-</script>
-
-
-
-  <div class="mydate">
-      Ден:<br/>
-      <input id="committee_date" name="committee[date]" type="text" class="datepicker" data-format="dd-MM-yyyy" value="<%=  @committee.date %>"  readonly placeholder="Select .." />
-  </div>
 
 
   <%= f.hidden_field :id %>
   <div>
     <h3>Членовe на комисията</h3>
     <% br_c=0 %>
-    <% @commissioners = @committee.commissioners %>
-    <% @commissioners.each do |c| %>
+    <% @committee.commissioners.each do |c| %>
       <% br_c+=1 %>
-      <p><%= select("commissioner", "#{br_c}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)', :selected => c.id}) %></p>
+      <p><%= select("comm", "#{br_c}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)', :selected => c.id}) %></p>
     <% end %>
     <% (br_c..4).each do |br| %>
-      <p><%= select("commissioner", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)'}) %></p>
+      <p><%= select("comm", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)'}) %></p>
     <% end %>
   </div>
 
-
-  <div id="p_scents">
-    <h3>Дипломни работи</h3>
-    <a href="#" id="addScnt">Добавяне на дипломна работа</a>
-    <% br=0 %>
-    <% @diploma_works= @committee.diploma_works %>
-    <% @diploma_works.each do |d| %>
-      <% br+=1 %>
-      <p><label for="p_scnts"><%= select("diploma_work", "#{br}", DiplomaWork.all.collect {|p| [ p.title, p.id ]},{include_blank: 'Няма (Избери)', :selected => d.id}) %></label>
-      <a href="#" id="remScnt">Премахни</a></p> 
-    <% end %>
-    <%= hidden_field_tag :diploma_works_number, br %>
-  </div>
 
   <div class="actions">
-    <%= f.submit "Запази промените" %>
+    <%= f.submit "Запази членовете" %>
   </div>
 <% end %>
+  
+  <%= render 'diploma_works' %>
+
+  <div style='display:none'>
+    <div id='inline_content' style='padding:10px; background:#fff;'>
+    <p><h2>Добаване на дипломна работа</h2></p>
+    <p><strong>Изберете:</strong></p>
+    <%= form_tag(add_diploma_work_path) do %>
+      <%= hidden_field_tag "committee", @committee.id %>
+      <p><%= select_tag "diploma_work",  options_for_select(DiplomaWork.all.collect{ |d| [d.title, d.id] }), prompt: "Изберете" %></p>  
+      <p><%= submit_tag "Добави" %></p>
+    <% end %>  
+    </div>
+  </div>
