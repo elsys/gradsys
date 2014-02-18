@@ -1,8 +1,15 @@
 source 'http://rubygems.org'
 
-gem 'bootstrap-datepicker-rails'
 
 gem 'heritage'
+
+gem 'therubyracer'
+gem 'libv8', '3.3.10.4'
+gem "execjs"
+gem "less-rails" 
+gem "twitter-bootstrap-rails"
+
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
