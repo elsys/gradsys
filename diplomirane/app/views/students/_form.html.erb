@@ -10,37 +10,56 @@
       </ul>
     </div>
   <% end %>
-	<div class="field">
-    <%= f.label :file,"CSV file" %><br>
-    <%= f.file_field :file %>
+
+  <div class="field">
+    <%= f.label :file,"CSV File" %>
+    <div class="controls">
+      <%= f.file_field :file %></p>
+    </div>
   </div>
-		<div class="field">
-    <%= f.label :name,"Име" %><br>
-    <%= f.text_field :name %>
+  
+   <div class="field">
+    <%= f.label :name, "Име" %>
+    <div class="controls">
+      <%= f.text_field :name %></p>
+    </div>
   </div>
-	<div class="field">
-    <%= f.label :user_name, "Акаунт" %><br>
-    <%= f.text_field :user_name %>
+  
+   <div class="field">
+    <%= f.label :user_name, "Акаунт" %>
+    <div class="controls">
+      <%= f.text_field :user_name %></p>
+    </div>
   </div>
-	<div class="field">
-    <%= f.label :number,"Номер" %><br>
-    <%= f.text_field :number %>
-	<div class="field">
-    <%= f.label :grade, "Клас" %><br>
-    <%= f.select(:grade, ["","12a","12b","12v","12g"]) %>
-	</div>
-	<div class="field">
-    <%= f.label :diploma_work_id, "Дипломна работа" %><br>
-    <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'None(Chose)'}) %>
-	</div>
+  
+  <div class="field">
+    <%= f.label :number,"Номер" %>
+    <div class="controls">
+      <%= f.text_field :number %></p>
+    </div>
+  </div>
 	
-	<div class="field">
-    <%= f.label :access,"Ниво на достъп" %><br>
-    <%= f.select(:access, ["user","admin"]) %>
-	</div>
+ <div class="field">
+    <%= f.label :grade, "Клас" %>
+    <div class="controls">
+      <%= f.select(:grade, ["","12a","12b","12v","12g"]) %></p>
+    </div>
+  </div>
+  
+   <div class="field">
+    <%= f.label :diploma_work_id, "Дипломна работа" %>
+    <div class="controls">
+      <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: 'None(Chose)'}) %></p>
+    </div>
+ 
+	  <div class="field">
+    <%= f.label :access,"Ниво на достъп" %>
+    <div class="controls">
+      <%= f.select(:access, ["user","admin"]) %></p>
+    </div>
+	
 	
   <div class="actions">
     <%= f.submit "Създай ученик" %>
   </div>
-  
 <% end %>

@@ -1,6 +1,6 @@
 <h1>Разглеждане на ученици</h1>
 
-<table>
+<table class = "table">
   <thead>
     <tr>
 			<th>Име</th>
@@ -26,13 +26,14 @@
 					<td><%= student.user_name %></td>
 					<td><%= student.id %></td>
 				<% end %>
-        <td><%= link_to 'Покажи', student %></td>
-        <td><%= link_to 'Промени', edit_student_path(student) %></td>
-        <td><%= link_to 'Унищожи', student, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></td>
+        <td><button type="button" class="btn btn-default"><%= link_to 'Покажи', student %></button></td>
+        <td><button type="button" class="btn btn-default"><%= link_to 'Промени', edit_student_path(student) %></button.</td>
+        <td><button type="button" class="btn btn-default"><%= link_to 'Унищожи', student, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></button></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<button type="button" class="btn btn-default"><a href="/students/new">Нов ученик</a></button>
 <script>
 var table = $('table');
 
@@ -75,4 +76,3 @@ $('#facility_header, #city_header')
 <br>
 
 
-<%= link_to 'Нов ученик', new_student_path %>

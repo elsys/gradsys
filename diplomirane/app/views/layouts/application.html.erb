@@ -2,27 +2,20 @@
 <html>
 <head>
   <title>Diplomirane</title>
-
-  <%= stylesheet_link_tag    "application" => true %>
-
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 	<% if session[:user_id].nil? %>
 		<%= stylesheet_link_tag "/assets/login.css" %>
 	<% end %>
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-
   <%= csrf_meta_tags %>
-			
+			<link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> 
+			<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
 
 <div id="header">
 	<% if session[:user_id] %>
 		<h1><a id="logo" href="/admin/">Elsys</a></h1>
-			<ul class="nav nav-pills">
-				  <li class="active"><a href="#">Home</a></li>
-				  <li><a href="#">Profile</a></li>
-				  <li><a href="#">Messages</a></li>
-			</ul>
 		<div class="menu-top-level-menu-container">
 			<ul id="menu-top-level-menu" class="menu">
 				<li><a href="/students/">Ученици</a></li>
@@ -33,25 +26,11 @@
 							<li><a href="/assemble/">Разпределение</a></li>
 				<% end %>
 				<% if @current_user.admin? %>
-					<li><a href="/committees/"data-no-turbolink >Комисия</a></li>
+					<li><a href="/committees/">Комисия</a></li>
 				<% end %>	
 			</ul>
 		</div>
 		<div id="user">
-		<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="/">Whizboo App</a>
-      <ul class="nav">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-      <ul class="nav pull-right">
-        <li><a href="/sign_in">Sign In</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
 			<ul>
 				<% if @current_user.predecessor.heir_type == "Teacher" %>
 					<li><%= link_to @current_user.user_name, teacher_path(@current_user) %></li>
