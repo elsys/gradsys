@@ -1,0 +1,25 @@
+<h1>Списък с тагове</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Име</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= link_to tag.name, tag %></td>
+        <td><%= link_to 'Промени', edit_tag_path(tag) %></td>
+        <td><%= link_to 'Унищожи', tag, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Нов таг', new_tag_path %>

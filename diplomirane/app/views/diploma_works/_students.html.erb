@@ -1,0 +1,34 @@
+<%= javascript_include_tag "colorbox" %>
+<div id="students">
+  <h3>Дипломанти</h3>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @diploma_work.students.each do |s| %>
+      <tr id="<%= s.id %>">
+        <td><%= link_to s.name, s %></td>
+        <td><%= button_to 'Премахни', diploma_work_remove_student_path({student_id: s.id, diploma_work_id: @diploma_work.id}), remote: true %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <p><a class='inline' href="#inline_content">Добавяне на дипломант</a></p>
+
+  <div style='display:none'>
+    <div id='inline_content' style='padding:10px; background:#fff;'>
+    <p><h2>Добаване на дипломна работа</h2></p>
+    <p><strong>Изберете:</strong></p>
+    <%= form_tag(diploma_work_add_student_path, remote: true) do %>
+      <%= hidden_field_tag "diploma_work_id", @diploma_work.id %>
+      <p><%= select_tag "student_id",  options_for_select(Student.where(diploma_work_id: nil).where(year: @diploma_work.year).collect{ |s| [s.name, s.id] }), prompt: "Изберете" %></p>  
+      <p><%= submit_tag "Добави" %></p>
+    <% end %>  
+    </div>
+  </div>
+</div>  

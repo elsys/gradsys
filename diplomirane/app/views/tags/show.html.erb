@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Име:</strong>
+  <%= @tag.name %>
+</p>
+<p>
+  <strong>Учители:</strong>
+  <%= @tag.teachers.map(&:name) %>
+</p>
+<p>
+  <strong>Дипломни работи:</strong>
+  <%= @tag.diploma_works.map(&:title) %>
+</p>
+
+
+<%= link_to 'Промени', edit_tag_path(@tag) %> |
+<%= link_to 'Назад', tags_path %>

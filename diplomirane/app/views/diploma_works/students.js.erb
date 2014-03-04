@@ -1,0 +1,4 @@
+var parent = $('#students').parent();
+$('#students').remove();
+$(window).colorbox.close();
+parent.prepend("<%=j render 'students' %>");
