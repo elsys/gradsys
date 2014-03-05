@@ -1,5 +1,5 @@
 <%= javascript_include_tag "colorbox" %>
-<div id="add_another_commissioner" >
+<div id="add_another_commissioner_<%=@committee.id%>" >
   <% if @committee.commissioners.size < 5 %>
     <p><a class='inline' href="#committee_<%=@committee.id%>">Добавяне на друг член на комисия</a></p>  
     <div style='display:none'>
@@ -7,7 +7,7 @@
         <p><h2>Добаване на член на комисия</h2></p>
         <p><strong>Име:</strong></p>
         
-        <%= form_tag(committee_add_commissioner_path, remote: true) do %>
+        <%= form_tag(add_commissioner_path, remote: true) do %>
           <%= hidden_field_tag "committee_id", @committee.id %>
           <% @had_commissioners = Teacher.joins(:committees).where('commissioners_committees.committee_id' => @committee.id) %>
           <p><%= select_tag "commissioner_id",  options_for_select(Teacher.where.not(id: @had_commissioners).collect {|p| [ p.name, p.id ]}), prompt: "Изберете" %></p>  
