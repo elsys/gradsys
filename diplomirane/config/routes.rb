@@ -32,6 +32,8 @@ Oop::Application.routes.draw do
 
   controller :diploma_works do
     post 'approve_diploma_work' => :approve_diploma_work
+    post 'diploma_work_add_student' => :add_student
+    post 'diploma_work_remove_student' => :remove_student
   end
 
   controller :sessions do

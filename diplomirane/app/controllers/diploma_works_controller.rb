@@ -84,6 +84,22 @@ class DiplomaWorksController < ApplicationController
     redirect_to diploma_works_url
   end
 
+  def add_student
+    @diploma_work = DiplomaWork.find(params[:diploma_work_id])
+    @student = Student.find(params[:student_id])
+    if !@diploma_work.students.exists?(@student)
+      @diploma_work.student << @student
+    end 
+    respond_to do |format|
+      format.js{ render :action => "students" }
+    end
+
+  end
+  
+  def remove_student
+
+  end  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_diploma_work

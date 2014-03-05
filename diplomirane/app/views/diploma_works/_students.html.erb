@@ -22,9 +22,9 @@
 
   <div style='display:none'>
     <div id='inline_content' style='padding:10px; background:#fff;'>
-    <p><h2>Добаване на дипломна работа</h2></p>
+    <p><h2>Добаване на дипломанти</h2></p>
     <p><strong>Изберете:</strong></p>
-    <%= form_tag(diploma_work_add_student_path, remote: true) do %>
+    <%= form_tag(diploma_work_add_student_path) do %>
       <%= hidden_field_tag "diploma_work_id", @diploma_work.id %>
       <p><%= select_tag "student_id",  options_for_select(Student.where(diploma_work_id: nil).where(year: @diploma_work.year).collect{ |s| [s.name, s.id] }), prompt: "Изберете" %></p>  
       <p><%= submit_tag "Добави" %></p>
