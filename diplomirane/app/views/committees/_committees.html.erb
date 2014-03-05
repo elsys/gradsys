@@ -3,10 +3,10 @@
     <% @committees.each do |committee| %> 
       <% @committee = committee %>
       <hr style="background-color: #777; height: 3px; border:none;">
-      <table>
+      <table class = "table">
         <h2>
-          <%= link_to @committee.date, @committee %> 
-          <%= link_to 'Промяна на комисия', edit_committee_path(@committee), data: {no_turbolink: true} %>
+         <button type="button" class="btn btn-default"><%= link_to @committee.date, @committee %></button>
+         <button type="button" class="btn btn-default"> <%= link_to 'Промяна на комисия', edit_committee_path(@committee), data: {no_turbolink: true} %></button>
         </h2>                                  
         <thead>        
           <tr>
