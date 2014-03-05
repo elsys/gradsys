@@ -18,7 +18,7 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
-				<td><%= link_to student.name, student %></td>
+				<td><%= link_to student.name, student, class: "btn btn-default" %></td>
 				<td><%= student.number %></td>
         <td><%= student.grade %></td>
 				<% if @current_user.admin? %>
@@ -31,6 +31,7 @@
     <% end %>
   </tbody>
 </table>
+<%=button_to "Нов ученик", "/students/new", class: "btn btn-default", method: "get" %>
 <button type="button" class="btn btn-default"><a href="/students/new">Нов ученик</a></button>
 <script>
 var table = $('table');
