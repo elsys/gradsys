@@ -12,9 +12,9 @@
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td><button type="button" class="btn btn-default"><%= link_to tag.name, tag %></button></td>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Промени', edit_tag_path(tag) %></button></td>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Унищожи', tag, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></button></td>
+        <td><%= link_to tag.name, tag, class: "btn btn-default" %></td>
+        <td><%= link_to 'Промени', edit_tag_path(tag), class: "btn btn-default" %></td>
+        <td><%= link_to 'Унищожи', tag, method: :delete, data: { confirm: 'Сигурни ли сте?' }, class: "btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<button type="button" class="btn btn-default"><%= link_to 'Нов таг', new_tag_path %></button>
+<%= link_to 'Нов таг', new_tag_path, class: "btn btn-default" %>

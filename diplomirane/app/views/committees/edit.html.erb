@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<button type="button" class="btn btn-default"><%= link_to 'Покажи', @committee %></button>
-<button type="button" class="btn btn-default"><%= link_to 'Назад', committees_path %></button>
+<%= link_to 'Покажи', @committee , class: "btn btn-default"%>
+<%= link_to 'Назад', committees_path , class: "btn btn-default"%>

@@ -29,13 +29,13 @@
 
 	<div id="p_scents">
 		<%= label_tag :diplomants %>
-		<a href="#" id="addScnt">Добавяне на дипломант</a>
+		<a href="#" id="addScnt"><button type="button" class="btn btn-default">Добавяне на дипломант</button></a>
 		<% br=0 %>
 		<% @diplomanti= @diploma_work.students %>
 		<% @diplomanti.each do |d| %>
 			<% br+=1 %>
 			<p><label for="p_scnts"><%= select("Дипломант", "p_dipl_#{br}", Student.all.collect {|p| [ p.name, p.id ]},{include_blank: 'None', :selected => d.id}) %></label>
-			<a href="#" id="remScnt">Remove</a></p>	
+			<a href="#" id="remScnt"><button type="button" class="btn btn-default">Remove</button></a></p>	
 		<% end %>
 		<%= hidden_field_tag :diplomants_number, br %>
 	</div>

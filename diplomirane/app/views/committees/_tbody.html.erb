@@ -6,7 +6,7 @@
       <% @br_c+=1 %>
       <tr>
         <td>Да</td>
-        <td><%= link_to c.name, c %></td>    
+        <td><%= link_to c.name, c, class: "btn btn-default" %></td>    
         <td>
           <%= button_to "Добави към комисия", committee_add_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %> 
         </td>   
@@ -33,7 +33,7 @@
             Не
         <% end %> 
       </td>
-      <td><%= link_to c.name, c %></td>
+      <td><%= link_to c.name, c , class: "btn btn-default"%></td>
       <td>
         <%= button_to "Премахни от комисия", committee_remove_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %>       
       </td>   

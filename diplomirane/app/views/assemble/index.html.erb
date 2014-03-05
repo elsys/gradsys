@@ -53,7 +53,7 @@
               <td><%= button_to 'Вземи ученик', get_student_path({id: student.id, diploma_work_id: diploma_work.id}), data: { confirm: 'Сигурни ли сте?' }, remote: true, id: "student_#{student.id}" %></td>
             </tr>
           <% end %>
-          <%= link_to "Изчакай следващо класиране", assemble_path %>
+          <%= link_to "Изчакай следващо класиране", assemble_path , class: "btn btn-default"%>
 
           <% @diplomants = @students.where("students.diploma_work_id =  '#{diploma_work.id}'") %>
           <% @diplomants.each do |student| %>
