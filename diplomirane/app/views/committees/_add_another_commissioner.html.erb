@@ -1,7 +1,7 @@
 <%= javascript_include_tag "colorbox" %>
 <div id="add_another_commissioner_<%=@committee.id%>" >
   <% if @committee.commissioners.size < 5 %>  
-    <p><a class='inline' href="#committee_<%=@committee.id%>">Добавяне на друг член на комисия</a></p>  
+    <p><a class='inline' href="#committee_<%=@committee.id%>"><button type="button" class="btn btn-default">Добавяне на друг член на комисия</button></a></p>  
     <div style='display:none'>
       <div id='committee_<%=@committee.id%>' style='padding:10px; background:#fff;'>
         <p><h2>Добаване на член на комисия</h2></p>
