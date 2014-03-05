@@ -63,8 +63,7 @@ class TeachersController < ApplicationController
   # PATCH/PUT /teachers/1.json
   def update
     @teacher.current_user =  @current_user
-
-    @tags = params[:tags].split(",")
+    @tags = params[:tags].downcase.split(",")
     @teacher.tags.clear
     @tags.each do |tag|
       if t = Tag.find_by_name(tag)

@@ -56,7 +56,7 @@ class DiplomaWorksController < ApplicationController
   # PATCH/PUT /diploma_works/1
   # PATCH/PUT /diploma_works/1.json
   def update
-    @tags = params[:tags].split(",")
+    @tags = params[:tags].downcase.split(",")
     @diploma_work.tags.clear
     @tags.each do |tag|
       if t = Tag.find_by_name(tag)
@@ -98,6 +98,7 @@ class DiplomaWorksController < ApplicationController
   def add_student
     @diploma_work = DiplomaWork.find(params[:diploma_work_id])
     @student = Student.find(params[:student_id])
+    @student.current_user = @current_user
     if !@diploma_work.students.exists?(@student) 
       @diploma_work.students << @student
     end  
