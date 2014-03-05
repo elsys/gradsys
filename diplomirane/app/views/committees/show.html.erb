@@ -13,6 +13,10 @@
   	<%= @committee.president.name%>
   <% end %>	
 </p>
+<p>
+  <strong>Тагове:</strong>
+  <%= @committee.tags.map(&:name)%>
+</p>
 
 <%= link_to 'Промяна', edit_committee_path(@committee), data: {no_turbolink: true}, class: "btn btn-default" %>
 <%= link_to 'Назад', committees_path, class: "btn btn-default" %>

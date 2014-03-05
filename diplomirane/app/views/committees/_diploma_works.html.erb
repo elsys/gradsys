@@ -17,17 +17,34 @@
     <% end %>
     </tbody>
   </table>
-  <p><a href="#inline_content"><button type="button" class="btn btn-default">Добавяне на дипломна работа</button></a></p>
-
+  <p><a class='inline' href="#inline_content"><button type="button" class="btn btn-default">Добавяне на дипломна работа</button></a></p> 
   <div style='display:none'>
     <div id='inline_content' style='padding:10px; background:#fff;'>
-    <p><h2>Добаване на дипломна работа</h2></p>
-    <p><strong>Изберете:</strong></p>
-    <%= form_tag(committee_add_diploma_work_path, remote: true) do %>
-      <%= hidden_field_tag "committee", @committee.id %>
-      <p><%= select_tag "diploma_work",  options_for_select(DiplomaWork.where(approved: true).where(committee_id: nil).where(year: Assemble.find(1).year_for_assembling).collect{ |d| [d.title, d.id] }), prompt: "Изберете" %></p>  
-      <p><%= submit_tag "Добави" %></p>
-    <% end %>  
+      <p><h2>Добаване на дипломна работа</h2></p>
+      <div class = "table" style="max-height: 500px; overflow: scroll;">
+        <table class = "table">
+          <thead>
+            <tr>
+              <th>Име</th>
+              <th>Ръководител</th>
+              <th>Общи</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @diplomas = DiplomaWork.where(approved: true).where(committee_id: nil).where(year: Assemble.find(1).year_for_assembling) %>
+            <% @diplomas = @diplomas.sort { |a, b| @committee.check_tags(b) <=> @committee.check_tags(a) }%>
+            <% @diplomas.each do |d| %>
+              <tr>
+                <td><%= d.title %></td>
+                <td><%= d.diploma_supervisor.name %></td>
+                <td><%= @committee.check_tags(d) %></td>
+                <td><%= button_to "Добави", committee_add_diploma_work_path({committee: @committee.id, diploma_work: d.id}), remote: true %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table> 
+      </div>  
     </div>
   </div>
 </div>  
