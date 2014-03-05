@@ -23,7 +23,6 @@ Oop::Application.routes.draw do
     post 'committee_remove_commissioner' => :remove_commissioner
     post 'committee_add_diploma_work' => :add_diploma_work
     post 'committee_remove_diploma_work' => :remove_diploma_work
-
   end 
 
   controller :assemble do
@@ -59,6 +58,10 @@ Oop::Application.routes.draw do
   resources :committees
 
   resources :tags
+
+  resources :committees do
+    get :autocomplete_teachers_name, :on => :collection
+  end
 
 	get 'students/parse_emails'
 	get 'user_mailer' => 'user_mailer#index'

@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Diplomirane</title>
+  <%= javascript_include_tag "autocomplete-rails.js" %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 	<% if session[:user_id].nil? %>
 		<%= stylesheet_link_tag "/assets/login.css" %>

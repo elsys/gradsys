@@ -2,6 +2,8 @@ class CommitteesController < ApplicationController
   #before_action :set_committee, only: [:show, :edit, :update, :destroy]
   before_filter :access
 
+  autocomplete :teacher, :name
+
   # GET /committees
   # GET /committees.json
   def index
