@@ -91,5 +91,5 @@ $(function() {
   </div>
 <% end %>
 
-<button type="button" class="btn btn-default"><%= link_to 'Покажи', @teacher %></button>
-<button type="button" class="btn btn-default"><%= link_to 'Назад', teachers_path %></button>
+<%= link_to 'Покажи', @teacher, class: "btn btn-default" %>
+<%= link_to 'Назад', teachers_path, class: "btn btn-default" %>

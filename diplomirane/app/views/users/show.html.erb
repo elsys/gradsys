@@ -18,8 +18,8 @@
   <%= @user.salt %>
 </p>
 <% if @user.heir_type == "Teacher" %>
-	<%= link_to 'Промяна', edit_teacher_path(@user) %> |
+	<%= link_to 'Промяна', edit_teacher_path(@user), class: "btn btn-default" %> |
 <% elsif @user.heir_type == "Student" %>
-	<%= link_to 'Промяна', edit_student_path(@user) %> |
+	<%= link_to 'Промяна', edit_student_path(@user), class: "btn btn-default" %> |
 <% end %>
-<%= link_to 'Назад', users_path %>
+<%= link_to 'Назад', users_path, class: "btn btn-default" %>

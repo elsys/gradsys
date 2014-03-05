@@ -25,8 +25,8 @@
 				</td>
         <td><%= diploma_work.covenanted %></td>
         <td><%= diploma_work.approved %></td>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Промени', edit_diploma_work_path(diploma_work), data: {no_turbolink: true}  %></button></td>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Унищожи', diploma_work, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></button></td>
+        <td><%= link_to 'Промени', edit_diploma_work_path(diploma_work), data: {no_turbolink: true}, class: "btn btn-default"  %></td>
+        <td><%= link_to 'Унищожи', diploma_work, method: :delete, data: { confirm: 'Сигурни ли сте?' }, class: "btn btn-default" %></td>
         <td><% if !diploma_work.approved%>
               <%= button_to 'Одобри', approve_diploma_work_path({id: diploma_work.id}), id: "diploma_work_#{diploma_work.id}" %>
             <% end %>
@@ -38,4 +38,4 @@
 
 <br>
 
-<button type="button" class="btn btn-default"><%= link_to 'Нова Дипломна работа', new_diploma_work_path %></button>
+<%= link_to 'Нова Дипломна работа', new_diploma_work_path, class: "btn btn-default" %>

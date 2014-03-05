@@ -5,8 +5,8 @@
       <hr style="background-color: #777; height: 3px; border:none;">
       <table class = "table">
         <h2>
-         <button type="button" class="btn btn-default"><%= link_to @committee.date, @committee %></button>
-         <button type="button" class="btn btn-default"> <%= link_to 'Промяна на комисия', edit_committee_path(@committee), data: {no_turbolink: true} %></button>
+         <%= link_to @committee.date, @committee, class: "btn btn-default" %>
+         <%= link_to 'Промяна на комисия', edit_committee_path(@committee), data: {no_turbolink: true}, class: "btn btn-default" %>
         </h2>                                  
         <thead>        
           <tr>

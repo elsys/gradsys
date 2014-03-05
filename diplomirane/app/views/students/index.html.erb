@@ -24,14 +24,14 @@
 				<% if @current_user.admin? %>
 					<td><%= student.user_name %></td>
 					<td><%= student.id %></td>
-          <td><button type="button" class="btn btn-default"><%= link_to 'Промени', edit_student_path(student) %></button.</td>
-          <td><button type="button" class="btn btn-default"><%= link_to 'Унищожи', student, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></button></td>
+          <td><%= link_to 'Промени', edit_student_path(student), class: "btn btn-default" %></td>
+          <td><%= link_to 'Унищожи', student, method: :delete, data: { confirm: 'Сигурни ли сте?' }, class: "btn btn-default" %></td>
         <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-<button type="button" class="btn btn-default"><a href="/students/new">Нов ученик</a></button>
+<a href="/students/new"><button type="button" class="btn btn-default">Нов ученик</button></a>
 <script>
 var table = $('table');
 

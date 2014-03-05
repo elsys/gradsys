@@ -16,10 +16,10 @@
       <tr>
         <td><hr><%= committee.date %></td>
         <td><hr><%= committee.commissioners.map(&:name)%></td>
-        <td><hr><%= link_to 'Покажи', committee %></td>
-        <td><hr><%= link_to 'Промени', edit_committee_path(@committee), data: {no_turbolink: true} %></td>
+        <td><hr><%= link_to 'Покажи', committee , class: "btn btn-default"%></td>
+        <td><hr><%= link_to 'Промени', edit_committee_path(@committee), data: {no_turbolink: true}, class: "btn btn-default" %></td>
         <td><hr>
-        	<%= link_to 'Унищожи', committee, method: :delete, data: { confirm: 'Сигурни ли сте?' } %>
+        	<%= link_to 'Унищожи', committee, method: :delete, data: { confirm: 'Сигурни ли сте?' }, class: "btn btn-default" %>
         </td>
 
       </tr>

@@ -39,5 +39,5 @@
 <div>
   <%= render 'committees' %> 
 </div>   
-<button type="button" class="btn btn-default"><%= link_to 'Нова комисяи за нов ден', new_committee_path %></button>
-<button type="button" class="btn btn-default"><%= link_to 'Всички комисии', committees_all_path %></button>
+<%= link_to 'Нова комисяи за нов ден', new_committee_path, class: "btn btn-default" %>
+<%= link_to 'Всички комисии', committees_all_path, class: "btn btn-default" %>
