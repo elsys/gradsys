@@ -31,46 +31,7 @@
     <% end %>
   </tbody>
 </table>
-<a href="/students/new"><button type="button" class="btn btn-default">Нов ученик</button></a>
-<script>
-var table = $('table');
-
-$('#facility_header, #city_header')
-    .wrapInner('<span title="sort this column"/>')
-    .each(function(){
-
-        var th = $(this),
-            thIndex = th.index(),
-            inverse = false;
-
-        th.click(function(){
-
-            table.find('td').filter(function(){
-
-                return $(this).index() === thIndex;
-
-            }).sortElements(function(a, b){
-
-                if( $.text([a]) == $.text([b]) )
-                    return 0;
-
-                return $.text([a]) > $.text([b]) ?
-                    inverse ? -1 : 1
-                    : inverse ? 1 : -1;
-
-            }, function(){
-
-                // parentNode is the element we want to move
-                return this.parentNode; 
-
-            });
-
-            inverse = !inverse;
-
-        });
-
-    });
-	</script>
+<%=link_to "Нов ученик", "/students/new", class: "btn btn-default"%>
 <br>
 
 
