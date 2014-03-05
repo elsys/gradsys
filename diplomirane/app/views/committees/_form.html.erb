@@ -40,17 +40,8 @@
     <%= f.submit "Запази членовете" %>
   </div>
 <% end %>
-  
+<div>  
   <%= render 'diploma_works' %>
+</div>  
 
-  <div style='display:none'>
-    <div id='inline_content' style='padding:10px; background:#fff;'>
-    <p><h2>Добаване на дипломна работа</h2></p>
-    <p><strong>Изберете:</strong></p>
-    <%= form_tag(add_diploma_work_path) do %>
-      <%= hidden_field_tag "committee", @committee.id %>
-      <p><%= select_tag "diploma_work",  options_for_select(DiplomaWork.all.collect{ |d| [d.title, d.id] }), prompt: "Изберете" %></p>  
-      <p><%= submit_tag "Добави" %></p>
-    <% end %>  
-    </div>
-  </div>
+  

@@ -131,7 +131,7 @@ class CommitteesController < ApplicationController
       @committee.diploma_works << @diploma_work
     end  
     respond_to do |format|
-        format.html {redirect_to edit_committee_path(@committee) }
+        format.js { render action: "diploma_works" }
     end
   end  
 
@@ -142,7 +142,7 @@ class CommitteesController < ApplicationController
       @committee.diploma_works.delete(@diploma_work.id)
     end 
     respond_to do |format|
-        format.js
+        format.js { render action: "diploma_works" }
     end
   end
 

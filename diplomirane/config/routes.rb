@@ -1,3 +1,4 @@
+
 Oop::Application.routes.draw do
 
   get "committees" => 'committees#index'
@@ -15,10 +16,10 @@ Oop::Application.routes.draw do
 
   controller :committees do
     post 'set_dates' => :set_dates
-    post 'add_commissioner' => :add_commissioner
-    post 'remove_commissioner' => :remove_commissioner
-    post 'add_diploma_work' => :add_diploma_work
-    post 'remove_diploma_work' => :remove_diploma_work
+    post 'committees_add_commissioner' => :add_commissioner
+    post 'committees_remove_commissioner' => :remove_commissioner
+    post 'committees_add_diploma_work' => :add_diploma_work
+    post 'committees_remove_diploma_work' => :remove_diploma_work
   end 
 
   controller :assemble do

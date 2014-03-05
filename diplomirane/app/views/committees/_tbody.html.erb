@@ -8,7 +8,7 @@
         <td>Да</td>
         <td><%= c.name %></td>    
         <td>
-          <%= button_to "Добави към комисия", add_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %> 
+          <%= button_to "Добави към комисия", committees_add_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %> 
         </td>   
       </tr> 
     <% end %>
@@ -31,7 +31,7 @@
       </td>
       <td><%=c.name%></td>
       <td>
-        <%= button_to "Премахни от комисия", remove_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %>       
+        <%= button_to "Премахни от комисия", committees_remove_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %>       
       </td>   
     </tr>
   <% end %>
