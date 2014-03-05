@@ -1,6 +1,6 @@
 <h1>Списък с тагове</h1>
 
-<table>
+<table class = "table">
   <thead>
     <tr>
       <th>Име</th>
@@ -12,9 +12,9 @@
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td><%= link_to tag.name, tag %></td>
-        <td><%= link_to 'Промени', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Унищожи', tag, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></td>
+        <td><button type="button" class="btn btn-default"><%= link_to tag.name, tag %></button></td>
+        <td><button type="button" class="btn btn-default"><%= link_to 'Промени', edit_tag_path(tag) %></button></td>
+        <td><button type="button" class="btn btn-default"><%= link_to 'Унищожи', tag, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></button></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'Нов таг', new_tag_path %>
+<button type="button" class="btn btn-default"><%= link_to 'Нов таг', new_tag_path %></button>
