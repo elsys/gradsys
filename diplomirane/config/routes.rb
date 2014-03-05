@@ -51,6 +51,8 @@ Oop::Application.routes.draw do
 
   resources :committees
 
+  resources :tags
+
 	get 'students/parse_emails'
 	get 'user_mailer' => 'user_mailer#index'
 

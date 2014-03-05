@@ -8,5 +8,5 @@
   <%= @committee.commissioners.map(&:name)%>
 </p>
 
-<%= link_to 'Промяна', edit_committee_path(@committee) %> |
+<%= link_to 'Промяна', edit_committee_path(@committee), data: {no_turbolink: true} %> |
 <%= link_to 'Назад', committees_path %>
