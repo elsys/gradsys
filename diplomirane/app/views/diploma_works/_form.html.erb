@@ -16,12 +16,12 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :description,"Описание" %><br>
+    <%= f.label :description,"Описание" %>
     <%= f.text_area :description %>
   </div>
   <div class="field">
   <% if @current_user.admin? %>
-    <%= f.label :diploma_supervisor_id,"Дипломен ръководител" %><br>
+    <%= f.label :diploma_supervisor_id,"Дипломен ръководител" %>
     <%= f.select(:diploma_supervisor_id, Teacher.where(:diploma_supervisor => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
   <% else %>
     <%= f.hidden_field :diploma_supervisor_id, readonly: true, value: @current_user.id %>
@@ -31,21 +31,23 @@
 		<%= hidden_field_tag :diplomants_number %>
 	</div>
   <div class="field">
-    <%= f.label :covenanted,"Уговорена" %><br>
+    <%= f.label :covenanted,"Уговорена" %>
     <%= f.check_box :covenanted %>
   </div>
   <% if @current_user.admin? %>
     <div class="field">
-      <%= f.label :reviewer_id,"Рецензент" %><br>
+      <%= f.label :reviewer_id,"Рецензент" %>
       <%= f.select(:reviewer_id, Teacher.where(:reviewer => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
     </div>
     <div class="field">
-     <%= f.label :committee_id,"Комисия" %><br>
+     <%= f.label :committee_id,"Комисия" %>
      <%= f.select(:committee_id, Committee.all.collect {|p| [ p.date, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
     </div>
     <div class="field">
-      <%= f.label :approved,"Удобрена" %><br>
+      <%= f.label :approved,"Удобрена" %>
+	  <div class="controls">
       <%= f.check_box :approved %>
+	  </div>
     </div>
     <div class="field">
     <%= f.label :year, "Година"%>
@@ -53,7 +55,7 @@
   </div>
   <% end %> 
   <div class="field">
-    <%= f.label :tags,"Тагове" %><br>
+    <%= f.label :tags,"Тагове" %>
     <%= text_field_tag :tags, @diploma_work.tags.map(&:name).join(",") %>
   </div> 
   <div class="actions">

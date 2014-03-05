@@ -14,5 +14,5 @@
   <% end %>	
 </p>
 
-<%= link_to 'Промяна', edit_committee_path(@committee), data: {no_turbolink: true} %> |
-<%= link_to 'Назад', committees_path %>
+<button type="button" class="btn btn-default"><%= link_to 'Промяна', edit_committee_path(@committee), data: {no_turbolink: true} %></button>
+<button type="button" class="btn btn-default"><%= link_to 'Назад', committees_path %></button>

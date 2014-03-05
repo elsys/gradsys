@@ -4,7 +4,7 @@
     <p><a class='inline' href="#committee_<%=@committee.id%>">Добавяне на друг член на комисия</a></p>  
     <div style='display:none'>
       <div id='committee_<%=@committee.id%>' style='padding:10px; background:#fff;'>
-        <p><h2>Добаване на член на комисия</h2></p>
+        <p><button type="button" class="btn btn-default"><h2>Добаване на член на комисия</h2></button></p>
         <p><strong>Име:</strong></p>
         
         <%= form_tag(committee_add_commissioner_path, remote: true) do %>
