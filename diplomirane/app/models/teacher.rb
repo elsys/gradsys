@@ -3,7 +3,9 @@ require 'digest/sha2'
 class Teacher < ActiveRecord::Base
 	child_of :user
   has_many :diploma_works, foreign_key: "diploma_supervisor_id"
+  has_many :president_in_committees,class_name: "Committee",  foreign_key: "president_id"
   has_and_belongs_to_many :committees, foreign_key: "commissioner_id", join_table: "commissioners_committees"
+  has_and_belongs_to_many :tags
 
   validates :user_name, :presence => true
   validate :must_be_valid_email, :unless => lambda { self.user_name.blank? }
@@ -42,7 +44,7 @@ class Teacher < ActiveRecord::Base
     
   def current_user=(current_user)
     @current_user = current_user
-  end  
+  end   
 
   
   private

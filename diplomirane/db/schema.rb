@@ -11,12 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140206144341) do
+ActiveRecord::Schema.define(version: 20140303105547) do
 
   create_table "assembles", force: true do |t|
-    t.string "round"
-    t.string "committee_start_date"
-    t.string "committee_end_date"
+    t.string  "round"
+    t.string  "committee_start_date"
+    t.string  "committee_end_date"
+    t.integer "year_for_registration"
+    t.integer "year_for_assembling"
   end
 
   create_table "commissioners_committees", force: true do |t|
@@ -25,7 +27,8 @@ ActiveRecord::Schema.define(version: 20140206144341) do
   end
 
   create_table "committees", force: true do |t|
-    t.string "date"
+    t.string  "date"
+    t.integer "president_id"
   end
 
   create_table "diploma_works", force: true do |t|
@@ -40,6 +43,12 @@ ActiveRecord::Schema.define(version: 20140206144341) do
     t.boolean  "checkout"
     t.integer  "committee_id"
     t.integer  "diplomants_number"
+    t.integer  "year"
+  end
+
+  create_table "diploma_works_tags", force: true do |t|
+    t.integer "tag_id"
+    t.integer "diploma_work_id"
   end
 
   create_table "students", force: true do |t|
@@ -50,6 +59,18 @@ ActiveRecord::Schema.define(version: 20140206144341) do
     t.integer "second"
     t.integer "third"
     t.float   "grades"
+    t.integer "year"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags_teachers", force: true do |t|
+    t.integer "tag_id"
+    t.integer "teacher_id"
   end
 
   create_table "teachers", force: true do |t|

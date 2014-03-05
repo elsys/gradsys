@@ -1,6 +1,8 @@
 
 Oop::Application.routes.draw do
 
+  resources :tags
+
   get "committees" => 'committees#index'
   get "committees/all"
   get "assemble" => 'assemble#index'
@@ -16,10 +18,12 @@ Oop::Application.routes.draw do
 
   controller :committees do
     post 'set_dates' => :set_dates
-    post 'committees_add_commissioner' => :add_commissioner
-    post 'committees_remove_commissioner' => :remove_commissioner
-    post 'committees_add_diploma_work' => :add_diploma_work
-    post 'committees_remove_diploma_work' => :remove_diploma_work
+    post 'set_years' => :set_years
+    post 'committee_add_commissioner' => :add_commissioner
+    post 'committee_remove_commissioner' => :remove_commissioner
+    post 'committee_add_diploma_work' => :add_diploma_work
+    post 'committee_remove_diploma_work' => :remove_diploma_work
+
   end 
 
   controller :assemble do

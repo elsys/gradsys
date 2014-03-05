@@ -13,6 +13,10 @@
   <%= @student.grade %>
 </p>
 <p>
+  <strong>Година:</strong>
+  <%= @student.year %>
+</p>
+<p>
   <strong>Дипломна работа:</strong>
   <% if s = @student.diploma_work %>
 		<%= s.title %>

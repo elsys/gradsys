@@ -58,11 +58,8 @@ class CommitteesController < ApplicationController
         end 
       end    
     end
+    @committee.president_id = params[:committee][:president]
     
-    #respond_to do |format|
-    #  format.js{ render :action => "tbody" }
-    #  format.html
-    #end
     respond_to do |format|
       if @committee.update(committee_params)
         format.html { redirect_to @committee, notice: 'Committee was successfully updated.' }
@@ -102,6 +99,18 @@ class CommitteesController < ApplicationController
     end
   end 
 
+  def set_years
+    @assemble = Assemble.find(1)
+    @assemble.year_for_registration = params[:year_for_registration]
+    @assemble.year_for_assembling = params[:year_for_assembling]
+    @assemble.save
+
+    respond_to do |format|
+      format.html {redirect_to committees_url}
+    end
+
+  end  
+
   def add_commissioner
     @committee = Committee.find(params[:committee_id])
     @commissioner = Teacher.find(params[:commissioner_id])
@@ -132,6 +141,7 @@ class CommitteesController < ApplicationController
     end  
     respond_to do |format|
         format.js { render action: "diploma_works" }
+        format.html {redirect_to edit_committee_path(@committee) }
     end
   end  
 
@@ -143,6 +153,7 @@ class CommitteesController < ApplicationController
     end 
     respond_to do |format|
         format.js { render action: "diploma_works" }
+        format.html {redirect_to edit_committee_path(@committee) }
     end
   end
 
@@ -154,25 +165,25 @@ class CommitteesController < ApplicationController
 
     def set_committees
       @assemble = Assemble.find(1)
-    if !@assemble.committee_start_date.nil? and 
-      !@assemble.committee_end_date.nil?
+      if !@assemble.committee_start_date.nil? and 
+        !@assemble.committee_end_date.nil?
 
-        @start_date = @assemble.committee_start_date.to_date.jd 
-        @end_date = @assemble.committee_end_date.to_date.jd 
+          @start_date = @assemble.committee_start_date.to_date.jd 
+          @end_date = @assemble.committee_end_date.to_date.jd 
 
-        @committees=Array.new
-        (@start_date..@end_date).each do |date|
-          @date = Date.jd(date).strftime('%d/%m/%Y')
-          if Committee.find_by_date(@date).nil?
-            c = Committee.create(:date => @date)
-          else 
-            c = Committee.find_by_date(@date) 
-          end 
+          @committees=Array.new
+          (@start_date..@end_date).each do |date|
+            @date = Date.jd(date).strftime('%d/%m/%Y')
+            if Committee.find_by_date(@date).nil?
+              c = Committee.create(:date => @date)
+            else 
+              c = Committee.find_by_date(@date) 
+            end 
 
-          @committees << c  
-        end   
-    end
-    end  
+            @committees << c  
+          end   
+      end
+    end   
 
     def access
       unless @current_user.admin?
@@ -184,4 +195,5 @@ class CommitteesController < ApplicationController
     def committee_params
       params.require(:committee).permit(:date)
     end
+
 end

@@ -7,6 +7,12 @@
   <strong>Членове на комисията:</strong>
   <%= @committee.commissioners.map(&:name)%>
 </p>
+<p>
+  <strong>Прецедател на комисията:</strong>
+  <% if @committee.president %>
+  	<%= @committee.president.name%>
+  <% end %>	
+</p>
 
 <%= link_to 'Промяна', edit_committee_path(@committee), data: {no_turbolink: true} %> |
 <%= link_to 'Назад', committees_path %>

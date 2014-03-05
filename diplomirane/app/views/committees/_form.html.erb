@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <script type="text/javascript">
+<script type="text/javascript">
   $(function() {
     $(".datepicker").datepicker({
       format:'dd/mm/yyyy',
@@ -19,8 +19,6 @@
     });
   });
 </script>
-
-
 
   <%= f.hidden_field :id %>
   <div>
@@ -34,7 +32,10 @@
       <p><%= select("comm", "#{br+1}", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)'}) %></p>
     <% end %>
   </div>
-
+  <div>
+    <h3>Прецедател на комисията</h3>
+    <p><%= select("committee", "president", Teacher.where(:commissioner => true).collect {|p| [ p.name, p.id ]},{include_blank: 'Няма (Избери)', :selected => @committee.president_id}) %></p>
+  </div>
 
   <div class="actions">
     <%= f.submit "Запази членовете" %>
@@ -43,5 +44,3 @@
 <div>  
   <%= render 'diploma_works' %>
 </div>  
-
-  

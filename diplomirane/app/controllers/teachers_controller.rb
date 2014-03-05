@@ -44,6 +44,7 @@ class TeachersController < ApplicationController
 		else
 			@teacher = Teacher.new(teacher_params)
       @teacher.current_user =  @current_user
+
       respond_to do |format|
         if @teacher.save
           Teacher.update_all("id = '#{@teacher.predecessor.id}'", "id = '#{@teacher.id}'")
@@ -62,6 +63,18 @@ class TeachersController < ApplicationController
   # PATCH/PUT /teachers/1.json
   def update
     @teacher.current_user =  @current_user
+
+    @tags = params[:tags].split(",")
+    @teacher.tags.clear
+    @tags.each do |tag|
+      if t = Tag.find_by_name(tag)
+        @teacher.tags << t
+      else  
+        t = Tag.create(name: tag)
+        @teacher.tags << t
+      end  
+    end 
+
     respond_to do |format|
       if @teacher.update(teacher_params)
         format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }

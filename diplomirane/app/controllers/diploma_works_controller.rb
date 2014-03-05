@@ -28,6 +28,20 @@ class DiplomaWorksController < ApplicationController
   def create
     @diploma_work = DiplomaWork.new(diploma_work_params)
 
+    @assemble = Assemble.find(1)
+    @year = @assemble.year_for_registration
+    @diploma_work.year = @year 
+
+    @tags = params[:tags].split(",")
+    @tags.each do |tag|
+      if t = Tag.find_by_name(tag)
+        @diploma_work.tags << t
+      else  
+        t = Tag.create(name: tag)
+        @diploma_work.tags << t
+      end  
+    end
+
     respond_to do |format|
       if @diploma_work.save
         format.html { redirect_to @diploma_work, notice: 'Diploma work was successfully created.' }
@@ -41,21 +55,18 @@ class DiplomaWorksController < ApplicationController
 
   # PATCH/PUT /diploma_works/1
   # PATCH/PUT /diploma_works/1.json
-  def update	
-		@diplomants_number = params[:diplomants_number].to_i
-		@diploma_work.students.clear
-		for d in 1..@diplomants_number
-			if !params[:diplomants][:"p_dipl_#{d}"].nil?
-				@diplomant_id = params[:diplomants][:"p_dipl_#{d}"].to_i
-				if @diplomant_id > 0	 
-					@diplomant = Student.find(@diplomant_id)
-					if !@diploma_work.students.exists?(@diplomant)
-						@diploma_work.students << @diplomant
-					end	
-				end
-			end
-		end
-	
+  def update
+    @tags = params[:tags].split(",")
+    @diploma_work.tags.clear
+    @tags.each do |tag|
+      if t = Tag.find_by_name(tag)
+        @diploma_work.tags << t
+      else  
+        t = Tag.create(name: tag)
+        @diploma_work.tags << t
+      end  
+    end  
+
     respond_to do |format|
       if @diploma_work.update(diploma_work_params)
         format.html { redirect_to @diploma_work, notice: 'Diploma work was successfully updated.' }
@@ -87,18 +98,26 @@ class DiplomaWorksController < ApplicationController
   def add_student
     @diploma_work = DiplomaWork.find(params[:diploma_work_id])
     @student = Student.find(params[:student_id])
-    if !@diploma_work.students.exists?(@student)
-      @diploma_work.student << @student
-    end 
+    if !@diploma_work.students.exists?(@student) 
+      @diploma_work.students << @student
+    end  
     respond_to do |format|
       format.js{ render :action => "students" }
+      format.html {redirect_to edit_diploma_work_path(@diploma_work) }
     end
-
-  end
-  
-  def remove_student
-
   end  
+
+  def remove_student
+    @diploma_work = DiplomaWork.find(params[:diploma_work_id])
+    @student = Student.find(params[:student_id])
+    if @diploma_work.students.exists?(@student)
+      @diploma_work.students.delete(@student.id)
+    end 
+    respond_to do |format|
+      format.js { render :action => "students" }
+      format.html {redirect_to edit_diploma_work_path(@diploma_work) }
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -129,7 +148,7 @@ class DiplomaWorksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def diploma_work_params
       if @current_user.admin?
-        params.require(:diploma_work).permit(:title, :description, :diploma_supervisor_id, :reviewer_id, :committee_id, :diplomants_number, :covenanted, :approved)
+        params.require(:diploma_work).permit(:title, :description, :diploma_supervisor_id, :reviewer_id, :committee_id, :diplomants_number, :year, :covenanted, :approved)
       else
          params.require(:diploma_work).permit(:title, :description, :diploma_supervisor_id, :diplomants_number, :covenanted)
       end

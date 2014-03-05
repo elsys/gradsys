@@ -67,6 +67,10 @@ $(function() {
     <%= f.label :business, "Работа" %><br>
     <%= f.text_area :business %>
 	</div>
+  <div class="field">
+    <%= f.label :tags,"Тагове" %><br>
+    <%= text_field_tag :tags, @teacher.tags.map(&:name).join(",") %>
+  </div> 
   <% if @current_user.admin? %>
 		<div class="field">
       <%= f.label :access, "Ниво на достъп" %><br>

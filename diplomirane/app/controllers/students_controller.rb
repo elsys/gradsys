@@ -27,6 +27,9 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
+    @assemble = Assemble.find(1)
+    @year = @assemble.year_for_registration 
+
 		file_data = params[:student][:file]
 		if !file_data.nil? and @current_user.admin?
 			CSV.foreach(file_data.path) do |row|
@@ -36,6 +39,7 @@ class StudentsController < ApplicationController
 				@email = row[4]
 				@student_params = { "user_name" => "#{@email}", "name" => "#{@name}", "email" => "#{@email}", "number" => "#{@number}", "grade" => "#{@grade}"}   
 		  	@student = Student.new(@student_params)
+        @student.year = @year
 				@student.save
 				Student.update_all("id = '#{@student.predecessor.id}'", "id = '#{@student.id}'")
 				User.where("heir_type = 'Student'").update_all("heir_id = '#{@student.predecessor.id}'", "heir_id = '#{@student.id}'")
@@ -44,6 +48,7 @@ class StudentsController < ApplicationController
       redirect_to students_url
 		else
 			@student = Student.new(student_params)
+      @student.year = @year
       @student.current_user =  @current_user
       respond_to do |format|
         if @student.save
@@ -102,7 +107,7 @@ class StudentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
 			if @current_user.admin?
-      	params.require(:student).permit(:user_name, :name, :password, :password_confirmation, :grade, :number, :grades, :diploma_work_id, :first, :second, :third, :access, :active)
+      	params.require(:student).permit(:user_name, :name, :password, :password_confirmation, :grade, :number, :grades, :year, :diploma_work_id, :first, :second, :third, :access, :active)
 			else 
 				params.require(:student).permit(:password, :password_confirmation, :current_password, :first, :second, :third)
 			end

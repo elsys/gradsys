@@ -11,22 +11,20 @@
 			<% end %>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @teachers.each do |teacher| %>
       <tr>
-				<td><%= teacher.name %></td>
+				<td><%= link_to teacher.name , teacher %></td>
 				<td><%= teacher.business %></td>		
 				<% if @current_user.admin? %>		
 					<td><%= teacher.user_name %></td>
           <td><%= teacher.id %></td>
-				<% end %>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Покажи', teacher %></button></td>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Промени', edit_teacher_path(teacher) %></button></td>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Унищожи', teacher, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></button></td>
+				  <td><button type="button" class="btn btn-default"><%= link_to 'Промени', edit_teacher_path(teacher) %></button></td>
+          <td><button type="button" class="btn btn-default"><%= link_to 'Унищожи', teacher, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></button></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

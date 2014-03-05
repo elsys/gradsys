@@ -5,17 +5,31 @@
     $(".datepicker").datepicker({
       format:'dd/mm/yyyy',
       autoclose: true
-    });
+    });   
   });
 </script>
 
-<%= form_tag(set_dates_path, remote: false) do %>
+<%= form_tag(set_dates_path, remote: true) do %>
   <div class="mydate">
     Начална дата :<br/>
     <input  id="committee_start_date" name="committee[start_date]" value="<%= @assemble.committee_start_date %>"  readonly type="text" class="datepicker" data-format="dd-MM-yyyy"  placeholder="Изберете .." />
     <br/>
     Крайна дата:<br/>
     <input id="committee_end_date" name="committee[end_date]" value="<%= @assemble.committee_end_date %>"  readonly type="text" class="datepicker" data-format="dd-MM-yyyy"  placeholder="Изберете .." />
+  </div>
+  <div>
+    <%= submit_tag "Запази"%>
+  </div>  
+<% end %>
+<br />
+<%= form_tag(set_years_path, remote: false) do %>
+  <div>
+    <%= label_tag :year_for_registration, "Година за нови регистации" %>
+    <%= text_field_tag :year_for_registration, @assemble.year_for_registration %>
+  </div>
+  <div>
+    <%= label_tag :year_for_assembling, "Година за разпределение" %>
+    <%= text_field_tag :year_for_assembling, @assemble.year_for_assembling %>
   </div>
   <div>
     <%= submit_tag "Запази"%>

@@ -15,7 +15,7 @@
     <% @committees.each do |committee| %>
       <tr>
         <td><hr><%= committee.date %></td>
-        <td><hr><%= committee.commissioners_names %></td>
+        <td><hr><%= committee.commissioners.map(&:name)%></td>
         <td><hr><%= link_to 'Покажи', committee %></td>
         <td><hr><%= link_to 'Промени', edit_committee_path(@committee), data: {no_turbolink: true} %></td>
         <td><hr>

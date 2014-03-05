@@ -9,8 +9,7 @@
 			<% if @current_user.admin? %>
 				<th>Акаунт</th>
 				<th>ID</th>
-			<% end %>		
-      <th></th>
+			<% end %>
       <th></th>
       <th></th>
     </tr>
@@ -19,16 +18,15 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
-				<td><%= student.name %></td>
+				<td><%= link_to student.name, student %></td>
 				<td><%= student.number %></td>
         <td><%= student.grade %></td>
 				<% if @current_user.admin? %>
 					<td><%= student.user_name %></td>
 					<td><%= student.id %></td>
-				<% end %>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Покажи', student %></button></td>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Промени', edit_student_path(student) %></button.</td>
-        <td><button type="button" class="btn btn-default"><%= link_to 'Унищожи', student, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></button></td>
+          <td><button type="button" class="btn btn-default"><%= link_to 'Промени', edit_student_path(student) %></button.</td>
+          <td><button type="button" class="btn btn-default"><%= link_to 'Унищожи', student, method: :delete, data: { confirm: 'Сигурни ли сте?' } %></button></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

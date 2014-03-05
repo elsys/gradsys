@@ -19,6 +19,10 @@
   <strong>Член на комисия:</strong>
   <%= @teacher.commissioner %>
 </p>
+<p>
+  <strong>Тагове:</strong>
+  <%= @teacher.tags.map(&:name) %>
+</p>
 <% if @teacher.commissioner %>
 	<p>
   	<strong>Дни в които може да бъде член на комисия:</strong>
