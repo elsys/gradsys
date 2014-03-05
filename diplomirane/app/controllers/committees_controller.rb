@@ -5,25 +5,7 @@ class CommitteesController < ApplicationController
   # GET /committees
   # GET /committees.json
   def index
-    @assemble = Assemble.find(1)
-    if !@assemble.committee_start_date.nil? and 
-      !@assemble.committee_end_date.nil?
-
-        @start_date = @assemble.committee_start_date.to_date.jd 
-        @end_date = @assemble.committee_end_date.to_date.jd 
-
-        @committees=Array.new
-        (@start_date..@end_date).each do |date|
-          @date = Date.jd(date).strftime('%d/%m/%Y')
-          if Committee.find_by_date(@date).nil?
-            c = Committee.create(:date => @date)
-          else 
-            c = Committee.find_by_date(@date) 
-          end 
-
-          @committees << c  
-        end   
-    end  
+    set_committees() 
   end
 
   # GET /committees/1
@@ -113,7 +95,7 @@ class CommitteesController < ApplicationController
     @assemble.committee_start_date = params[:committee][:start_date]
     @assemble.committee_end_date = params[:committee][:end_date]
     @assemble.save
-    index()
+    set_committees()
     respond_to do |format|
       format.js 
       format.html {redirect_to committees_url}
@@ -169,6 +151,28 @@ class CommitteesController < ApplicationController
     def set_committee
       @committee = Committee.find(params[:id])
     end
+
+    def set_committees
+      @assemble = Assemble.find(1)
+    if !@assemble.committee_start_date.nil? and 
+      !@assemble.committee_end_date.nil?
+
+        @start_date = @assemble.committee_start_date.to_date.jd 
+        @end_date = @assemble.committee_end_date.to_date.jd 
+
+        @committees=Array.new
+        (@start_date..@end_date).each do |date|
+          @date = Date.jd(date).strftime('%d/%m/%Y')
+          if Committee.find_by_date(@date).nil?
+            c = Committee.create(:date => @date)
+          else 
+            c = Committee.find_by_date(@date) 
+          end 
+
+          @committees << c  
+        end   
+    end
+    end  
 
     def access
       unless @current_user.admin?

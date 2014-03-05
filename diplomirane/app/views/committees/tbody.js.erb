@@ -1,4 +1,9 @@
 var parent = $('#tbody_<%=@committee.id%>').parent();
 $('#tbody_<%=@committee.id%>').remove();
-$(window).colorbox.close();
 parent.prepend("<%=j render 'tbody' %>");
+
+var parent2 = $('#add_other_commissioner_<%=@committee.id%>').parent();
+$('#add_other_commissioner_<%=@committee.id%>').remove();
+parent2.prepend("<%=j render 'add_other_commissioner' %>");
+
+$(window).colorbox.close();

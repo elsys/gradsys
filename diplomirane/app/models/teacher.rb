@@ -13,7 +13,7 @@ class Teacher < ActiveRecord::Base
   attr_accessor :current_password
   attr_reader   :password
 
-  validate :current_password_must_match, :unless => lambda { !self.hashed_password.nil?  }
+  validate :current_password_must_match, :unless => lambda { self.admin? }
 
   def must_be_valid_email
     errors.add(:user_name, "Невалиден имейл адрес") unless
