@@ -7,7 +7,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    set_students()
   end
 
   # GET /students/1
@@ -89,11 +89,24 @@ class StudentsController < ApplicationController
     end
   end
 
+  def set_year
+    @year = params[:year]
+    set_students()
+
+    respond_to do |format|
+      format.js { render action: "tbody" }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
     end
+
+    def set_students
+      @students = Student.all
+    end  
 
 		def access
 			if @student

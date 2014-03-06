@@ -1,35 +1,30 @@
 <h1>Разглеждане на ученици</h1>
 
+<% @years =  Student.all.map(&:year).uniq %>
+<% @years = @years.sort{ |a,b| b.to_i <=> a.to_i } %>
+<% @years << "Всички" %>
+<%= form_tag(student_set_year_path, remote: true, id: "set_year") do %>
+  <strong>Година</strong>
+  <%= select_tag "year",  options_for_select(@years, Assemble.find(1).year_for_assembling), onchange: ("$('#set_year').submit()") %>
+<% end %>
+<% @year = Assemble.find(1).year_for_assembling %>
+
 <table class = "table">
   <thead>
     <tr>
 			<th>Име</th>
 			<th>Номер</th>
       <th>Клас</th>
+      <th>Година</th>
 			<% if @current_user.admin? %>
 				<th>Акаунт</th>
-				<th>ID</th>
 			<% end %>
       <th></th>
       <th></th>
     </tr>
   </thead>
+  <%= render 'tbody' %>
 
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-				<td><%= link_to student.name, student, class: "btn btn-default" %></td>
-				<td><%= student.number %></td>
-        <td><%= student.grade %></td>
-				<% if @current_user.admin? %>
-					<td><%= student.user_name %></td>
-					<td><%= student.id %></td>
-          <td><%= link_to 'Промени', edit_student_path(student), class: "btn btn-default" %></td>
-          <td><%= link_to 'Унищожи', student, method: :delete, data: { confirm: 'Сигурни ли сте?' }, class: "btn btn-default" %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
 </table>
 <%=link_to "Нов ученик", "/students/new", class: "btn btn-default"%>
 <br>

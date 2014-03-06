@@ -1,0 +1,3 @@
+var parent = $('#tbody').parent();
+$('#tbody').remove();
+parent.prepend("<%=j render 'tbody' %>");

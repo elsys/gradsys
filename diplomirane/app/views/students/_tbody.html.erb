@@ -1,0 +1,20 @@
+<tbody id= "tbody">
+  <% if @year != "Всички" %>
+    <% @students = @students.where(year: @year) %>
+  <% else %>
+    <% @students = @students.sort_by {|s| - s.year} %> 
+  <% end %> 
+  <% @students.each do |student| %>
+    <tr>
+			<td><%= link_to student.name, student, class: "btn btn-default" %></td>
+			<td><%= student.number %></td>
+      <td><%= student.grade %></td>
+      <td><%= student.year %></td>
+			<% if @current_user.admin? %>
+				<td><%= student.user_name %></td>
+        <td><%= link_to 'Промени', edit_student_path(student), class: "btn btn-default" %></td>
+        <td><%= link_to 'Унищожи', student, method: :delete, data: { confirm: 'Сигурни ли сте?' }, class: "btn btn-default" %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</tbody>

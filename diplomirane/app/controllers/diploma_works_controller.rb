@@ -6,7 +6,7 @@ class DiplomaWorksController < ApplicationController
   # GET /diploma_works
   # GET /diploma_works.json
   def index
-    @diploma_works = DiplomaWork.all
+    set_diploma_works()
   end
 
   # GET /diploma_works/1
@@ -82,9 +82,11 @@ class DiplomaWorksController < ApplicationController
   # DELETE /diploma_works/1.json
   def destroy
     @diploma_work.destroy
+    set_diploma_works()
     respond_to do |format|
       format.html { redirect_to diploma_works_url }
       format.json { head :no_content }
+      format.js { render action: "tbody" }
     end
   end
 
@@ -92,7 +94,10 @@ class DiplomaWorksController < ApplicationController
     @d = DiplomaWork.find(params[:id])
     @d.approved = "true"
     @d.save
-    redirect_to diploma_works_url
+    set_diploma_works()
+    respond_to do |format|
+      format.js { render action: "tbody" }
+    end
   end
 
   def add_student
@@ -115,16 +120,28 @@ class DiplomaWorksController < ApplicationController
       @diploma_work.students.delete(@student.id)
     end 
     respond_to do |format|
-      format.js { render :action => "students" }
+      format.js { render action: "students" }
       format.html {redirect_to edit_diploma_work_path(@diploma_work) }
     end
   end
+
+  def set_year
+    @year = params[:year]
+    set_diploma_works()
+
+    respond_to do |format|
+      format.js { render action: "tbody" }
+    end
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_diploma_work
       @diploma_work = DiplomaWork.find(params[:id])
-		
+    end
+
+    def set_diploma_works
+      @diploma_works = DiplomaWork.all
     end
 
 		def access
