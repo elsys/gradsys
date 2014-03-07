@@ -7,7 +7,7 @@
   <strong>Година</strong>
   <%= select_tag "year",  options_for_select(@years, Assemble.find(1).year_for_assembling), onchange: ("$('#set_year').submit()") %>
 <% end %>
-<% @year = Assemble.find(1).year_for_assembling%>
+
 
 <table class = "table">
   <thead>
@@ -27,4 +27,4 @@
 
 <br>
 
-<%= link_to 'Нова Дипломна работа', new_diploma_work_path, class: "btn btn-default" %>
+<%= link_to 'Нова Дипломна работа', new_diploma_work_path, class: "btn btn-default", data: {no_turbolink: true} %>

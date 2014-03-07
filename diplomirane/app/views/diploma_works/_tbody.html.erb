@@ -1,8 +1,11 @@
 <tbody id= "tbody">
+  <% if @year.nil? %>
+    <% @year = Assemble.find(1).year_for_assembling%>
+  <% end %>
   <% if @year != "Всички" %>
     <% @diploma_works = @diploma_works.where(year: @year) %>
   <% end %>  
-  <% if @current_user.admin? %>
+  <% if @current_user.admin? or @current_user.diploma_supervisor%>
     <% @diploma_works = @diploma_works.sort_by {|d| [d.approved ? 1 : 0, - d.year]} %>
   <% else %> 
     <% @diploma_works = @diploma_works.where(approved: true).sort_by {|d| - d.year} %> 

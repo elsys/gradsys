@@ -1,0 +1,6 @@
+var parent = $('#form').parent();
+$('#form').remove();
+parent.prepend("<%=j render 'form' %>");
+$('#diploma_work_covenanted').val(<%=j @covenanted %>);
+$('#covenanted').val("<%=j @covenanted %>");
+

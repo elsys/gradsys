@@ -1,67 +1,80 @@
-<%= form_for(@diploma_work) do |f| %>
-  <% if @diploma_work.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@diploma_work.errors.count, "error") %> prohibited this diploma_work from being saved:</h2>
+<div id="form">
+  <%= form_tag(diploma_work_covenanted_path, remote: true, id: "set_covenanted") do %>
+    <strong>УГОВОРЕНА</strong>
+    <%= hidden_field_tag "id", @diploma_work.id %>
+    <%= select_tag "covenanted",  options_for_select([["Да","true"],["Не","false"]], "false"), onchange: ("$('#set_covenanted').submit()") %>
+  <% end %>
+  <%= form_for(@diploma_work) do |f| %>
+    <% if @diploma_work.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@diploma_work.errors.count, "error") %> prohibited this diploma_work from being saved:</h2>
 
-      <ul>
-      <% @diploma_work.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @diploma_work.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title%>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :description,"Описание" %>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+    <% if @current_user.admin? %>
+      <%= f.label :diploma_supervisor_id,"Дипломен ръководител" %>
+      <%= f.select(:diploma_supervisor_id, Teacher.where(:diploma_supervisor => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
+    <% else %>
+      <%= f.hidden_field :diploma_supervisor_id, readonly: true, value: @current_user.id %>
+    <% end %>
+    </div>
+    <div class="field">
+      <%= f.label :covenanted,"Уговорена" %>
+      <%= f.text_field :covenanted %>
+    </div>
+    <% if @current_user.admin? %>
+      <div class="field">
+        <%= f.label :reviewer_id,"Рецензент" %>
+        <%= f.select(:reviewer_id, Teacher.where(:reviewer => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
+      </div>
+      <div class="field">
+       <%= f.label :committee_id,"Комисия" %>
+       <%= f.select(:committee_id, Committee.all.collect {|p| [ p.date, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
+      </div>
+      <div class="field">
+        <%= f.label :approved,"Удобрена" %>
+  	  <div class="controls">
+        <%= f.check_box :approved %>
+  	  </div>
+      </div>
+      <div class="field">
+      <%= f.label :year, "Година"%>
+      <%= f.text_field :year %>
+    </div>
+    <% end %> 
+    <div class="field">
+      <%= f.label :tags,"Тагове" %>
+      <%= text_field_tag :tags, @diploma_work.tags.map(&:name).join(",") %>
+    </div>
+    <% unless @covenanted == "true" %>
+      <div>
+        <%= f.label :diplomants_number, "Брой дипломанти"%>
+        <%= text_field_tag :diplomants_number %>
+      </div> 
+    <% end %>
+    <div class="actions">
+      <%= f.submit "Запази" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title%>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description,"Описание" %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-  <% if @current_user.admin? %>
-    <%= f.label :diploma_supervisor_id,"Дипломен ръководител" %>
-    <%= f.select(:diploma_supervisor_id, Teacher.where(:diploma_supervisor => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
-  <% else %>
-    <%= f.hidden_field :diploma_supervisor_id, readonly: true, value: @current_user.id %>
+ 
+  <% if @covenanted == "true"%>  
+    <div>
+      <%= render 'students'%>
+    </div>
   <% end %>
-  </div>
-  <div>
-		<%= hidden_field_tag :diplomants_number %>
-	</div>
-  <div class="field">
-    <%= f.label :covenanted,"Уговорена" %>
-    <%= f.check_box :covenanted %>
-  </div>
-  <% if @current_user.admin? %>
-    <div class="field">
-      <%= f.label :reviewer_id,"Рецензент" %>
-      <%= f.select(:reviewer_id, Teacher.where(:reviewer => true).collect {|p| [ p.name, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
-    </div>
-    <div class="field">
-     <%= f.label :committee_id,"Комисия" %>
-     <%= f.select(:committee_id, Committee.all.collect {|p| [ p.date, p.id ]}, {include_blank: 'Няма (Избери)'}) %>
-    </div>
-    <div class="field">
-      <%= f.label :approved,"Удобрена" %>
-	  <div class="controls">
-      <%= f.check_box :approved %>
-	  </div>
-    </div>
-    <div class="field">
-    <%= f.label :year, "Година"%>
-    <%= f.text_field :year %>
-  </div>
-  <% end %> 
-  <div class="field">
-    <%= f.label :tags,"Тагове" %>
-    <%= text_field_tag :tags, @diploma_work.tags.map(&:name).join(",") %>
-  </div> 
-  <div class="actions">
-    <%= f.submit "Запази" %>
-  </div>
-<% end %>
-<div>
-  <%= render 'students'%>
 </div>

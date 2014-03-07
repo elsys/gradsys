@@ -1,12 +1,13 @@
 class DiplomaWorksController < ApplicationController
   before_action :set_diploma_work, only: [:show, :edit, :update, :destroy]
-	before_filter :access, :except => [:index, :show, :new, :create]
-	before_filter :access_supervior, :except => [:index, :show]
+  before_action :set_diploma_works, only: [:index, :destroy, :approve_diploma_work, :set_year]
+  before_filter :admin_access, :except => [:index, :show, :new, :create, :destroy, :set_year, :covenanted]
+	before_filter :access, :except => [:index, :show, :new, :create, :set_year, :covenanted]
+	before_filter :access_supervior, :except => [:index, :show, :set_year]
 
   # GET /diploma_works
   # GET /diploma_works.json
   def index
-    set_diploma_works()
   end
 
   # GET /diploma_works/1
@@ -82,7 +83,6 @@ class DiplomaWorksController < ApplicationController
   # DELETE /diploma_works/1.json
   def destroy
     @diploma_work.destroy
-    set_diploma_works()
     respond_to do |format|
       format.html { redirect_to diploma_works_url }
       format.json { head :no_content }
@@ -90,11 +90,23 @@ class DiplomaWorksController < ApplicationController
     end
   end
 
+  def covenanted
+    @covenanted = params[:covenanted]
+    if params[:id]
+      @diploma_work = DiplomaWork.find(params[:id])
+    else
+      @diploma_work = DiplomaWork.new 
+    end
+    respond_to do |format|
+      format.js { render action: "covenanted" }
+    end
+  end  
+
   def approve_diploma_work
     @d = DiplomaWork.find(params[:id])
     @d.approved = "true"
     @d.save
-    set_diploma_works()
+
     respond_to do |format|
       format.js { render action: "tbody" }
     end
@@ -127,7 +139,6 @@ class DiplomaWorksController < ApplicationController
 
   def set_year
     @year = params[:year]
-    set_diploma_works()
 
     respond_to do |format|
       format.js { render action: "tbody" }
@@ -143,6 +154,12 @@ class DiplomaWorksController < ApplicationController
     def set_diploma_works
       @diploma_works = DiplomaWork.all
     end
+
+    def admin_access
+      unless @current_user.admin?      
+        redirect_to diploma_works_url
+      end
+    end  
 
 		def access
 			if @diploma_work

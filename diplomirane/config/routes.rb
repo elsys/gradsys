@@ -36,6 +36,7 @@ Oop::Application.routes.draw do
     post 'diploma_work_add_student' => :add_student
     post 'diploma_work_remove_student' => :remove_student
     post 'diploma_work_set_year' => :set_year
+    post 'diploma_work_covenanted' => :covenanted
   end
 
   controller :students do
