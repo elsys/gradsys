@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-	before_filter :access, :except => [:index, :show]
+	before_filter :access, :except => [:index, :show, :set_year]
 
 	require 'csv'
 
