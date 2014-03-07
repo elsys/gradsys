@@ -1,8 +1,6 @@
 
 Oop::Application.routes.draw do
 
-  resources :tags
-
   get "committees" => 'committees#index'
   get "committees/all"
   get "assemble" => 'assemble#index'
@@ -37,7 +35,12 @@ Oop::Application.routes.draw do
     post 'approve_diploma_work' => :approve_diploma_work
     post 'diploma_work_add_student' => :add_student
     post 'diploma_work_remove_student' => :remove_student
+    post 'diploma_work_set_year' => :set_year
   end
+
+  controller :students do
+    post 'student_set_year' => :set_year
+  end  
 
   controller :sessions do
     get  'login' => :new
