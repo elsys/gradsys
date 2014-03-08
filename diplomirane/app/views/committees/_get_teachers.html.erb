@@ -1,15 +1,26 @@
-<tbody id="get_teachers_<%=@committee.id%>"> 
-  <% @commissioners = Teacher.all %>
-  <% @commissioners.each do |c| %>
-    <% if !@committee.commissioners.exists?(c.id) %>
+<div id="get_teachers_<%=@committee.id%>">  
+  <h4 class="type">Свободни</h4>
+  <table id="get_teachers"  class = "table">                                   
+    <thead>        
       <tr>
-        <td>Да</td>
-        <td><%= link_to c.name, c, class: "btn btn-default" %></td>    
-        <td>
-          <%= button_to "Добави", committee_add_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true, class: "btn btn-default"  %> 
-        </td>   
-      </tr> 
-    <% end %>
-  <% end %>
-</tbody>
-     
+        <th>Св</th>
+        <th>Име</th>
+        <th>Опции</th>
+      </tr>  
+    </thead> 
+    <tbody> 
+      <% @commissioners = Teacher.where("teachers.commissioner_dates LIKE '%#{@committee.date}%'") %>
+      <% @commissioners.each do |c| %>
+        <% if !@committee.commissioners.exists?(c.id) %>
+          <tr>
+            <td>Да</td>
+            <td><%= link_to c.name, c, class: "btn btn-default" %></td>    
+            <td>
+              <%= button_to "Добави", committee_add_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true, class: "btn btn-default"  %> 
+            </td>   
+          </tr> 
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>     

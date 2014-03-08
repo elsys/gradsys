@@ -1,11 +1,11 @@
 <%= javascript_include_tag "colorbox" %>
-<div id="diploma_works">
-  <h3>Дипломни работи</h3>
+<div id="diploma_works_<%= @committee.id%>">
+  <h4 class="type">Дипломни работи</h4>
   <table class = "table">
     <thead>
       <tr>
-        <th></th>
-        <th></th>
+        <th>Име</th>
+        <th>Опции</th>
       </tr>
     </thead>
     <tbody>
@@ -17,9 +17,9 @@
     <% end %>
     </tbody>
   </table>
-  <p><a class='inline' href="#inline_content"><button type="button" class="btn btn-default">Добавяне на дипломна работа</button></a></p> 
+  <p><a class='inline' href="#inline_content_<%= @committee.id%>"><button type="button" class="btn btn-default">Добавяне на дипломна работа</button></a></p> 
   <div style='display:none'>
-    <div id='inline_content' style='padding:10px; background:#fff;'>
+    <div id='inline_content_<%= @committee.id%>' style='padding:10px; background:#fff;'>
       <p><h2>Добаване на дипломна работа</h2></p>
       <div class = "table" style="max-height: 500px; overflow: scroll;">
         <table class = "table">
@@ -39,7 +39,7 @@
                 <td><%= d.title %></td>
                 <td><%= d.diploma_supervisor.name %></td>
                 <td><%= @committee.check_tags(d) %></td>
-                <td><%= button_to "Добави", committee_add_diploma_work_path({committee: @committee.id, diploma_work: d.id}), remote: true %></td>
+                <td><%= button_to "Добави", committee_add_diploma_work_path({committee_id: @committee.id, diploma_work_id: d.id}), remote: true %></td>
               </tr>
             <% end %>
           </tbody>

@@ -116,9 +116,11 @@ class CommitteesController < ApplicationController
   def add_commissioner
     @committee = Committee.find(params[:committee_id])
     @commissioner = Teacher.find(params[:commissioner_id])
-    if !@committee.commissioners.exists?(@commissioner)
-      @committee.commissioners << @commissioner
-    end 
+    if @committee.commissioners.length < 5
+      if !@committee.commissioners.exists?(@commissioner)
+        @committee.commissioners << @commissioner
+      end
+    end   
     respond_to do |format|
       format.js{ render :action => "tbody" }
     end
@@ -136,8 +138,8 @@ class CommitteesController < ApplicationController
   end
 
   def add_diploma_work
-    @committee = Committee.find(params[:committee])
-    @diploma_work = DiplomaWork.find(params[:diploma_work])
+    @committee = Committee.find(params[:committee_id])
+    @diploma_work = DiplomaWork.find(params[:diploma_work_id])
     if !@committee.diploma_works.exists?(@diploma_work)
       @committee.diploma_works << @diploma_work
     end  

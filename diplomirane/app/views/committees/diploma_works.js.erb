@@ -1,4 +1,4 @@
-var parent = $('#diploma_works').parent();
-$('#diploma_works').remove();
+var parent = $('#diploma_works_<%=@committee.id%>').parent();
+$('#diploma_works_<%=@committee.id%>').remove();
 parent.prepend("<%=j render 'diploma_works' %>");
 $(window).colorbox.close();

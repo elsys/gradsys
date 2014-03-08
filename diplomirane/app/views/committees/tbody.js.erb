@@ -2,9 +2,18 @@ var parent = $('#have_teachers_<%=@committee.id%>').parent();
 $('#have_teachers_<%=@committee.id%>').remove();
 parent.prepend("<%=j render 'have_teachers' %>");
 
-var parent = $('#get_teachers_<%=@committee.id%>').parent();
+var parent2 = $('#get_teachers_<%=@committee.id%>').parent();
 $('#get_teachers_<%=@committee.id%>').remove();
-parent.prepend("<%=j render 'get_teachers' %>");
+var parent3 = $('#diploma_works_<%=@committee.id%>').parent();
+$('#diploma_works_<%=@committee.id%>').remove();
+
+if (<%= @committee.commissioners.length < 5 %> ){
+	parent2.prepend("<%=j render 'get_teachers' %>");
+	parent3.prepend("<%=j render 'get_teachers' %>");
+}else{
+	parent2.prepend("<%=j render 'diploma_works' %>");
+	parent3.prepend("<%=j render 'diploma_works' %>");
+}
 
 
 var parent2 = $('#add_another_commissioner_<%=@committee.id%>').parent();
