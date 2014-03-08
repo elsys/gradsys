@@ -1,0 +1,12 @@
+var i = $('#diplomants_tbody tr td').size()/2 + 1;
+$('#diplomants').append("<%=j hidden_field_tag "diplomant(#{@br})", @s.id, class: "ids" %>");
+$('#diplomants_tbody').append("<tr><td><%=j link_to @s.name, @s, id: @s.id, name: "diplomant#{@br}", class: "btn btn-default" %></td><td><%=j link_to "Премахни", diploma_work_remove_student_field_path({id: @s.id}), remote: true, method: "post", class: "btn btn-default" %></td></tr>");
+
+$('#diploma_work_diplomants_number').val(i);
+$('#diplomants_values').val(<%= @br %>);
+
+var parent = $('#students').parent();
+$('#students').remove();
+parent.prepend("<%=j render 'students_new' %>");
+
+$(window).colorbox.close();

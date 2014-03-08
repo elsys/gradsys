@@ -1,0 +1,7 @@
+var parent = $('#<%= @id %>').parent().parent();
+parent.remove();
+$('#diplomant_<%= @id %>_').remove();
+$("input[class='ids'][value='<%= @id %>']").remove();
+
+var i = $('#diplomants tr td').size()/2;
+$('#diploma_work_diplomants_number').val(i);

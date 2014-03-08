@@ -1,9 +1,10 @@
 <div id="form">
-  <%= form_tag(diploma_work_covenanted_path, remote: true, id: "set_covenanted") do %>
-    <strong>УГОВОРЕНА</strong>
-    <%= hidden_field_tag "id", @diploma_work.id %>
-    <%= select_tag "covenanted",  options_for_select([["Да","true"],["Не","false"]], "false"), onchange: ("$('#set_covenanted').submit()") %>
-  <% end %>
+  <% if @diploma_work.id.nil? %>
+    <%= form_tag(diploma_work_covenanted_path, remote: true, id: "set_covenanted") do %>
+      <strong>УГОВОРЕНА</strong>
+      <%= select_tag "covenanted",  options_for_select([["Да","true"],["Не","false"]], "false"), onchange: ("$('#set_covenanted').submit()") %>
+    <% end %>
+  <% end %>  
   <%= form_for(@diploma_work) do |f| %>
     <% if @diploma_work.errors.any? %>
       <div id="error_explanation">
@@ -61,20 +62,48 @@
       <%= f.label :tags,"Тагове" %>
       <%= text_field_tag :tags, @diploma_work.tags.map(&:name).join(",") %>
     </div>
-    <% unless @covenanted == "true" %>
-      <div>
+    <div>
+      <% if @covenanted != "true" and @diploma_work.id.nil? %>
         <%= f.label :diplomants_number, "Брой дипломанти"%>
-        <%= text_field_tag :diplomants_number %>
-      </div> 
+        <%= f.text_field :diplomants_number %>
+      <% else %>
+        <%= f.label :diplomants_number, "Брой дипломанти"%>
+        <%= f.text_field :diplomants_number, value: 0 ,readonly: true %>
+        <%= hidden_field_tag :diplomants_values %>
+      <% end %>
+    </div>
+    <% if @diploma_work.id.nil? and @covenanted == "true"  %>
+      <% @br = 0 %>
+      <div id="diplomants">     
+      </div>  
     <% end %>
+
     <div class="actions">
       <%= f.submit "Запази" %>
     </div>
+
   <% end %>
- 
-  <% if @covenanted == "true"%>  
-    <div>
-      <%= render 'students'%>
-    </div>
-  <% end %>
+  <div>  
+    <% if !@diploma_work.id.nil? %>  
+      <%= render 'students' %>  
+    <% elsif @covenanted == "true"  %>
+      <h3>Дипломанти</h3>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="diplomants_tbody">
+
+          </tbody>
+        </table>  
+      </div>
+      <div>
+        <%= render 'students_new' %>
+      </div>  
+    <% end %>
+  </div>
 </div>

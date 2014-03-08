@@ -3,7 +3,7 @@ class DiplomaWorksController < ApplicationController
   before_action :set_diploma_works, only: [:index, :destroy, :approve_diploma_work, :set_year]
   before_filter :admin_access, :except => [:index, :show, :new, :create, :destroy, :set_year, :covenanted]
 	before_filter :access, :except => [:index, :show, :new, :create, :set_year, :covenanted]
-	before_filter :access_supervior, :except => [:index, :show, :set_year]
+	before_filter :access_supervior, :except => [:index, :show, :set_year, :covenanted]
 
   # GET /diploma_works
   # GET /diploma_works.json
@@ -45,6 +45,21 @@ class DiplomaWorksController < ApplicationController
 
     respond_to do |format|
       if @diploma_work.save
+        @diplomants_values = params[:diplomants_values].to_i
+        @diploma_work.students.clear
+        for d in 1..@diplomants_values
+          if !params[:"diplomant(#{d})"].nil?
+            @diplomant_id = params[:"diplomant(#{d})"].to_i
+            if @diplomant_id > 0   
+              @diplomant = Student.find(@diplomant_id)
+              if !@diploma_work.students.exists?(@diplomant)
+                @diplomant.current_user = @current_user
+                @diploma_work.students << @diplomant
+              end 
+            end
+          end
+        end
+        
         format.html { redirect_to @diploma_work, notice: 'Diploma work was successfully created.' }
         format.json { render action: 'show', status: :created, location: @diploma_work }
       else
@@ -53,6 +68,8 @@ class DiplomaWorksController < ApplicationController
       end
     end
   end
+
+ 
 
   # PATCH/PUT /diploma_works/1
   # PATCH/PUT /diploma_works/1.json
@@ -92,11 +109,8 @@ class DiplomaWorksController < ApplicationController
 
   def covenanted
     @covenanted = params[:covenanted]
-    if params[:id]
-      @diploma_work = DiplomaWork.find(params[:id])
-    else
-      @diploma_work = DiplomaWork.new 
-    end
+    @diploma_work = DiplomaWork.new 
+
     respond_to do |format|
       format.js { render action: "covenanted" }
     end
@@ -136,6 +150,27 @@ class DiplomaWorksController < ApplicationController
       format.html {redirect_to edit_diploma_work_path(@diploma_work) }
     end
   end
+
+  def add_student_field
+    @s = Student.find(params[:student_id])
+    @students = params[:students]
+    @students = @students.delete(@s.id)
+    @diploma_work = DiplomaWork.new
+    @br = params[:br].to_i
+    @br+= 1
+
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def remove_student_field
+    @id = params[:id]
+
+    respond_to do |format|
+      format.js
+    end
+  end  
 
   def set_year
     @year = params[:year]

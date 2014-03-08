@@ -12,12 +12,12 @@
     <% @diploma_work.students.each do |s| %>
       <tr id="<%= s.id %>">
         <td><%= link_to s.name, s, class: "btn btn-default" %></td>
-        <td><%= button_to 'Премахни', diploma_work_remove_student_path({student_id: s.id, diploma_work_id: @diploma_work.id}), remote: true %></td>
+        <td><%= link_to 'Премахни', diploma_work_remove_student_path({student_id: s.id, diploma_work_id: @diploma_work.id}), method: "post", remote: true, class: "btn btn-default" %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
-
+  <br />
   <p><a class='inline' href="#inline_content"><button type="button" class="btn btn-default">Добавяне на дипломант</button></a></p>
 
   <div style='display:none'>
