@@ -153,8 +153,6 @@ class DiplomaWorksController < ApplicationController
 
   def add_student_field
     @s = Student.find(params[:student_id])
-    @students = params[:students]
-    @students = @students.delete(@s.id)
     @diploma_work = DiplomaWork.new
     @br = params[:br].to_i
     @br+= 1
