@@ -1,0 +1,19 @@
+<tbody id="have_teachers_<%=@committee.id%>"> 
+  <% @committee.commissioners.each do |c| %> 
+    <tr>
+      <td>
+        <% if c.commissioner_dates %>
+          <%= c.commissioner_dates.include?(@committee.date) ? "Да" : "Не" %>
+        <% else %>
+            Не
+        <% end %> 
+      </td>
+      <td><%= link_to c.name, c , class: "btn btn-default"%></td>
+      <td>
+        <%= button_to "Премахни от комисия", committee_remove_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %>       
+      </td>   
+    </tr>
+  <% end %>
+
+</tbody>
+     

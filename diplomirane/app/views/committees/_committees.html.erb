@@ -2,24 +2,31 @@
   <% if !@committees.nil? %>
     <% @committees.each do |committee| %> 
       <% @committee = committee %>
-      <hr style="background-color: #777; height: 3px; border:none;">
-      <table class = "table">
-        <h2>
+      
+      <h2>
          <%= link_to @committee.date, @committee, class: "btn btn-default" %>
          <%= link_to 'Промяна на комисия', edit_committee_path(@committee), data: {no_turbolink: true}, class: "btn btn-default" %>
-        </h2>                                  
-        <thead>        
-          <tr>
-            <th>Свободен</th>
-            <th>Име</th>
-            <th>Опции</th>
-            <th>Свободен</th>
-            <th>Име</th>
-            <th>Опции</th>
-          </tr> 
-        </thead>   
-        <%= render 'tbody' %>            
-      </table>
+      </h2>
+        <table class = "table">                                   
+          <thead>        
+            <tr>
+              <th>Свободен</th>
+              <th>Име</th>
+              <th>Опции</th>
+            </tr>  
+          </thead>   
+          <%= render 'have_teachers' %>            
+        </table>
+        <table class = "table">                                   
+          <thead>        
+            <tr>
+              <th>Свободен</th>
+              <th>Име</th>
+              <th>Опции</th>
+            </tr>  
+          </thead>   
+          <%= render 'get_teachers' %>            
+        </table>
       <div>
         <%= render 'add_another_commissioner' %> 
       </div>  
