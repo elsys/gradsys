@@ -13,6 +13,16 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+	respond_to do |format|
+		format.html
+		format.pdf do
+			pdf = Prawn::Document.new
+			pdf.text "hello"
+			send_data pdf.render, filename: "molba.pdf",
+				type: "application/pdf",
+				disposition: "inline"
+		 end
+	 end
   end
 
   # GET /students/new
