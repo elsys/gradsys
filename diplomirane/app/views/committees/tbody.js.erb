@@ -1,6 +1,11 @@
-var parent = $('#tbody_<%=@committee.id%>').parent();
-$('#tbody_<%=@committee.id%>').remove();
-parent.prepend("<%=j render 'tbody' %>");
+var parent = $('#have_teachers_<%=@committee.id%>').parent();
+$('#have_teachers_<%=@committee.id%>').remove();
+parent.prepend("<%=j render 'have_teachers' %>");
+
+var parent = $('#get_teachers_<%=@committee.id%>').parent();
+$('#get_teachers_<%=@committee.id%>').remove();
+parent.prepend("<%=j render 'get_teachers' %>");
+
 
 var parent2 = $('#add_another_commissioner_<%=@committee.id%>').parent();
 $('#add_another_commissioner_<%=@committee.id%>').remove();

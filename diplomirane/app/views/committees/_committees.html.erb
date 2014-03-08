@@ -7,7 +7,7 @@
          <%= link_to @committee.date, @committee, class: "btn btn-default" %>
          <%= link_to 'Промяна на комисия', edit_committee_path(@committee), data: {no_turbolink: true}, class: "btn btn-default" %>
       </h2>
-        <table class = "table">                                   
+        <table id="have_teachers" class = "table">                                   
           <thead>        
             <tr>
               <th>Свободен</th>
@@ -17,7 +17,7 @@
           </thead>   
           <%= render 'have_teachers' %>            
         </table>
-        <table class = "table">                                   
+        <table id="get_teachers"  class = "table">                                   
           <thead>        
             <tr>
               <th>Свободен</th>
