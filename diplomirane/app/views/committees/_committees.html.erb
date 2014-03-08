@@ -2,35 +2,43 @@
   <% if !@committees.nil? %>
     <% @committees.each do |committee| %> 
       <% @committee = committee %>
-      
+      <hr style="background-color: #777; height: 3px; border:none;">
       <h2>
          <%= link_to @committee.date, @committee, class: "btn btn-default" %>
          <%= link_to 'Промяна на комисия', edit_committee_path(@committee), data: {no_turbolink: true}, class: "btn btn-default" %>
       </h2>
-        <table id="have_teachers" class = "table">                                   
-          <thead>        
-            <tr>
-              <th>Свободен</th>
-              <th>Име</th>
-              <th>Опции</th>
-            </tr>  
-          </thead>   
-          <%= render 'have_teachers' %>            
-        </table>
-        <table id="get_teachers"  class = "table">                                   
-          <thead>        
-            <tr>
-              <th>Свободен</th>
-              <th>Име</th>
-              <th>Опции</th>
-            </tr>  
-          </thead>   
-          <%= render 'get_teachers' %>            
-        </table>
+      <div id="parent">
+        <div class="left">
+          <h4 class="type">Членове</h4>
+          <table id="have_teachers" class = "table">                                   
+            <thead>        
+              <tr>
+                <th>Св</th>
+                <th>Име</th>
+                <th>Опции</th>
+              </tr>  
+            </thead>   
+            <%= render 'have_teachers' %>            
+          </table>
+        </div>  
+        <div class="right">
+          <h4 class="type">Свободни</h4>
+          <table id="get_teachers"  class = "table">                                   
+            <thead>        
+              <tr>
+                <th>Св</th>
+                <th>Име</th>
+                <th>Опции</th>
+              </tr>  
+            </thead>   
+            <%= render 'get_teachers' %>            
+          </table>
+        </div>
+      </div>    
       <div>
         <%= render 'add_another_commissioner' %> 
       </div>  
-      <br />
+      
     <% end %>   
   <% end %>
 </div>  

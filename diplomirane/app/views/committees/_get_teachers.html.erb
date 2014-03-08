@@ -1,19 +1,15 @@
 <tbody id="get_teachers_<%=@committee.id%>"> 
-  <% @commissioners = Teacher.where("teachers.commissioner_dates LIKE '%#{@committee.date}%'").all %>
+  <% @commissioners = Teacher.all %>
   <% @commissioners.each do |c| %>
     <% if !@committee.commissioners.exists?(c.id) %>
       <tr>
-      <td></td>
-      <td></td>
-      <td></td>
         <td>Да</td>
         <td><%= link_to c.name, c, class: "btn btn-default" %></td>    
         <td>
-          <%= button_to "Добави към комисия", committee_add_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %> 
+          <%= button_to "Добави", committee_add_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true, class: "btn btn-default"  %> 
         </td>   
       </tr> 
     <% end %>
   <% end %>
-
 </tbody>
      

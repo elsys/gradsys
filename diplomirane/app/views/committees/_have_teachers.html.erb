@@ -10,7 +10,7 @@
       </td>
       <td><%= link_to c.name, c , class: "btn btn-default"%></td>
       <td>
-        <%= button_to "Премахни от комисия", committee_remove_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true %>       
+        <%= button_to "Премахни", committee_remove_commissioner_path({commissioner_id: c.id, committee_id: @committee.id}), remote: true, class: "btn btn-default"  %>       
       </td>   
     </tr>
   <% end %>

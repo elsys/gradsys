@@ -1,3 +1,30 @@
 // Place all the styles related to the committee controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#parent {
+   height: 310px;
+}
+.right {
+		float: right;
+  	width: 49%;
+    height: 310px;
+    overflow: auto;
+}
+
+.left {
+		float: left;
+		width: 49%;
+		height: 310px;
+}
+
+.type {
+	text-align: center;
+}
+
+#parent div table thead tr th {
+	text-align: center;
+}
+
+form {
+	margin: 0 0 0 0;
+}

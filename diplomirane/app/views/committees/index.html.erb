@@ -18,7 +18,7 @@
     <input id="committee_end_date" name="committee[end_date]" value="<%= @assemble.committee_end_date %>"  readonly type="text" class="datepicker" data-format="dd-MM-yyyy"  placeholder="Изберете .." />
   </div>
   <div>
-    <%= submit_tag "Запази"%>
+    <%= submit_tag "Запази", class: "btn btn-default"%>
   </div>  
 <% end %>
 <br />
@@ -32,12 +32,13 @@
     <%= text_field_tag :year_for_assembling, @assemble.year_for_assembling %>
   </div>
   <div>
-    <%= submit_tag "Запази"%>
+    <%= submit_tag "Запази", class: "btn btn-default" %>
   </div>  
 <% end %>
 <br />
 <div>
   <%= render 'committees' %> 
-</div>   
+</div> 
+<br />  
 <%= link_to 'Нова комисяи за нов ден', new_committee_path, class: "btn btn-default" %>
 <%= link_to 'Всички комисии', committees_all_path, class: "btn btn-default" %>
