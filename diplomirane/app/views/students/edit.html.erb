@@ -15,32 +15,32 @@
   
   <% if @current_user.admin? %>
 		<div class="field">
-      <%= f.label :name,"Име" %><br>
+      <%= f.label :name,"Име" %>
       <%= f.text_field :name %>
     </div>
 	  <div class="field">
-      <%= f.label :user_name,"Акаунт" %><br>
+      <%= f.label :user_name,"Акаунт" %>
       <%= f.text_field :user_name %>
     </div>
   <% else %> 
     <div class="field"> 
-      <%= f.label :name, "Име: #{@student.name}" %><br>
+      <%= f.label :name, "Име: #{@student.name}" %>
     </div>  
   <% end %>
   <div class="field">
-    <%= f.label :grades, "Успех" %><br>
+    <%= f.label :grades, "Успех" %>
     <%= f.select(:grades, ["2","2.52","3","3.5","4","4.5","5","5.5","6"]) %>
   </div>
   <div class="field">
-    <%= f.label :first,"Първо желание" %><br>
+    <%= f.label :first,"Първо желание" %>
     <%= f.select(:first, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: "Няма (Избери)"}) %>
   </div>
   <div class="field">
-   <%= f.label :second, "Второ желание" %><br>
+   <%= f.label :second, "Второ желание" %>
     <%= f.select(:second, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: "Няма (Избери)"}) %>
   </div>
   <div class="field">
-    <%= f.label :third, "Трето желание" %><br>
+    <%= f.label :third, "Трето желание" %>
     <%= f.select(:third, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: "Няма (Избери)"}) %>
   </div> 
   <div class="field">
@@ -53,26 +53,26 @@
   </div>
   <% if @current_user.admin? %>
   	<div class="field">
-      <%= f.label :number, "Номер" %><br>
+      <%= f.label :number, "Номер" %>
       <%= f.text_field :number %>
     </div>  
   	<div class="field">
-      <%= f.label :grade, "Клас" %><br>
+      <%= f.label :grade, "Клас" %>
       <%= f.select(:grade, ["","12a","12b","12v","12g"]) %>
   	</div>
     <div class="field">
-      <%= f.label :year, "Година" %><br>
+      <%= f.label :year, "Година" %>
       <%= f.text_field :year %>
     </div>
-    <%= f.label :diploma_work_id, "Дипломна работа" %><br>
+    <%= f.label :diploma_work_id, "Дипломна работа" %>
       <%= f.select(:diploma_work_id, DiplomaWork.all.collect {|p| [ p.title, p.id ]}, {include_blank: "Няма (Избери)"}) %>
   	
   	<div class="field">
-      <%= f.label :access, "Ниво на достъп" %><br>
+      <%= f.label :access, "Ниво на достъп" %>
       <%= f.select(:access, ["user","admin"]) %>
   	</div>
     <div class="field">
-      <%= f.label :active, "Активен" %><br>
+      <%= f.label :active, "Активен" %>
       <%= f.select(:active, [["Да","true"],["Не" ,"false"]]) %>
     </div>
   <% else %>
@@ -87,5 +87,5 @@
 <% end %>
 
 
-<%= link_to 'Покажи', @student, class: "btn btn-default" %> |
+<%= link_to 'Покажи', @student, class: "btn btn-default" %> 
 <%= link_to 'Назад', students_path, class: "btn btn-default" %>
