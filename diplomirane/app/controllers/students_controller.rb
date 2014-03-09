@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :set_students, only: [:index, :set_year]
 	before_filter :access, :except => [:index, :show, :set_year]
 
 	require 'csv'
@@ -7,7 +8,6 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    set_students()
   end
 
   # GET /students/1
@@ -46,8 +46,12 @@ class StudentsController < ApplicationController
 				@grade = row[0]
 				@number = row[1]
 				@name = row[2]
+        @egn = row[3]
 				@email = row[4]
-				@student_params = { "user_name" => "#{@email}", "name" => "#{@name}", "email" => "#{@email}", "number" => "#{@number}", "grade" => "#{@grade}"}   
+        @skype = row[5]
+				@student_params = { "user_name" => "#{@email}", "name" => "#{@name}", 
+        "email" => "#{@email}", "number" => "#{@number}", "grade" => "#{@grade}", 
+        "egn" => "#{@egn}", "skype" => "#{@skype}"}   
 		  	@student = Student.new(@student_params)
         @student.year = @year
 				@student.save
@@ -101,7 +105,6 @@ class StudentsController < ApplicationController
 
   def set_year
     @year = params[:year]
-    set_students()
 
     respond_to do |format|
       format.js { render action: "tbody" }

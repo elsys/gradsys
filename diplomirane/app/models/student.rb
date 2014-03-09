@@ -8,17 +8,13 @@ class Student < ActiveRecord::Base
   validate :must_be_valid_email, :unless => lambda { self.user_name.blank? }
   validates_presence_of :number
 	validates_inclusion_of :grade, :in => ["12a","12b","12v","12g"] 
-	validates :diploma_work_id,	:numericality => true, :unless => lambda { self.diploma_work_id.nil? }
+	validates :diploma_work_id,	:numericality => true, 
+  :unless => lambda { self.diploma_work_id.nil? }
 	validates :password, :confirmation => true
   attr_accessor :password_confirmation
   attr_accessor :current_password
   attr_reader   :password
   validate :current_password_must_match, :unless => lambda { self.admin? }
-
-  def must_be_valid_email
-    errors.add(:user_name, "Невалиден имейл адрес") unless
-       self.user_name =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  end
 
   def Student.encrypt_password(password, salt)
     Digest::SHA2.hexdigest(password + "interesno" + salt)
@@ -39,6 +35,10 @@ class Student < ActiveRecord::Base
   end 
   
   private
+    def must_be_valid_email
+      errors.add(:user_name, "Невалиден имейл адрес") unless
+       self.user_name =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+    end
 
     def current_password_must_match
       unless @current_user.admin?
@@ -52,7 +52,5 @@ class Student < ActiveRecord::Base
   
     def generate_salt
       self.salt = self.object_id.to_s + rand.to_s
-    end
-
-		
+    end	
 end

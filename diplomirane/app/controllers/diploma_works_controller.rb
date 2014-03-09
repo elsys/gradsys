@@ -45,19 +45,21 @@ class DiplomaWorksController < ApplicationController
 
     respond_to do |format|
       if @diploma_work.save
-        @diplomants_values = params[:diplomants_values].to_i
-        @diploma_work.students.clear
-        for d in 1..@diplomants_values
-          if !params[:"diplomant(#{d})"].nil?
-            @diplomant_id = params[:"diplomant(#{d})"].to_i
-            if @diplomant_id > 0   
-              @diplomant = Student.find(@diplomant_id)
-              if !@diploma_work.students.exists?(@diplomant)
-                @diplomant.current_user = @current_user
-                @diploma_work.students << @diplomant
-              end 
+        if @diploma_work.covenanted
+          @diplomants_values = params[:diplomants_values].to_i
+          @diploma_work.students.clear
+          for d in 1..@diplomants_values
+            if !params[:"diplomant(#{d})"].nil?
+              @diplomant_id = params[:"diplomant(#{d})"].to_i
+              if @diplomant_id > 0   
+                @diplomant = Student.find(@diplomant_id)
+                if !@diploma_work.students.exists?(@diplomant)
+                  @diplomant.current_user = @current_user
+                  @diploma_work.students << @diplomant
+                end 
+              end
             end
-          end
+          end  
         end
         
         format.html { redirect_to @diploma_work, notice: 'Diploma work was successfully created.' }
@@ -99,7 +101,9 @@ class DiplomaWorksController < ApplicationController
   # DELETE /diploma_works/1
   # DELETE /diploma_works/1.json
   def destroy
-    @diploma_work.destroy
+    if !@diploma_work.approved or @current_user.admin? 
+      @diploma_work.destroy
+    end
     respond_to do |format|
       format.html { redirect_to diploma_works_url }
       format.json { head :no_content }

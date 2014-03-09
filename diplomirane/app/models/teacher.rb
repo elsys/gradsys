@@ -3,24 +3,23 @@ require 'digest/sha2'
 class Teacher < ActiveRecord::Base
 	child_of :user
   has_many :diploma_works, foreign_key: "diploma_supervisor_id"
-  has_many :president_in_committees,class_name: "Committee",  foreign_key: "president_id"
-  has_and_belongs_to_many :committees, foreign_key: "commissioner_id", join_table: "commissioners_committees"
+  has_many :president_in_committees,class_name: "Committee",  
+  foreign_key: "president_id"
+  has_and_belongs_to_many :committees, foreign_key: "commissioner_id", 
+  join_table: "commissioners_committees"
   has_and_belongs_to_many :tags
 
   validates :user_name, :presence => true
-  validate :must_be_valid_email, :unless => lambda { self.user_name.blank? }
+  validate :must_be_valid_email, 
+  :unless => lambda { self.user_name.blank? }
   validates :name, :presence => true
 	validates :password, :confirmation => true
   attr_accessor :password_confirmation
   attr_accessor :current_password
   attr_reader   :password
-
-  validate :current_password_must_match, :unless => lambda { self.admin? }
-
-  def must_be_valid_email
-    errors.add(:user_name, "Невалиден имейл адрес") unless
-       self.user_name =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-  end 
+  validate :current_password_must_match, 
+  :unless => lambda { self.admin? }
+  
 
   def Teacher.encrypt_password(password, salt)
     Digest::SHA2.hexdigest(password + "interesno" + salt)
@@ -48,6 +47,10 @@ class Teacher < ActiveRecord::Base
 
   
   private
+    def must_be_valid_email
+      errors.add(:user_name, "Невалиден имейл адрес") unless
+        self.user_name =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+    end
 
     def current_password_must_match
       unless @current_user.admin?

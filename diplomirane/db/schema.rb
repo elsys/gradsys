@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140303105547) do
+ActiveRecord::Schema.define(version: 20140309082712) do
 
   create_table "assembles", force: true do |t|
     t.string  "round"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20140303105547) do
     t.integer "third"
     t.float   "grades"
     t.integer "year"
+    t.integer "egn"
   end
 
   create_table "tags", force: true do |t|
@@ -93,6 +94,8 @@ ActiveRecord::Schema.define(version: 20140303105547) do
     t.boolean "active",          default: false
     t.string  "activation_code"
     t.boolean "lost_password",   default: false
+    t.string  "skype"
+    t.integer "gsm"
   end
 
 end

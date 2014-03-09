@@ -1,5 +1,6 @@
 class CommitteesController < ApplicationController
-  #before_action :set_committee, only: [:show, :edit, :update, :destroy]
+  before_action :set_committee, only: [:show, :edit, :update, :destroy]
+  before_action :set_committees, only: [:index, :set_dates]
   before_filter :access
 
   autocomplete :teacher, :name
@@ -7,13 +8,11 @@ class CommitteesController < ApplicationController
   # GET /committees
   # GET /committees.json
   def index
-    set_committees() 
   end
 
   # GET /committees/1
   # GET /committees/1.json
   def show
-    set_committee()
   end
 
   # GET /committees/new
@@ -23,7 +22,6 @@ class CommitteesController < ApplicationController
 
   # GET /committees/1/edit
   def edit
-    set_committee()
   end
 
   # POST /committees
@@ -45,7 +43,6 @@ class CommitteesController < ApplicationController
   # PATCH/PUT /committees/1
   # PATCH/PUT /committees/1.json
   def update
-    @committee = Committee.find(params[:committee][:id])
     @committee.commissioners.clear
     for c in 1..5
       if !params[:comm].nil? 
@@ -77,7 +74,6 @@ class CommitteesController < ApplicationController
   # DELETE /committees/1
   # DELETE /committees/1.json
   def destroy
-    set_committee()
     @committee.destroy
     respond_to do |format|
       format.html { redirect_to committees_url }
@@ -90,11 +86,10 @@ class CommitteesController < ApplicationController
   end
 
   def set_dates
-    @assemble = Assemble.find(1)
     @assemble.committee_start_date = params[:committee][:start_date]
     @assemble.committee_end_date = params[:committee][:end_date]
     @assemble.save
-    set_committees()
+
     respond_to do |format|
       format.js 
       format.html {redirect_to committees_url}
@@ -102,7 +97,6 @@ class CommitteesController < ApplicationController
   end 
 
   def set_years
-    @assemble = Assemble.find(1)
     @assemble.year_for_registration = params[:year_for_registration]
     @assemble.year_for_assembling = params[:year_for_assembling]
     @assemble.save
@@ -168,7 +162,6 @@ class CommitteesController < ApplicationController
     end
 
     def set_committees
-      @assemble = Assemble.find(1)
       if !@assemble.committee_start_date.nil? and 
         !@assemble.committee_end_date.nil?
 

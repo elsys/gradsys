@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
 	before_filter :authorize
 	before_action :set_current_user
+	before_action :set_assemble
   protect_from_forgery with: :exception
 
 	
@@ -23,4 +24,8 @@ class ApplicationController < ActionController::Base
 				end
 			end
 		end
+
+		def set_assemble
+			@assemble = Assemble.find(1)
+		end	
 end

@@ -35,8 +35,7 @@
     <% end %>
     </div>
     <div class="field">
-      <%= f.label :covenanted,"Уговорена" %>
-      <%= f.text_field :covenanted %>
+      <%= f.hidden_field :covenanted %>
     </div>
     <% if @current_user.admin? %>
       <div class="field">
@@ -79,7 +78,7 @@
     <% end %>
 
     <div class="actions">
-      <%= f.submit "Запази" %>
+      <%= f.submit "Запази", class: "btn btn-default" %>
     </div>
 
   <% end %>

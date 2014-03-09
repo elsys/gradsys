@@ -11,9 +11,6 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   attr_reader   :password
 
-  #validate  :password_must_be_present
-
-
 	def User.authenticate(user_name, password)
     if user = find_by_user_name(user_name)
       if user.hashed_password == encrypt_password(password, user.salt)
@@ -45,10 +42,6 @@ class User < ActiveRecord::Base
   end
  
   private
-
-    def password_must_be_present
-      errors.add(:password, "Missing password") unless hashed_password.present?
-    end
   
     def generate_salt
       self.salt = self.object_id.to_s + rand.to_s
