@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 	before_action :set_assemble
   protect_from_forgery with: :exception
 
-	
 	protected
 
     def authorize

@@ -39,7 +39,7 @@
 				<% elsif  @current_user.predecessor.heir_type == "Student" %>
 					<li><%= link_to @current_user.user_name, student_path(@current_user) %></li>
 				<% end %>
-			  <li><%= button_to 'Изход', logout_path, :method => :delete %></li>
+			  <li><%= button_to 'Изход', logout_path, :method => :delete, class: "btn btn-default" %></li>
 			</ul>
 		</div>
 	<% else %>	
