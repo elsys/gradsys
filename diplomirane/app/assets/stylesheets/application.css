@@ -24,14 +24,14 @@ body {
 
 #header {
 	background: #fff;
-	width: 960px;
+	width: 1280px;
 	margin: 0 auto 0 auto;
 	height: 55px;
 	display: block;
 }
 
 /* header */
-#header {background: #fff; width: 960px; margin: 0 auto 0 auto; height: 55px; display: block;}
+#header {background: #fff; margin: 0 auto 0 auto; height: 55px; display: block;}
 #header h1 {margin: 0px; padding: 0px; float: left; position: relative;}
 #header #logo {display: block; width: 55px; height: 30px !important; background: url(/assets/logo.png) top left no-repeat; text-indent: -9999px; padding: 0px; margin: 13px 15px 12px 15px;}
 #header #logo:hover {background: url(/assets/logoh.png) top left no-repeat;}
